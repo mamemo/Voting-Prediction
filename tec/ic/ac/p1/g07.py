@@ -18,7 +18,9 @@ parser.add_argument("--l2", action="store_true", help="L2 regularization.")
 parser.add_argument("--red-neuronal", action="store_true", help="Neural Network Model.")
 parser.add_argument("--numero-capas", type=int, help="Number of Layers.")
 parser.add_argument("--unidades-por-capa", type=list, help="Number of Units per Layer.")
-parser.add_argument("--funcion-activacion", help="Activation Function.")
+parser.add_argument("--funcion-activacion",
+                    choices=["softmax", "elu", "selu", "softplus", "softsign", "relu", "tanh", "sigmoid",
+                             "hard_sigmoid", "linear"], help="Activation Function.")
 
 # Decision Tree
 parser.add_argument("--arbol", action="store_true", help="Decision Tree Model.")
