@@ -1,5 +1,6 @@
 import argparse
 
+from tec.ic.ia.pc1.g07 import generar_muestra_pais, generar_muestra_provincia
 from tec.ic.ac.p1.models.Decision_Tree import DecisionTree
 from tec.ic.ac.p1.models.K_Nearest_Neighbors import KNearestNeighbors
 from tec.ic.ac.p1.models.Logistic_Regression import LogisticRegression
@@ -52,7 +53,17 @@ if cont_unique_flag > 1:
     parser.error("The application only allows one model per execution.")
 
 # Removes non-wanted attributes and creates samples
-samples = None
+# Removes non-wanted attributes and creates samples
+samples = []
+pre_samples = generar_muestra_pais(args.poblacion)
+print(pre_samples[0])
+indexes = [2,3,4,5,9,10,15,19,21,24,25,27,30,31,32,37,38,40,44]
+for i in range(0,args.poblacion):
+    sample = []
+    for j in range(0,57):
+        if j not in indexes:
+            sample.append(pre_samples[i][j])
+    samples.append(sample)   
 
 # Instantiates the Model class and call its execute method
 model = None
