@@ -56,7 +56,6 @@ if cont_unique_flag > 1:
 # Removes non-wanted attributes and creates samples
 samples = []
 pre_samples = generar_muestra_pais(args.poblacion)
-print(pre_samples[0])
 indexes = [2,3,4,5,9,10,15,19,21,24,25,27,30,31,32,37,38,40,44]
 for i in range(0,args.poblacion):
     sample = []
