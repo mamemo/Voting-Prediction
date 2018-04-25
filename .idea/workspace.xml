@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9726869b-c8ab-4420-9d3c-53d17842f33e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Proyecto1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Proyecto1.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tec/ic/ac/p1/g07.py" beforeDir="false" afterPath="$PROJECT_DIR$/tec/ic/ac/p1/g07.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tec/ic/ac/p1/models/Decision_Tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/tec/ic/ac/p1/models/Decision_Tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tec/ic/ac/p1/models/K_Nearest_Neighbors.py" beforeDir="false" afterPath="$PROJECT_DIR$/tec/ic/ac/p1/models/K_Nearest_Neighbors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py" beforeDir="false" afterPath="$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py" beforeDir="false" afterPath="$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tec/ic/ac/p1/models/Support_Vector_Machine.py" beforeDir="false" afterPath="$PROJECT_DIR$/tec/ic/ac/p1/models/Support_Vector_Machine.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,27 +20,36 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Proyecto1$a.coverage" NAME="g07 Coverage Results" MODIFIED="1523933632203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tec/ic/ac/p1" />
-    <SUITE FILE_PATH="coverage/Prediccion_Votantes$NN.coverage" NAME="NN Coverage Results" MODIFIED="1524458699444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/Prediccion_Votantes$g07.coverage" NAME="g07 Coverage Results" MODIFIED="1524457286474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Prediccion_Votantes$NN.coverage" NAME="NN Coverage Results" MODIFIED="1524540263480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Prediccion_Votantes$g07.coverage" NAME="g07 Coverage Results" MODIFIED="1524586090496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Proyecto1$g07_sin_nada.coverage" NAME="g07_sin_nada Coverage Results" MODIFIED="1523933559027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tec/ic/ac/p1" />
     <SUITE FILE_PATH="coverage/Prediccion_Votantes$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1524443110700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tec/ic/ac/p1" />
     <SUITE FILE_PATH="coverage/Prediccion_Votantes$g07_sin_nada.coverage" NAME="g07_sin_nada Coverage Results" MODIFIED="1524422817163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tec/ic/ac/p1" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Prediccion-Votantes" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="g07.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="g07.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/g07.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-78">
+              <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Neural_Network.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Logistic_Regression.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1560">
+              <caret line="62" column="38" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Neural_Network.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="286">
@@ -76,11 +91,11 @@
         <option value="$PROJECT_DIR$/tec/ic/ac/p1/Support_Vector_Machine.py" />
         <option value="$PROJECT_DIR$/tec/ic/ac/p1/models/Model.py" />
         <option value="$PROJECT_DIR$/tec/ic/ac/p1/models/Support_Vector_Machine.py" />
-        <option value="$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py" />
         <option value="$PROJECT_DIR$/tec/ic/ac/p1/models/Decision_Tree.py" />
         <option value="$PROJECT_DIR$/tec/ic/ac/p1/models/K_Nearest_Neighbors.py" />
-        <option value="$PROJECT_DIR$/tec/ic/ac/p1/g07.py" />
         <option value="$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py" />
+        <option value="$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py" />
+        <option value="$PROJECT_DIR$/tec/ic/ac/p1/g07.py" />
       </list>
     </option>
   </component>
@@ -107,7 +122,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -154,12 +168,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Mauro/Desktop/IA/PC1/tec/ic/ia/pc1/g07.py" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tec/ic/ac/p1/g07.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -181,7 +196,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.NN">
+  <component name="RunManager" selected="Python.g07">
     <configuration name="NN" type="PythonConfigurationType" factoryName="Python">
       <module name="Proyecto1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -238,34 +253,44 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50182885" side_tool="true" weight="0.33245382" />
+      <window_info anchor="bottom" id="TODO" order="7" weight="0.32933334" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5025604" side_tool="true" weight="0.35238096" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Python Console" order="13" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.49817118" visible="true" weight="0.24934037" />
-      <window_info anchor="bottom" id="Terminal" order="12" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14850037" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32933334" />
+      <window_info anchor="bottom" id="Python Console" order="13" weight="0.3292517" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49743965" weight="0.23809524" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32933334" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49910554" visible="true" weight="0.16477703" />
       <window_info anchor="right" id="R Packages" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="R Graphics" order="3" />
-      <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.3298153" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Find" order="2" />
       <window_info anchor="right" id="SciView" order="5" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.39973614" />
+      <window_info id="Structure" order="1" sideWeight="0.5008944" side_tool="true" weight="0.15570673" />
+      <window_info id="Favorites" order="2" sideWeight="0.5008944" side_tool="true" weight="0.15570673" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.39863947" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.3298153" />
+      <window_info anchor="right" x="0" y="0" width="295" height="685" id="Documentation" order="8" side_tool="true" weight="0.32879817" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="2" />
       <window_info anchor="right" id="Coverage" order="6" side_tool="true" />
     </layout>
   </component>
@@ -275,14 +300,156 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/g07.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1560">
+          <caret line="62" column="38" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/g07.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="13" column="36" lean-forward="true" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1560">
+          <caret line="62" column="38" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/g07.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1560">
+          <caret line="62" column="38" lean-forward="true" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/g07.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="6" column="60" lean-forward="true" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/g07.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/g07.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/g07.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/g07.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="26">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -290,9 +457,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="26">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -351,9 +515,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/Support.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
@@ -368,13 +529,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Decision_Tree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/K_Nearest_Neighbors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
@@ -382,27 +536,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Decision_Tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Logistic_Regression.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        <state relative-caret-position="1560">
+          <caret line="62" column="38" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/g07.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tec/ic/ac/p1/models/Neural_Network.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="12" />
+        <state relative-caret-position="-78">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
         </state>
       </provider>
     </entry>
