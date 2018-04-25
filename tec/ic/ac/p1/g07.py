@@ -1,11 +1,11 @@
 import argparse
 
-from tec.ic.ia.pc1.g07 import generar_muestra_pais, generar_muestra_provincia
-from tec.ic.ac.p1.models.Decision_Tree import DecisionTree
-from tec.ic.ac.p1.models.K_Nearest_Neighbors import KNearestNeighbors
-from tec.ic.ac.p1.models.Logistic_Regression import LogisticRegression
-from tec.ic.ac.p1.models.Neural_Network import NeuralNetwork
-from tec.ic.ac.p1.models.Support_Vector_Machine import SupportVectorMachine
+from tec.ic.ia.pc1.g07 import generar_muestra_pais
+from models.Decision_Tree import DecisionTree
+from models.K_Nearest_Neighbors import KNearestNeighbors
+from models.Logistic_Regression import LogisticRegression
+from models.Neural_Network import NeuralNetwork
+from models.Support_Vector_Machine import SupportVectorMachine
 
 parser = argparse.ArgumentParser(
     description='This program allows to train a model of your choice based on Costa Rica\'s elections.')
@@ -39,6 +39,7 @@ parser.add_argument("--prefijo", required=True, help="Prefix of all generated fi
 parser.add_argument("--poblacion", required=True, type=int, help="Number of Samples.")
 parser.add_argument("--porcentaje-pruebas", required=True, type=float,
                     help="Percentage of samples to use on final validation.")
+parser.add_argument("--prediccion", required=True, choices=["prediccion_r1","prediccion_r2","prediccion_r2_con_r1"], help="The model prediction.")
 
 args = parser.parse_args()
 

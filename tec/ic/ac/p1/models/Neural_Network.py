@@ -1,4 +1,4 @@
-from tec.ic.ac.p1.models.Model import Model
+from models.Model import Model
 
 
 class NeuralNetwork(Model):
