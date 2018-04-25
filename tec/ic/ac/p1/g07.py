@@ -1,11 +1,14 @@
 import argparse
 
+from tec.ic.ac.p1.models.Decision_Tree import DecisionTree
+from tec.ic.ac.p1.models.K_Nearest_Neighbors import KNearestNeighbors
+from tec.ic.ac.p1.models.Logistic_Regression import LogisticRegression
+from tec.ic.ac.p1.models.Neural_Network import NeuralNetwork
+from tec.ic.ac.p1.models.Support_Vector_Machine import SupportVectorMachine
+
+
 from tec.ic.ia.pc1.g07 import generar_muestra_pais
-from models.Decision_Tree import DecisionTree
-from models.K_Nearest_Neighbors import KNearestNeighbors
-from models.Logistic_Regression import LogisticRegression
-from models.Neural_Network import NeuralNetwork
-from models.Support_Vector_Machine import SupportVectorMachine
+
 
 parser = argparse.ArgumentParser(
     description='This program allows to train a model of your choice based on Costa Rica\'s elections.')
@@ -63,7 +66,7 @@ for i in range(0,args.poblacion):
     for j in range(0,57):
         if j not in indexes:
             sample.append(pre_samples[i][j])
-    samples.append(sample)   
+    samples.append(sample)
 
 # Instantiates the Model class and call its execute method
 model = None
