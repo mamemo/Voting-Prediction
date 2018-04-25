@@ -56,11 +56,14 @@ for flag in unique_flags:
 if cont_unique_flag > 1:
     parser.error("The application only allows one model per execution.")
 
-# Removes non-wanted attributes and creates samples
-# Removes non-wanted attributes and creates samples
+# Removes non-wanted attributes depending on prediction type and creates samples
 samples = []
 pre_samples = generar_muestra_pais(args.poblacion)
-indexes = [2,3,4,5,9,10,15,19,21,24,25,27,30,31,32,37,38,40,44]
+indexes = [1,2,3,4,5,9,10,15,19,21,24,25,27,30,31,32,37,38,40,44]
+if args.prediccion == "prediccion_r1":
+    indexes.extend([7,56])
+elif args.prediccion == "prediccion_r2":
+    indexes.extend([6,55])
 for i in range(0,args.poblacion):
     sample = []
     for j in range(0,57):

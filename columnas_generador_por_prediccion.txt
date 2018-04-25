@@ -1,0 +1,121 @@
+﻿--------------------------------------------------------------
+Columnas de las muestras del generador -PREDICCION R1-
+--------------------------------------------------------------
+1. Provincia	
+2. Votos Recibidos En 1ra ronda	
+--A partir de aquí los datos son referentes al cantón o de la muestra generada --
+3. Población Total	
+4. Porcentaje De Población Urbana 	
+5. Si la muestra pertenece a población urbana o no urbana	
+6. Relación hombres-mujeres: Hombres por cada 100 mujeres		
+7. Sexo (hombre/mujer)		
+8. Rango de Edad Según Su Sexo		
+9. Viviendas Individuales Ocupadas	
+10. Promedio De Ocupantes	
+11. Si la muestra posee Vivienda en Buen Estado o Vivienda en Mal Estado	
+12. Si la muestra posee Vivienda Hacinada o Vivienda No Hacinada	
+13. Nivel de Escolaridad	
+14. Si la muestra es Alfabeta/No Alfabeta (solo se considera la posibilidad de analfabetismo si no tiene escolaridad o tiene primaria incompleta)	
+15. Escolaridad Promedio de Su Edad  (se toman el rango de edad de 25 a 49 años como si iniciaran en 18 años, por falta de datos) 	
+16. Porcentaje de Asistencia a la Educación Regular 		
+17. Porcentaje de Hombres Dentro de la Fuerza de Trabajo 	
+18. Porcentaje de Mujeres Dentro de la Fuerza de Trabajo 	
+19. Si la muestra se encuentra Dentro o Fuera de la Fuerza de Trabajo		
+20. Razón por la que se encuentra Fuera de la Fuerza (de ser el caso), o Sector en el que labora (si se encuentra Dentro de la Fuerza) 
+21. Si la muestra es nacido o no en el extranjero	
+22. Si la muestra posee o no discapacidad	
+23. Porcentaje de Población No Asegurada 	
+24. Si la muestra está asegurada o no 		
+25. Porcentaje de Hogares con Jefatura Femenina 	
+26. Porcentaje de Hogares con Jefatura Compartida	 
+27. Tipo de jefatura en el hogar de la muestra		
+28. Si la muestra posee teléfono celular en hogar o no		
+29. Si la muestra posee teléfono residencial en hogar o no	
+30. Si la muestra posee computadora en hogar o no	
+31. Si la muestra posee internet en hogar o no		
+32. Si la muestra posee electricidad en hogar o no	
+33. Si la muestra posee servicio sanitario en hogar o no	
+34. Si la muestra posee agua en hogar o no		
+35. Voto de la muestra 1era Ronda	
+
+--------------------------------------------------------------
+Columnas de las muestras del generador -PREDICCION R2-
+--------------------------------------------------------------
+1. Provincia	
+2. Votos Recibidos En 2da ronda	
+--A partir de aquí los datos son referentes al cantón o de la muestra generada --
+3. Población Total	
+4. Porcentaje De Población Urbana 	
+5. Si la muestra pertenece a población urbana o no urbana	
+6. Relación hombres-mujeres: Hombres por cada 100 mujeres		
+7. Sexo (hombre/mujer)		
+8. Rango de Edad Según Su Sexo		
+9. Viviendas Individuales Ocupadas	
+10. Promedio De Ocupantes	
+11. Si la muestra posee Vivienda en Buen Estado o Vivienda en Mal Estado	
+12. Si la muestra posee Vivienda Hacinada o Vivienda No Hacinada	
+13. Nivel de Escolaridad	
+14. Si la muestra es Alfabeta/No Alfabeta (solo se considera la posibilidad de analfabetismo si no tiene escolaridad o tiene primaria incompleta)	
+15. Escolaridad Promedio de Su Edad  (se toman el rango de edad de 25 a 49 años como si iniciaran en 18 años, por falta de datos) 	
+16. Porcentaje de Asistencia a la Educación Regular 		
+17. Porcentaje de Hombres Dentro de la Fuerza de Trabajo 	
+18. Porcentaje de Mujeres Dentro de la Fuerza de Trabajo 	
+19. Si la muestra se encuentra Dentro o Fuera de la Fuerza de Trabajo		
+20. Razón por la que se encuentra Fuera de la Fuerza (de ser el caso), o Sector en el que labora (si se encuentra Dentro de la Fuerza) 
+21. Si la muestra es nacido o no en el extranjero	
+22. Si la muestra posee o no discapacidad	
+23. Porcentaje de Población No Asegurada 	
+24. Si la muestra está asegurada o no 		
+25. Porcentaje de Hogares con Jefatura Femenina 	
+26. Porcentaje de Hogares con Jefatura Compartida	 
+27. Tipo de jefatura en el hogar de la muestra		
+28. Si la muestra posee teléfono celular en hogar o no		
+29. Si la muestra posee teléfono residencial en hogar o no	
+30. Si la muestra posee computadora en hogar o no	
+31. Si la muestra posee internet en hogar o no		
+32. Si la muestra posee electricidad en hogar o no	
+33. Si la muestra posee servicio sanitario en hogar o no	
+34. Si la muestra posee agua en hogar o no		
+35. Voto de la muestra 2da Ronda	
+
+--------------------------------------------------------------
+Columnas de las muestras del generador -PREDICCION R2 CON R1-
+--------------------------------------------------------------
+1. Provincia	
+2. Votos Recibidos En 1ra ronda	
+3. Votos Recibidos En 2da ronda	
+--A partir de aquí los datos son referentes al cantón o de la muestra generada --
+4. Población Total	
+5. Porcentaje De Población Urbana 	
+6. Si la muestra pertenece a población urbana o no urbana	
+7. Relación hombres-mujeres: Hombres por cada 100 mujeres		
+8. Sexo (hombre/mujer)		
+9. Rango de Edad Según Su Sexo		
+10. Viviendas Individuales Ocupadas	
+11. Promedio De Ocupantes	
+12. Si la muestra posee Vivienda en Buen Estado o Vivienda en Mal Estado	
+13. Si la muestra posee Vivienda Hacinada o Vivienda No Hacinada	
+14. Nivel de Escolaridad	
+15. Si la muestra es Alfabeta/No Alfabeta (solo se considera la posibilidad de analfabetismo si no tiene escolaridad o tiene primaria incompleta)	
+16. Escolaridad Promedio de Su Edad  (se toman el rango de edad de 25 a 49 años como si iniciaran en 18 años, por falta de datos) 	
+17. Porcentaje de Asistencia a la Educación Regular 		
+18. Porcentaje de Hombres Dentro de la Fuerza de Trabajo 	
+19. Porcentaje de Mujeres Dentro de la Fuerza de Trabajo 	
+20. Si la muestra se encuentra Dentro o Fuera de la Fuerza de Trabajo		
+21. Razón por la que se encuentra Fuera de la Fuerza (de ser el caso), o Sector en el que labora (si se encuentra Dentro de la Fuerza) 
+22. Si la muestra es nacido o no en el extranjero	
+23. Si la muestra posee o no discapacidad	
+24. Porcentaje de Población No Asegurada 	
+25. Si la muestra está asegurada o no 		
+26. Porcentaje de Hogares con Jefatura Femenina 	
+27. Porcentaje de Hogares con Jefatura Compartida	 
+28. Tipo de jefatura en el hogar de la muestra		
+29. Si la muestra posee teléfono celular en hogar o no		
+30. Si la muestra posee teléfono residencial en hogar o no	
+31. Si la muestra posee computadora en hogar o no	
+32. Si la muestra posee internet en hogar o no		
+33. Si la muestra posee electricidad en hogar o no	
+34. Si la muestra posee servicio sanitario en hogar o no	
+35. Si la muestra posee agua en hogar o no		
+36. Voto de la muestra 1era Ronda
+37. Voto de la muestra 2da Ronda	
