@@ -1,4 +1,4 @@
-from models.Model import Model
+from tec.ic.ac.p1.models.Model import Model
 
 
 class SupportVectorMachine(Model):
