@@ -22,7 +22,7 @@ Valores por columna
 18. Porcentaje de Hombres Dentro de la Fuerza de Trabajo     [0-100]	
 19. Porcentaje de Mujeres Dentro de la Fuerza de Trabajo     [0-100] 	
 20. Si la muestra se encuentra Dentro o Fuera de la Fuerza de Trabajo	['dentro de fuerza','fuera de fuerza']	
-21. Razón por la que se encuentra Fuera de la Fuerza (de ser el caso), o Sector en el que labora (si se encuentra Dentro de la Fuerza)    ['pensionado','rentista','estudia','oficios domesticos','otros'] 
+21. Razón por la que se encuentra Fuera de la Fuerza (de ser el caso), o Sector en el que labora (si se encuentra Dentro de la Fuerza)    ['pensionado','rentista','estudia','oficios domesticos','otros'] / ['sector primario','sector secundario','sector terciario']
 22. Si la muestra es nacido o no en el extranjero    ['nacido en extranjero','no nacido en extranjero']	
 23. Si la muestra posee o no discapacidad    ['discapacidad','sin discapacidad']	
 24. Porcentaje de Población No Asegurada     [0-100] 	
