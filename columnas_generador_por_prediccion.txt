@@ -120,6 +120,9 @@ Columnas de las muestras del generador -PREDICCION R2-
 34. Si la muestra posee agua en hogar o no		
 35. Voto de la muestra 2da Ronda	
 
+Si se normalizan:		 -1 cada uno
+[1, 2, 3, 5, 8, 9, 14, 15, 16, 17, 22, 24, 25] 
+
 --------------------------------------------------------------
 Columnas de las muestras del generador -PREDICCION R2 CON R1-
 --------------------------------------------------------------
@@ -161,3 +164,6 @@ Columnas de las muestras del generador -PREDICCION R2 CON R1-
 35. Si la muestra posee agua en hogar o no		
 36. Voto de la muestra 1era Ronda
 37. Voto de la muestra 2da Ronda	
+
+Si se normalizan: 		-1 cada uno
+[1, 2, 3, 4, 6, 9, 10, 15, 16, 17, 18, 23, 25, 26] 
