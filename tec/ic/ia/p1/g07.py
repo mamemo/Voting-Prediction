@@ -124,4 +124,6 @@ print("\n\nGenerating samples")
 data_train, gt_train, data_test, gt_test = generar_muestras(args.muestras, args.prediccion, args.poblacion, args.porcentaje_pruebas, normalization)
 model.samples_train = [data_train, gt_train]
 model.samples_test = [data_test, gt_test]
+
+print("\nStart execution")
 model.execute()
