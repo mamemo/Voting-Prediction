@@ -7,7 +7,7 @@ class LogisticRegression(Model):
     def __init__(self, samples_train, samples_test, prefix, regularization):
         super().__init__(samples_train, samples_test, prefix)
         self.regularization = regularization
-        # Parameters
+        # HyperParameters
         self.learning_rate = 0.01
         self.training_epochs = 5000
         self.batch_size = 100
