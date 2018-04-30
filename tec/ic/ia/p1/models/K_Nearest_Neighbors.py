@@ -1,9 +1,7 @@
 from tec.ic.ia.p1.models.Model import Model
 import numpy as np
-import pprint
 from collections import Counter
 
-pp = pprint.PrettyPrinter(indent=4)
 
 class KNearestNeighbors(Model):
 	def __init__(self, samples_train, samples_test, prefix, k):
@@ -30,36 +28,6 @@ class KNearestNeighbors(Model):
 
 	def calculate_manhattan_distance(self, p1, p2):
 		return sum(abs(x - y) for x,y in zip(p1, p2))
-
-	def closest_point(self,all_points, new_point):
-	    best_point = None
-	    best_distance = None
-
-	    for current_point in all_points:
-	        current_distance = self.calculate_manhattan_distance(new_point, current_point)
-
-	        if best_distance is None or current_distance < best_distance:
-	            best_distance = current_distance
-	            best_point = current_point
-
-	    return best_distance
-
-	def find_closest_samples(self, samples, new_sample, k):
-		knn_points = []
-		best_distances = []
-
-		for sample in samples:
-			sample_dist = self.calculate_manhattan_distance(new_sample, sample)
-			if len(knn_points) < 5:
-				knn_points.append(sample)
-				best_distances.append(sample_dist)             
-			elif sample_dist < max(best_distances):
-				worst_point_index = best_distances.index(max(best_distances))
-				knn_points[worst_point_index] = sample
-				best_distances[worst_point_index] = sample_dist
-		return knn_points
-
-
 
 
 	def kdtree_closest_point(self, root, point, depth=0):
