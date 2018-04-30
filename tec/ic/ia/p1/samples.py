@@ -73,7 +73,7 @@ def normalization_total_sin_one_hot_encoding(samples, tipo_prediccion):
             es_r2 = True
     normalized_samples, gt = configure_samples(
         samples, discrete_indexes, es_r2=es_r2)
-    return normalized_samples, gt
+    return normalized_samples.tolist(), gt.tolist()
 
 # normaliza lo que sea continuo
 
