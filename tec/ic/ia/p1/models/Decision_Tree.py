@@ -13,18 +13,21 @@ class DecisionTree(Model):
     def __init__(self, samples_train, samples_test, prefix, pruning_threshold):
         super().__init__(samples_train, samples_test, prefix)
         self.pruning_threshold = pruning_threshold
+        #Variables para Gain()
         self.entropia_general = 0
         self.lista_atributos = []
         self.valores_atributos = []
         self.valores_answers = []
         self.lista_answers = []
+        #Se usa para funcion de importancia
         self.total = []
-        self.valores = []
-        self.minimos = []
-        self.maximos = []
+        #Cantidad de ejemplos
         self.N = 0
+        #Guarda los hijos de todos los atributos
         self.atributos_oficiales = []
         self.valores_atributos_oficiales = []
+        #guarda el arbol
+        self.main_tree = None
 
     #Funcion responsable de sacar la ganancia a un atributo especifico
     def gain(self, atributo , datos):
@@ -84,47 +87,52 @@ class DecisionTree(Model):
 
     #Establece rangos a los valores numericos.
     def generar_rangos(self):
-        for i in range(len(self.samples_train[0])):
-            if(i>0 and self.valores==[]):
-                break
-            for j in range(len(self.samples_train[0][i])):
-                if(i==0 and type(self.samples_train[0][i][j])!=type("")):
-                    self.valores += [j]
-                    self.minimos += [self.samples_train[0][i][j]]
-                    self.maximos += [self.samples_train[0][i][j]]
-                elif(j in self.valores and type(self.samples_train[0][i][j])!=type("") and self.samples_train[0][i][j]<self.minimos[self.valores.index(j)]):
-                    self.minimos[self.valores.index(j)] = self.samples_train[0][i][j]
-                elif(j in self.valores and type(self.samples_train[0][i][j])!=type("") and self.samples_train[0][i][j]>self.maximos[self.valores.index(j)]):
-                    self.maximos[self.valores.index(j)] = self.samples_train[0][i][j]+1      
-        for i in self.samples_train[0]:
-            for j in self.valores:
-                suma = (self.maximos[self.valores.index(j)]-self.minimos[self.valores.index(j)])/4
-                for k in range(4):
-                     if(i[j] >= (self.minimos[self.valores.index(j)]+((suma)*(k))) and  i[j] < (self.minimos[self.valores.index(j)]+((suma)*(k+1)))):
-                         i[j] = str(self.minimos[self.valores.index(j)]+((suma)*(k)))+"-"+str(self.minimos[self.valores.index(j)]+((suma)*(k+1)))
-                         break
-                     elif (i[j] <self.minimos[self.valores.index(j)]):
-                         i[j] = "< "+str(self.minimos[self.valores.index(j)])
-                         break
-                     elif (i[j] > self.maximos[self.valores.index(j)]):
-                         i[j] = "> "+str(self.maximos[self.valores.index(j)])
-                         break
+            numericos = []
+            for i in range(len(self.samples_train[0][0])):
+                if(type(self.samples_train[0][0][i])!=type("")):
+                    numericos += [i]
+            if (numericos != []):
+                for i in self.samples_train[0]:
+                    for j in numericos:
+                        if(i[j] >= 0 and i[j]<0.20):
+                            i[j] = "[0 , 0.20["
+                        elif(i[j] >= 0.20 and i[j]<0.40):
+                            i[j] = "[0.20 , 0.40["
+                        elif(i[j] >= 0.40 and i[j]<0.60):
+                            i[j] = "[0.40 , 0.60["
+                        elif(i[j] >= 0.60 and i[j]<0.80):
+                            i[j] = "[0.60 , 0.80["
+                        elif(i[j] >= 0.80 and i[j]<=1):
+                            i[j] = "[0.80 , 1]"
+                for i in self.samples_test[0]:
+                    for j in numericos:
+                        if(i[j] >= 0 and i[j]<0.20):
+                            i[j] = "[0 , 0.20["
+                        elif(i[j] >= 0.20 and i[j]<0.40):
+                            i[j] = "[0.20 , 0.40["
+                        elif(i[j] >= 0.40 and i[j]<0.60):
+                            i[j] = "[0.40 , 0.60["
+                        elif(i[j] >= 0.60 and i[j]<0.80):
+                            i[j] = "[0.60 , 0.80["
+                        elif(i[j] >= 0.80 and i[j]<=1):
+                            i[j] = "[0.80 , 1]"
+            
 
     #Funcion encargada de realizar el arbol de decision.
     def decision_tree_learning(self, examples, attributes, parent_examples):
-        print("---------------------------------------------")
+        #print("---------------------------------------------")
         if (examples == []):
-            print("Hoja: ",self.plurality_value(parent_examples))
+            #print("Hoja: ",self.plurality_value(parent_examples))
             return self.plurality_value(parent_examples)
         elif (self.clasificacion(examples) == True):
-            print("Hoja: ", self.samples_train[1][examples[0]])
+            #print("Hoja: ", self.samples_train[1][examples[0]])
             return self.samples_train[1][examples[0]]
         elif (attributes == []):
-            print("Hoja: ",self.plurality_value(examples))
+            #print("Hoja: ",self.plurality_value(examples))
             return self.plurality_value(examples)
         else:
             lista_r=[self.gain(i, examples) for i in attributes]
-            print(lista_r)
+            #print(lista_r)
             tree = Tree()
             tree.atributo = attributes[argmax(lista_r)]
             ejemplos = [[] for i in range(len(self.valores_atributos_oficiales[tree.atributo]))]
@@ -132,8 +140,8 @@ class DecisionTree(Model):
             for i in examples:
                 v = self.valores_atributos_oficiales[self.atributos_oficiales.index(tree.atributo)]
                 ejemplos[v.index(self.samples_train[0][i][tree.atributo])] += [i]
-            print("Atributos :", v, "\nEjemplos: ",ejemplos)
-            print("Atributos: ",attributes, "\nAtributo actual: ", tree.atributo)
+            #print("Atributos :", v)
+            #print("Atributos: ",attributes, "\nAtributo actual: ", tree.atributo)
             attributes.remove(tree.atributo)
             for k in range(len(v)):
                 tree.condicion += [v[k]]
@@ -162,37 +170,47 @@ class DecisionTree(Model):
                 valores[salidas.index(self.samples_train[1][i])] += 1
         return (salidas[argmax(valores)])
 
+    def validar_datos(self):
+        count = 0
+        partidos = []
+        a_x_p = []
+        for i in range(len(self.samples_test[0])):
+            hijo = False
+            arbol = self.main_tree
+            while (hijo == False):
+                arbol = arbol.hijos[arbol.condicion.index(self.samples_test[0][i][arbol.atributo])]
+                if(type(arbol) == type("")):
+                    hijo = True
+            #print("Era: ", self.samples_test[1][i], " Salio: ", arbol)
+            if (self.samples_test[1][i] == arbol):
+                count += 1
+                if(self.samples_test[1][i] not in partidos):
+                    partidos += [self.samples_test[1][i]]
+                    a_x_p += [[1,1]]
+                else:
+                    a_x_p[partidos.index(self.samples_test[1][i])][0] += 1
+                    a_x_p[partidos.index(self.samples_test[1][i])][1] += 1
+            else:
+                if(self.samples_test[1][i] not in partidos):
+                    partidos += [self.samples_test[1][i]]
+                    a_x_p += [[1,0]]
+                else:
+                    a_x_p[partidos.index(self.samples_test[1][i])][0] += 1
+
+        print("Aciertos: ", count," De: ", len(self.samples_test[0]), " Accuracy: ", (count/len(self.samples_test[0])*100))
+        for i in range(len(a_x_p)):
+            print(partidos[i])
+            print(a_x_p[i])
+
     def execute(self):
-        print("\n\n----------entro al arbol de decision-----------\n\n")
-
-        print("Cantidad ejemplos training: ", len(self.samples_train[0]))
-        print("Cantidad ejemplos testing: ", len(self.samples_test[0]),"\n\n")
-
-        #Lista de ejemplo.
-        lista = [["yes" , "no"  , "no"  , "yes" , "some" , "$$$" , "no"  , "yes" , "french" , "0-10"  , "yes"],
-                 ["yes" , "no"  , "no"  , "yes" , "full" , "$"   , "no"  , "no"  , "thai"   , "30-60" , "no" ],
-                 ["no"  , "no"  , "no"  , "no"  , "some" , "$"   , "no"  , "no"  , "burger" , "0-10"  , "yes"],
-                 ["yes" , "yes" , "yes" , "yes" , "full" , "$"   , "yes" , "no"  , "thai"   , "10-30" , "yes"],
-                 ["yes" , "yes" , "yes" , "no"  , "full" , "$$$" , "no"  , "yes" , "french" , ">60"   , "no" ],
-                 ["no"  , "no"  , "no"  , "yes" , "some" , "$$"  , "yes" , "yes" , "italian", "0-10"  , "yes"],
-                 ["no"  , "no"  , "no"  , "no"  , "none" , "$"   , "yes" , "no"  , "burger" , "0-10"  , "no" ],
-                 ["no"  , "no"  , "no"  , "yes" , "some" , "$$"  , "yes" , "yes" , "thai"   , "0-10"  , "yes"],
-                 ["no"  , "yes" , "yes" , "no"  , "full" , "$"   , "yes" , "no"  , "burger" , ">60"   , "no" ],
-                 ["yes" , "yes" , "yes" , "yes" , "full" , "$$$" , "no"  , "yes" , "italian", "10-30" , "no" ],
-                 ["no"  , "no"  , "no"  , "no"  , "none" , "$"   , "no"  , "no"  , "thai"   , "0-10"  , "no" ],
-                 ["yes" , "yes" , "yes" , "yes" , "full" , "$"   , "no"  , "no"  , "burger" , "30-60" , "yes"]]
-
         #Ejemplo de corrida del arbol.
-        att = [i for i in range(len(lista[0])-1)]
-        datos = [i for i in range(len(lista))]
-        self.samples_train = [[],[]]
-        print("LISTA: ", self.samples_train)
-        for i in lista:
-            self.samples_train[0] += [i[:-1]]
-            self.samples_train[1] += [i[-1]]
-        #self.generar_rangos()
-        print("LISTA: ", self.samples_train)
-        self.decision_tree_learning(datos, att, datos)
-
-        print("\n\n----------salio del arbol de decision-----------\n\n")
+        att = [i for i in range(len(self.samples_train[0][0]))]
+        datos = [i for i in range(len(self.samples_train[0]))]
+        self.generar_rangos()
+        for i in self.samples_train[0]:
+            for j in i:
+                if(type(j)!=type("")):
+                    print("HABIA UN VALORRRRRRRRR: ", j)
+        self.main_tree = self.decision_tree_learning(datos, att, datos)
+        self.validar_datos()
         
