@@ -222,19 +222,12 @@ class DecisionTree(Model):
                     total_examples += 1
                     total_outputs[outputs.index(self.samples_train[1][j])] += 1
                     outputs_x_attributes[i][outputs.index(self.samples_train[1][j])] += 1
-        #print(outputs)
-        #print(total_outputs)
-        #print(total_examples)
-        #print(outputs_x_attributes)
         for i in range(len(outputs_x_attributes)):
             partial_result = 0
             for j in range(len(outputs_x_attributes[i])):
                 true_irrelevance = total_outputs[j] * (len(examples[i])/total_examples)
-                #print("ti "+str(j)+": ",true_irrelevance)
                 partial_result += ((outputs_x_attributes[i][j] - true_irrelevance)**2)/true_irrelevance
-                #print("rp "+str(j)+": ",((outputs_x_attributes[i][j] - true_irrelevance)**2)/true_irrelevance)
             result += partial_result
-        #print("Desviacion: ",result)
         return(1 - stats.chi2.cdf(x=result, df=((len(outputs)-1)*(len(attributes)-1))))
 
     def validar_datos(self):
@@ -268,7 +261,7 @@ class DecisionTree(Model):
                 else:
                     a_x_p[partidos.index(self.samples_test[1][i])][0] += 1
 
-        print("Aciertos: ", count," De: ", len(self.samples_test[0]), " Accuracy: ", (count/len(self.samples_test[0])*100))
+        print("Aciertos: ", count," De: ", len(self.samples_test[0]), " Accuracy: ", (count/len(self.samples_test[0])*100),"%")
         for i in range(len(a_x_p)):
             print(partidos[i])
             print(a_x_p[i])
@@ -285,80 +278,32 @@ class DecisionTree(Model):
                 arbol+=","
         return ("("+arbol+")"+str(tree.atributo))
         
-        
-
-    def prueba_2(self):
-        self.samples_train = self.samples_test = [[
-                                    ["rainy"    , "hot"  , "high"   , "false" ],
-                                    ["rainy"    , "hot"  , "high"   , "true"  ],
-                                    ["overoast" , "hot"  , "high"   , "false" ],
-                                    ["sunny"    , "mild" , "high"   , "false" ],
-                                    ["sunny"    , "cool" , "normal" , "false" ],
-                                    ["sunny"    , "cool" , "normal" , "true"  ],
-                                    ["overoast" , "cool" , "normal" , "true"  ],
-                                    ["rainy"    , "mild" , "high"   , "false" ],
-                                    ["rainy"    , "cool" , "normal" , "false" ],
-                                    ["sunny"    , "mild" , "normal" , "false" ],
-                                    ["rainy"    , "mild" , "normal" , "true"  ],
-                                    ["overoast" , "mild" , "high"   , "true"  ],
-                                    ["overoast" , "hot"  , "normal" , "false" ],
-                                    ["sunny"    , "mild" , "high"   , "true"  ]], 
-                                    ["no", "no", "yes", "yes","yes","no","yes","no","yes","yes","yes","yes","yes","no"]]
-        self.samples_train = self.samples_test = [[
-                 ["yes" , "no"  , "no"  , "yes" , "some" , "$$$" , "no"  , "yes" , "french" , "0-10"  ],
-                 ["yes" , "no"  , "no"  , "yes" , "full" , "$"   , "no"  , "no"  , "thai"   , "30-60" ],
-                 ["no"  , "no"  , "no"  , "no"  , "some" , "$"   , "no"  , "no"  , "burger" , "0-10"  ],
-                 ["yes" , "yes" , "yes" , "yes" , "full" , "$"   , "yes" , "no"  , "thai"   , "10-30" ],
-                 ["yes" , "yes" , "yes" , "no"  , "full" , "$$$" , "no"  , "yes" , "french" , ">60"   ],
-                 ["no"  , "no"  , "no"  , "yes" , "some" , "$$"  , "yes" , "yes" , "italian", "0-10"  ],
-                 ["no"  , "no"  , "no"  , "no"  , "none" , "$"   , "yes" , "no"  , "burger" , "0-10"  ],
-                 ["no"  , "no"  , "no"  , "yes" , "some" , "$$"  , "yes" , "yes" , "thai"   , "0-10"  ],
-                 ["no"  , "yes" , "yes" , "no"  , "full" , "$"   , "yes" , "no"  , "burger" , ">60"   ],
-                 ["yes" , "yes" , "yes" , "yes" , "full" , "$$$" , "no"  , "yes" , "italian", "10-30" ],
-                 ["no"  , "no"  , "no"  , "no"  , "none" , "$"   , "no"  , "no"  , "thai"   , "0-10"  ],
-                 ["yes" , "yes" , "yes" , "yes" , "full" , "$"   , "no"  , "no"  , "burger" , "30-60" ]],
-                 ["yes", "no", "yes" , "yes", "no" , "yes", "no", "yes", "no", "no" , "no", "yes"]]
 
     def execute(self):
-        #Ejemplo de corrida del arbol.
-        #self.prueba_2()
         att = [i for i in range(len(self.samples_train[0][0]))]
         datos = [i for i in range(len(self.samples_train[0]))]
         self.generar_rangos()
-        #print("-------Hacer arbol--------")
+        
+        #Se crea el arbol
         self.main_tree = self.decision_tree_learning(datos, att, datos)
-
+        
+        #Funcion para pintar arbol antes de la poda
         #t = Tree(self.recorrer_arbol(self.main_tree)+";", format=1)
         #print (t.get_ascii(attributes=["name", "label"])+"\n")
 
-        #print("-------Validar datos--------")
+        print("\n-------Before pruning--------")
+        #Se validan los datos con arbol sin podar
         self.validar_datos()
-        print("-------Hacer poda con umbral ",self.pruning_threshold,"--------")
+        
+        #Se poda el arbol
         self.main_tree = self.pruning_tree(datos, self.main_tree)
-        #print(self.main_tree.hijos)
 
+        #Funcion para pintar arbol despues de la poda
         #t = Tree(self.recorrer_arbol(self.main_tree)+";", format=1)
         #print (t.get_ascii(attributes=["name", "label"])+"\n")
 
-
-        """for i in range(len(self.main_tree.hijos)):
-            print("("+str(self.main_tree.atributo)+") "+self.main_tree.condicion[i],":")
-            if(type(self.main_tree.hijos[i])!=type("")):
-                t = Tree(self.recorrer_arbol(self.main_tree.hijos[i])+";", format=1)
-                print (t.get_ascii(attributes=["name", "label"])+"\n")
-            else:
-                print(self.main_tree.hijos[i]+"\n")"""
-        print("-------Validar datos again--------")
+        print("\n-------After pruning--------")
+        #Se validan los datos con arbol podado
         self.validar_datos()
+        print("\nEnding execution\n")
 
-
-
-        """self.samples_train = [[],["si","si","si","si","si","si","si","si","si","si","si","si","si","si","si",
-                                  "no","no","no","no","no","no","no","no","no","no","no","no","no","no","no"]]
-        print("")
-        print("Porcentaje: ",self.total_desviation(["female","male"],[[0,1,15,16,17,18,19,20,21,22],[2,3,4,5,6,7,8,9,10,11,12,13,14,23,24,25,26,27,28,29]]))
-        print("")
-        print("Porcentaje: ",self.total_desviation(["class ix","class x"],[[0,0,0,0,0,0,15,15,15,15,15,15,15,15],[0,0,0,0,0,0,0,0,0,15,15,15,15,15,15,15]]))
-        print("")
-        print("Porcentaje: ",self.total_desviation(["t","f"],[[15,15,15,15,15],[0]]))
-        print("")"""
