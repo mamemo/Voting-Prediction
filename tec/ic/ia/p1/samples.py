@@ -21,7 +21,7 @@ def generar_muestras(tipo_muestras, poblacion, porcentaje_pruebas, normalization
         elif normalization == "svm":
             normalized_samples, gt = normalization_svm(samples[i],i)
         partition = poblacion - int(poblacion * porcentaje_pruebas / 100)
-        result.append([normalized_samples[:partition], gt[:partition], normalized_samples[partition:], gt[partition:]])
+        result.append([normalized_samples[:partition], gt[:partition], normalized_samples[partition:], gt[partition:],samples[i]])
     return result
 
 def create_samples(tipo_muestras, poblacion):

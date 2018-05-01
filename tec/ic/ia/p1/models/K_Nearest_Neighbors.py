@@ -72,22 +72,40 @@ class KNearestNeighbors(Model):
 		print("Cantidad ejemplos training: ", len(self.samples_train[0]))
 		print("Cantidad ejemplos testing: ", len(self.samples_test[0]),"\n\n") 
 
-		tree = self.create_kdtree(self.samples_train)  
-		posit = 0
-		neg = 0
-		for i in range(0,len(self.samples_test[0])):
-			event = self.kdtree_closest_point(tree,self.samples_test[0][i])
-			events = event[0]
-			data = Counter(events)
-			muestra = self.samples_test[1][i] 
-			result = max(events, key=data.get)
-			if muestra == result:
-				posit+=1
+		tree = self.create_kdtree(self.samples_train) 
+		pred_votes = [] 
+
+		#Measures error with training data
+		p_results = 0
+		n_results = 0
+		for i in range(0,len(self.samples_train[0])):
+			knn_result = self.kdtree_closest_point(tree,self.samples_train[0][i])
+			votes = knn_result[0]
+			data = Counter(votes)
+			sample_result = self.samples_train[1][i] 
+			pred_result = max(votes, key=data.get)
+			if sample_result == pred_result:
+				p_results+=1
 			else:
-				neg+=1
-		print("positivo%: ",(posit*100)/len(self.samples_test[0]))
-		print(posit)
-		print(neg)
+				n_results+=1
+		print("Porcentaje de errores con train set: ",n_results/len(self.samples_train[0]))
+		#Measures error with testing data
+		p_results = 0
+		n_results = 0
+		for i in range(0,len(self.samples_test[0])):
+			knn_result = self.kdtree_closest_point(tree,self.samples_test[0][i])
+			votes = knn_result[0]
+			data = Counter(votes)
+			sample_result = self.samples_test[1][i] 
+			pred_result = max(votes, key=data.get)
+			if sample_result == pred_result:
+				p_results+=1
+			else:
+				n_results+=1
+			pred_votes.append(pred_result)
+		print("Porcentaje de errores con test set: ",n_results/len(self.samples_test[0]))
+		return pred_votes
+
                 
                 
 

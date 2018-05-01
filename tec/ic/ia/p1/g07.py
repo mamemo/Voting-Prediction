@@ -1,4 +1,5 @@
 import argparse
+import csv
 
 from tec.ic.ia.p1.models.Decision_Tree import DecisionTree
 from tec.ic.ia.p1.models.K_Nearest_Neighbors import KNearestNeighbors
@@ -122,11 +123,43 @@ print("\n\nGenerating samples")
 # Removes non-wanted attributes depending on prediction type and creates samples
 configured_sets = generar_muestras(args.muestras, args.poblacion, args.porcentaje_pruebas, normalization)
 
+first_round = ['ACCESIBILIDAD SIN EXCLUSION', 'ACCION CIUDADANA', 'ALIANZA DEMOCRATA CRISTIANA', 'DE LOS TRABAJADORES', 'FRENTE AMPLIO', 'INTEGRACION NACIONAL', 'LIBERACION NACIONAL',
+                        'MOVIMIENTO LIBERTARIO', 'NUEVA GENERACION', 'RENOVACION COSTARRICENSE', 'REPUBLICANO SOCIAL CRISTIANO', 'RESTAURACION NACIONAL', 'UNIDAD SOCIAL CRISTIANA', 'NULOS', 'BLANCOS']
+second_round = ['ACCION CIUDADANA', 'RESTAURACION NACIONAL', 'NULOS', 'BLANCOS']
+
+#Executes the model for each type of prediction
+overall_results = []
+training_set_len = len(configured_sets[0][0])
+testing_set_len = len(configured_sets[0][2])
 for i in range(0,3):
-    print(configured_sets[i][0])
-    print(configured_sets[i][1])
     model.samples_train = [configured_sets[i][0],configured_sets[i][1]]
     model.samples_test = [configured_sets[i][2],configured_sets[i][3]]
 
     print("\nStart execution ",i+1)
-    model.execute()
+    votes = model.execute()
+    #Changes indexes for party names
+    for j in range(0,len(votes)):
+        if i == 0:
+            votes[j] = first_round[int(votes[j])]
+        else:
+            votes[j] = second_round[int(votes[j])]
+    overall_results.append(votes)
+#Prepares rows with samples and results for csv
+rows = []
+for i in range (0,len(configured_sets[2][4])):
+    es_entrenamiento = "False"
+    row = configured_sets[2][4][i]
+    if i < training_set_len:
+        es_entrenamiento = "True"    
+        row.extend([es_entrenamiento,'','',''])
+    else:
+        row.extend([es_entrenamiento,overall_results[0][i-training_set_len],overall_results[1][i-training_set_len],overall_results[2][i-training_set_len]])
+    rows.append(row)
+#Creates output csv
+with open('output.csv', 'w') as csvfile:
+    filewriter = csv.writer(csvfile, delimiter=',',
+                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    for row in rows:
+        filewriter.writerow(row)
+  
+
