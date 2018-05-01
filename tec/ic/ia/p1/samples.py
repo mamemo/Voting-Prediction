@@ -15,6 +15,8 @@ def generar_muestras(tipo_muestras, tipo_prediccion, poblacion, porcentaje_prueb
             samples, tipo_prediccion)
     elif normalization == "semi":
         normalized_samples, gt = normalization_semi(samples, tipo_prediccion)
+    elif normalization == "svm":
+        normalized_samples, gt = normalization_svm(samples, tipo_prediccion)
     partition = poblacion - int(poblacion * porcentaje_pruebas / 100)
     return normalized_samples[:partition], gt[:partition], normalized_samples[partition:], gt[partition:]
 
@@ -94,6 +96,20 @@ def normalization_semi(samples, tipo_prediccion):
                 normalized_samples[i][j] = float(normalized_samples[i][j])
     return normalized_samples, gt
 
+def normalization_svm(samples, tipo_prediccion):
+    es_r2 = False
+    if tipo_prediccion == "r2_con_r1":
+        discrete_indexes = [0, 5, 7, 8, 11, 12, 13, 14, 19, 20, 21, 22,
+                            24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]  # 36 es el GT
+    else:
+        discrete_indexes = [0, 4, 6, 7, 10, 11, 12, 13, 18, 19, 20,
+                            21, 23, 26, 27, 28, 29, 30, 31, 32, 33, 34]  # 34 es el GT
+        if tipo_prediccion == "r2":
+            es_r2 = True
+    normalized_samples, gt = configure_samples_svm(
+        samples, discrete_indexes, es_r2=es_r2)
+    return normalized_samples, gt
+
 # Configures sample values (normalizes them and changes them to numbers if they are discrete)
 
 
@@ -119,6 +135,22 @@ def configure_samples(samples, discrete_indexes, es_semi=False, es_r2=False):
         data = np.array(np_samples_by_attr[:-1])
         gt = np.array(np_samples_by_attr[-1])
         return data.T.tolist(), gt.tolist()
+
+def configure_samples_svm(samples, discrete_indexes, es_r2=False):
+    np_samples_by_attr = np.array(samples).T.tolist()
+
+    discrete = 0
+    for i in range(len(np_samples_by_attr)):
+        if i in discrete_indexes:
+            for j in range(len(np_samples_by_attr[i])):
+                np_samples_by_attr[i][j] = convert_discrete_value(
+                    discrete, np_samples_by_attr[i][j], es_r2)
+            discrete += 1
+
+    data = np.array(np_samples_by_attr[:-1], dtype=np.float32)
+    gt = np.array(np_samples_by_attr[-1])
+    return data.T, gt
+
 
 
 def normalize_min_max(values):

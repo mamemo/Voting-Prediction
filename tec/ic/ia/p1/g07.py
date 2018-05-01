@@ -115,7 +115,7 @@ elif args.knn:
     normalization = "total_sin_one_hot_encoding"
 elif args.svm:
     model = SupportVectorMachine(samples_train=None, samples_test=None,prefix = args.prefijo)
-    normalization = "total_con_one_hot_encoding"
+    normalization = "svm"
 else:
     parser.print_help()
     exit(0)
