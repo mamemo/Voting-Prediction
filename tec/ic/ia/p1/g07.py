@@ -50,8 +50,6 @@ parser.add_argument("--poblacion", required=True,
                     type=int, help="Number of Samples.")
 parser.add_argument("--porcentaje-pruebas", required=True, type=float,
                     help="Percentage of samples to use on final validation.")
-parser.add_argument("--prediccion", required=True,
-                    choices=["r1", "r2", "r2_con_r1"], help="The model prediction.")
 parser.add_argument("--muestras", required=True, choices=["PAIS", 'SAN_JOSE',
                                                           'ALAJUELA',
                                                           'CARTAGO',
@@ -115,16 +113,20 @@ elif args.knn:
     normalization = "total_sin_one_hot_encoding"
 elif args.svm:
     model = SupportVectorMachine(samples_train=None, samples_test=None,prefix = args.prefijo)
-    normalization = "svm"
+    normalization = "total_con_one_hot_encoding"
 else:
     parser.print_help()
     exit(0)
 
 print("\n\nGenerating samples")
 # Removes non-wanted attributes depending on prediction type and creates samples
-data_train, gt_train, data_test, gt_test = generar_muestras(args.muestras, args.prediccion, args.poblacion, args.porcentaje_pruebas, normalization)
-model.samples_train = [data_train, gt_train]
-model.samples_test = [data_test, gt_test]
+configured_sets = generar_muestras(args.muestras, args.poblacion, args.porcentaje_pruebas, normalization)
 
-print("\nStart execution")
-model.execute()
+for i in range(0,3):
+    print(configured_sets[i][0])
+    print(configured_sets[i][1])
+    model.samples_train = [configured_sets[i][0],configured_sets[i][1]]
+    model.samples_test = [configured_sets[i][2],configured_sets[i][3]]
+
+    print("\nStart execution ",i+1)
+    model.execute()

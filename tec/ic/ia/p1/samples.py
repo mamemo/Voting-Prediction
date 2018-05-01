@@ -3,25 +3,28 @@ import numpy as np
 from keras.utils import to_categorical
 
 
-def generar_muestras(tipo_muestras, tipo_prediccion, poblacion, porcentaje_pruebas, normalization):
+def generar_muestras(tipo_muestras, poblacion, porcentaje_pruebas, normalization):
     # Removes non-wanted attributes depending on prediction type and creates samples
-    samples = create_samples(tipo_muestras, tipo_prediccion, poblacion)
+    samples = create_samples(tipo_muestras, poblacion)
     print("\nNormalizing samples")
-    if normalization == "total_con_one_hot_encoding":
-        normalized_samples, gt = normalization_total_con_one_hot_encoding(
-            samples, tipo_prediccion)
-    elif normalization == "total_sin_one_hot_encoding":
-        normalized_samples, gt = normalization_total_sin_one_hot_encoding(
-            samples, tipo_prediccion)
-    elif normalization == "semi":
-        normalized_samples, gt = normalization_semi(samples, tipo_prediccion)
-    elif normalization == "svm":
-        normalized_samples, gt = normalization_svm(samples, tipo_prediccion)
-    partition = poblacion - int(poblacion * porcentaje_pruebas / 100)
-    return normalized_samples[:partition], gt[:partition], normalized_samples[partition:], gt[partition:]
+    result = []
+    for i in range (0,3):
+        tipo_prediccion = i
+        if normalization == "total_con_one_hot_encoding":
+            normalized_samples, gt = normalization_total_con_one_hot_encoding(
+                samples[i], i)
+        elif normalization == "total_sin_one_hot_encoding":
+            normalized_samples, gt = normalization_total_sin_one_hot_encoding(
+                samples[i], i)
+        elif normalization == "semi":
+            normalized_samples, gt = normalization_semi(samples[i], i)
+        elif normalization == "svm":
+            normalized_samples, gt = normalization_svm(samples[i],i)
+        partition = poblacion - int(poblacion * porcentaje_pruebas / 100)
+        result.append([normalized_samples[:partition], gt[:partition], normalized_samples[partition:], gt[partition:]])
+    return result
 
-
-def create_samples(tipo_muestras, tipo_prediccion, poblacion):
+def create_samples(tipo_muestras, poblacion):
     samples = []
     pre_samples = None
     if tipo_muestras == "PAIS":
@@ -30,18 +33,21 @@ def create_samples(tipo_muestras, tipo_prediccion, poblacion):
         pre_samples = generar_muestra_provincia(poblacion, "SAN JOSE")
     else:
         pre_samples = generar_muestra_provincia(poblacion, tipo_muestras)
-    indexes = [1, 2, 3, 4, 5, 9, 10, 15, 19, 21,
-               24, 25, 27, 30, 31, 32, 37, 38, 40, 44]
-    if tipo_prediccion == "r1":
-        indexes.extend([7, 56])
-    elif tipo_prediccion == "r2":
-        indexes.extend([6, 55])
-    for i in range(0, poblacion):
-        sample = []
-        for j in range(0, 57):
-            if j not in indexes:
-                sample.append(pre_samples[i][j])
-        samples.append(sample)
+    for k in range (0,3):
+        samples_set = []
+        indexes = [1, 2, 3, 4, 5, 9, 10, 15, 19, 21,
+                   24, 25, 27, 30, 31, 32, 37, 38, 40, 44]
+        if k == 0:
+            indexes.extend([7, 56])
+        elif k == 1:
+            indexes.extend([6, 55])
+        for i in range(0, poblacion):
+            sample = []
+            for j in range(0, 57):
+                if j not in indexes:
+                    sample.append(pre_samples[i][j])
+            samples_set.append(sample)
+        samples.append(samples_set)
     return samples
 
 
@@ -50,12 +56,12 @@ def normalization_total_con_one_hot_encoding(samples, tipo_prediccion):
     es_r2 = False
     discrete_indexes = [0, 4, 6, 7, 10, 11, 12, 13, 18, 19, 20,
                         21, 23, 26, 27, 28, 29, 30, 31, 32, 33, 34]  # 34 es el GT
-    if tipo_prediccion == "r2_con_r1":
+    if tipo_prediccion == 2:
         discrete_indexes = [0, 5, 7, 8, 11, 12, 13, 14, 19, 20, 21, 22,
                             24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]  # 36 es el GT
-    elif tipo_prediccion == "r1":
+    elif tipo_prediccion == 0:
         num_classes = 15
-    elif tipo_prediccion == "r2":
+    elif tipo_prediccion == 1:
         es_r2 = True
     normalized_samples, gt = configure_samples(
         samples, discrete_indexes, es_r2=es_r2)
@@ -65,13 +71,13 @@ def normalization_total_con_one_hot_encoding(samples, tipo_prediccion):
 
 def normalization_total_sin_one_hot_encoding(samples, tipo_prediccion):
     es_r2 = False
-    if tipo_prediccion == "r2_con_r1":
+    if tipo_prediccion == 2:
         discrete_indexes = [0, 5, 7, 8, 11, 12, 13, 14, 19, 20, 21, 22,
                             24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]  # 36 es el GT
     else:
         discrete_indexes = [0, 4, 6, 7, 10, 11, 12, 13, 18, 19, 20,
                             21, 23, 26, 27, 28, 29, 30, 31, 32, 33, 34]  # 34 es el GT
-        if tipo_prediccion == "r2":
+        if tipo_prediccion == 1:
             es_r2 = True
     normalized_samples, gt = configure_samples(
         samples, discrete_indexes, es_r2=es_r2)
@@ -81,7 +87,7 @@ def normalization_total_sin_one_hot_encoding(samples, tipo_prediccion):
 
 
 def normalization_semi(samples, tipo_prediccion):
-    if tipo_prediccion == "r2_con_r1":
+    if tipo_prediccion == 2:
         discrete_indexes = [0, 5, 7, 8, 11, 12, 13, 14, 19, 20, 21, 22,
                             24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]  # 36 es el GT
     else:
@@ -98,13 +104,13 @@ def normalization_semi(samples, tipo_prediccion):
 
 def normalization_svm(samples, tipo_prediccion):
     es_r2 = False
-    if tipo_prediccion == "r2_con_r1":
+    if tipo_prediccion == 2:
         discrete_indexes = [0, 5, 7, 8, 11, 12, 13, 14, 19, 20, 21, 22,
                             24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]  # 36 es el GT
     else:
         discrete_indexes = [0, 4, 6, 7, 10, 11, 12, 13, 18, 19, 20,
                             21, 23, 26, 27, 28, 29, 30, 31, 32, 33, 34]  # 34 es el GT
-        if tipo_prediccion == "r2":
+        if tipo_prediccion == 1:
             es_r2 = True
     normalized_samples, gt = configure_samples_svm(
         samples, discrete_indexes, es_r2=es_r2)
