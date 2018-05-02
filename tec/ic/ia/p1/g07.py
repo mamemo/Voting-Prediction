@@ -156,10 +156,11 @@ for i in range (0,len(configured_sets[2][4])):
         row.extend([es_entrenamiento,overall_results[0][i-training_set_len],overall_results[1][i-training_set_len],overall_results[2][i-training_set_len]])
     rows.append(row)
 #Creates output csv
-with open('output.csv', 'w') as csvfile:
+with open('Output.csv', 'w',newline='') as csvfile:
     filewriter = csv.writer(csvfile, delimiter=',',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
     for row in rows:
         filewriter.writerow(row)
-  
+
+
 
