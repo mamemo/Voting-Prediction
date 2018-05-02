@@ -10,7 +10,7 @@ class LogisticRegression(Model):
         # HyperParameters
         self.learning_rate = 0.01
         self.training_epochs = 5000
-        self.batch_size = 100
+        self.batch_size = 1000
         self.display_step = 5
         self.lambd = 0.01
 
@@ -46,22 +46,30 @@ class LogisticRegression(Model):
         with tf.name_scope("Declaring_Optimizer"):
             optimizer = tf.train.GradientDescentOptimizer(learning_rate=self.learning_rate).minimize(regularized_loss)
 
+        output_prediction = []
         with tf.name_scope("Training"):
             with tf.Session() as sess:
                 # Initialize variables
                 sess.run(tf.global_variables_initializer())
+                l = 0
                 for epoch in range(self.training_epochs):
-                    loss_in_each_epoch = 0
                     _, l = sess.run([optimizer, regularized_loss], feed_dict={X: self.samples_train[0], y: self.samples_train[1]})
-                    loss_in_each_epoch += l
-                    # Print loss
-                    if (epoch+1) % self.display_step == 0:
-                        print("Epoch: {}".format(epoch + 1), "loss={}".format(loss_in_each_epoch))
-
                 print("Optimization Finished!")
 
-                # Test model
+                print("\nResults:")
+
+                #Loss
+                print("Loss on Training set:", l)
+                l = sess.run(regularized_loss, feed_dict={X: self.samples_test[0], y: self.samples_test[1]})
+                print("Loss on Test set:", l)
+
+                # Accuracy
                 correct_prediction = tf.equal(tf.argmax(y_techo, 1), tf.argmax(y, 1))
                 # Calculate accuracy for test examples
                 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-                print("Accuracy:", accuracy.eval({X: self.samples_test[0], y: self.samples_test[1]}))
+                print("Accuracy on Training set:", accuracy.eval({X: self.samples_train[0], y: self.samples_train[1]}))
+                print("Accuracy on Test set:", accuracy.eval({X: self.samples_test[0], y: self.samples_test[1]}))
+
+                pred_train = self.samples_train[0].dot(sess.run(W))+sess.run(b)
+                pred_test = self.samples_test[0].dot(sess.run(W))+sess.run(b)
+                return (np.argmax(pred_train, axis=1).tolist() + np.argmax(pred_test, axis=1).tolist())

@@ -150,15 +150,12 @@ for i in range (0,len(configured_sets[2][4])):
     es_entrenamiento = "False"
     row = configured_sets[2][4][i]
     if i < training_set_len:
-        es_entrenamiento = "True"    
+        es_entrenamiento = "True"
     row.extend([es_entrenamiento,overall_results[0][i],overall_results[1][i],overall_results[2][i]])
     rows.append(row)
 #Creates output csv
-with open('Output.csv', 'w',newline='') as csvfile:
+with open(args.prefijo+'Output.csv', 'w',newline='') as csvfile:
     filewriter = csv.writer(csvfile, delimiter=',',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
     for row in rows:
         filewriter.writerow(row)
-
-
-

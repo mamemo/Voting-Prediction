@@ -8,6 +8,7 @@
 * [Installation](#installation)
 * [Usage](#usage)
 * [Models' Report](#models'-report)
+* [Samples Generator](#samples-generator)
 
 ## Installation:
 
@@ -28,7 +29,7 @@ Before using the project, first you have to install all the project dependencies
  * Scikit:
  	* For installing Scikit you must have Python 3.3+, Numpy 1.8.2+ and Scipy 0.13.3+.
  	* Install it  with pip:
-    ```pip install -U scikit-learns```
+    ```pip install -U scikit-learn```
 
 Now that all dependencies are installed. You can install the project using:
 
@@ -135,6 +136,79 @@ This section contains the analysis of using each model and how well it performs 
 
 ### Logistic Regression
 
+For logistic regression we had to compare how it performs with regularization L1 and L2. All the experiment combinations were ran 10 times and the value in the table is the mean. This algorithm uses the normalized samples NOMBRE. In these tests we used the next hyper-parameters to get the best results:
+* Learning rate = 0.01
+* Training epochs = 5000
+* Batch size = 1000
+* Regularization Coefficient = 0.01
+
+The results are:
+
+<table>
+    <thead>
+        <tr>
+            <th>Prediction</th>
+            <th colspan=4>L1</th>
+            <th colspan=4>L2</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td colspan=2 align="center">Acurracy</td>
+            <td colspan=2 align="center">Loss</td>
+            <td colspan=2 align="center">Acurracy</td>
+            <td colspan=2 align="center">Loss</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+        </tr>
+        <tr>
+            <td>r1</td>
+            <td></td>
+            <td></td>
+            <td>2.59636</td>
+            <td>2.58917</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>r2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>r2 with r1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+HABLADA DICIENDO PORQUE LOS RESULTADOS DIERON ASI
+
 ### Neural Network
 
 ### Decision Tree
@@ -142,3 +216,6 @@ This section contains the analysis of using each model and how well it performs 
 ### K-Nearest Neighbors
 
 ### Support Vector Machines
+
+
+## Samples Generator

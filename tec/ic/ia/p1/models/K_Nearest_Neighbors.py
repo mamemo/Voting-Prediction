@@ -90,6 +90,8 @@ class KNearestNeighbors(Model):
         tree = self.create_kdtree(self.samples_train)
         pred_votes = []
 
+        print("Arbol Creado!")
+        print("Empezando el recorrido del arbol para metricas")
         # Measures error with training data
         p_results = 0
         n_results = 0
