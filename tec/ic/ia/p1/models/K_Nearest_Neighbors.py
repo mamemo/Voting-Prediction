@@ -88,6 +88,7 @@ class KNearestNeighbors(Model):
 				p_results+=1
 			else:
 				n_results+=1
+			pred_votes.append(pred_result)
 		print("Porcentaje de errores con train set: ",n_results/len(self.samples_train[0]))
 		#Measures error with testing data
 		p_results = 0

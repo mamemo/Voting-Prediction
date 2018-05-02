@@ -151,9 +151,7 @@ for i in range (0,len(configured_sets[2][4])):
     row = configured_sets[2][4][i]
     if i < training_set_len:
         es_entrenamiento = "True"    
-        row.extend([es_entrenamiento,'','',''])
-    else:
-        row.extend([es_entrenamiento,overall_results[0][i-training_set_len],overall_results[1][i-training_set_len],overall_results[2][i-training_set_len]])
+    row.extend([es_entrenamiento,overall_results[0][i],overall_results[1][i],overall_results[2][i]])
     rows.append(row)
 #Creates output csv
 with open('Output.csv', 'w',newline='') as csvfile:
