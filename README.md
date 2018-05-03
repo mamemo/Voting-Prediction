@@ -7,7 +7,7 @@
 
 * [Installation](#installation)
 * [Usage](#usage)
-* [Models' Report](#models'-report)
+* [Models' Report](#models-report)
 * [Samples Generator](#samples-generator)
 
 ## Installation:
@@ -173,36 +173,36 @@ The results are:
         </tr>
         <tr>
             <td>r1</td>
-            <td></td>
-            <td></td>
+            <td>0.24674</td>
+            <th>0.25455</th>
             <td>2.59636</td>
             <td>2.58917</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>0.25614</td>
+            <td>0.252</td>
+            <td>2.55583</td>
+            <td>2.55691</td>
         </tr>
         <tr>
             <td>r2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>0.611325</td>
+            <td>0.6159</td>
+            <td>1.15681</td>
+            <td>1.15294</td>
+            <td>0.61821</td>
+            <th>0.61945</th>
+            <td>1.12866</td>
+            <td>1.12633</td>
         </tr>
         <tr>
             <td>r2 with r1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>0.60874</td>
+            <td>0.61335</td>
+            <td>1.15408</td>
+            <td>1.14953</td>
+            <td>0.61834</td>
+            <th>0.62045</th>
+            <td>1.12618</td>
+            <td>1.12462</td>
         </tr>
     </tbody>
 </table>
@@ -215,7 +215,7 @@ HABLADA DICIENDO PORQUE LOS RESULTADOS DIERON ASI
 
 ### K-Nearest Neighbors
 
-### Support Vector Machines
+### Support Vector Machine
 
 
 ## Samples Generator
