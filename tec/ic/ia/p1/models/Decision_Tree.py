@@ -2,7 +2,7 @@ from tec.ic.ia.p1.models.Model import Model
 from math import log
 from numpy import argmax
 import scipy.stats as stats
-from ete3 import Tree
+import datetime
 
 #Clase arbol.
 class DTree(object):
@@ -14,6 +14,7 @@ class DTree(object):
 class DecisionTree(Model):
     def __init__(self, samples_train, samples_test, prefix, pruning_threshold):
         super().__init__(samples_train, samples_test, prefix)
+        self.votos = [['ACCESIBILIDAD SIN EXCLUSION', 'ACCION CIUDADANA', 'ALIANZA DEMOCRATA CRISTIANA', 'DE LOS TRABAJADORES', 'FRENTE AMPLIO', 'INTEGRACION NACIONAL', 'LIBERACION NACIONAL','MOVIMIENTO LIBERTARIO', 'NUEVA GENERACION', 'RENOVACION COSTARRICENSE', 'REPUBLICANO SOCIAL CRISTIANO', 'RESTAURACION NACIONAL', 'UNIDAD SOCIAL CRISTIANA', 'NULOS', 'BLANCOS'],['ACCION CIUDADANA', 'RESTAURACION NACIONAL', 'NULOS', 'BLANCOS']]
         self.pruning_threshold = pruning_threshold
         #Variables para Gain()
         self.entropia_general = 0
@@ -28,8 +29,10 @@ class DecisionTree(Model):
         #Guarda los hijos de todos los atributos
         self.atributos_oficiales = []
         self.valores_atributos_oficiales = []
+        self.prediccion = 0
         #guarda el arbol
         self.main_tree = None
+        self.oficial_outputs = []
 
     #Funcion responsable de sacar la ganancia a un atributo especifico
     def gain(self, atributo , datos):
@@ -157,6 +160,8 @@ class DecisionTree(Model):
         iguales = True
         valor = self.samples_train[1][examples[0]]
         for i in examples:
+            if(self.samples_train[1][i] not in self.oficial_outputs):
+                self.oficial_outputs += [self.samples_train[1][i]]
             if(self.samples_train[1][i]!=valor):
                 iguales = False
                 break
@@ -230,80 +235,79 @@ class DecisionTree(Model):
             result += partial_result
         return(1 - stats.chi2.cdf(x=result, df=((len(outputs)-1)*(len(attributes)-1))))
 
-    def validar_datos(self):
+    def validar_datos(self,data):
         count = 0
         partidos = []
         a_x_p = []
-        for i in range(len(self.samples_test[0])):
+        result = []
+        for i in range(len(data[0])):
             hijo = False
             arbol = self.main_tree
             while (hijo == False):
-                if(arbol.condicion.count(self.samples_test[0][i][arbol.atributo]) != 0):
-                    arbol = arbol.hijos[arbol.condicion.index(self.samples_test[0][i][arbol.atributo])]
+                if(arbol.condicion.count(data[0][i][arbol.atributo]) != 0):
+                    arbol = arbol.hijos[arbol.condicion.index(data[0][i][arbol.atributo])]
                     if(type(arbol) == type("")):
                         hijo = True
                 else:
-                    print("Atributo: \"",self.samples_test[0][i][arbol.atributo], "\" no se encuentra en arbol.")
+                    print("Atributo: \"",data[0][i][arbol.atributo], "\" no se encuentra en arbol.")
                     break
-            #print("Era: ", self.samples_test[1][i], " Salio: ", arbol)
-            if (self.samples_test[1][i] == arbol):
+            #print("Era: ", data[1][i], " Salio: ", arbol)
+            if (data[1][i] == arbol):
+                result += [self.votos[self.prediccion].index(data[1][i])]
                 count += 1
-                if(self.samples_test[1][i] not in partidos):
-                    partidos += [self.samples_test[1][i]]
+                if(data[1][i] not in partidos):
+                    partidos += [data[1][i]]
                     a_x_p += [[1,1]]
                 else:
-                    a_x_p[partidos.index(self.samples_test[1][i])][0] += 1
-                    a_x_p[partidos.index(self.samples_test[1][i])][1] += 1
+                    a_x_p[partidos.index(data[1][i])][0] += 1
+                    a_x_p[partidos.index(data[1][i])][1] += 1
             else:
-                if(self.samples_test[1][i] not in partidos):
-                    partidos += [self.samples_test[1][i]]
+                result += [self.votos[self.prediccion].index(data[1][i])]
+                if(data[1][i] not in partidos):
+                    partidos += [data[1][i]]
                     a_x_p += [[1,0]]
                 else:
-                    a_x_p[partidos.index(self.samples_test[1][i])][0] += 1
+                    a_x_p[partidos.index(data[1][i])][0] += 1
 
-        print("Aciertos: ", count," De: ", len(self.samples_test[0]), " Accuracy: ", (count/len(self.samples_test[0])*100),"%")
-        for i in range(len(a_x_p)):
-            print(partidos[i])
-            print(a_x_p[i])
-
-    def recorrer_arbol(self, tree):
-        arbol = ""
-        for k in range(len(tree.hijos)):
-            if (type(tree.hijos[k]) != type("")):
-                arbol += self.recorrer_arbol(tree.hijos[k])+" <"+tree.condicion[k]+">"
-            else:
-                #arbol += "<"+tree.condicion[k]+"> "+tree.hijos[k]
-                arbol += "<"+tree.condicion[k]+"> "+"PAC"
-            if(k < len(tree.hijos)-1):
-                arbol+=","
-        return ("("+arbol+")"+str(tree.atributo))
-        
+        print("Aciertos: ", count," De: ", len(data[0]), " Accuracy: ", (count/len(data[0])*100),"%")
+        #for i in range(len(a_x_p)):
+        #    print(partidos[i])
+        #    print(a_x_p[i])
+        return result
 
     def execute(self):
+        result = []
+        self.atributos_oficiales = []
+        self.valores_atributos_oficiales = []
+        self.main_tree = None
+        self.oficial_outputs = []
         att = [i for i in range(len(self.samples_train[0][0]))]
         datos = [i for i in range(len(self.samples_train[0]))]
         self.generar_rangos()
         
         #Se crea el arbol
         self.main_tree = self.decision_tree_learning(datos, att, datos)
-        
-        #Funcion para pintar arbol antes de la poda
-        #t = Tree(self.recorrer_arbol(self.main_tree)+";", format=1)
-        #print (t.get_ascii(attributes=["name", "label"])+"\n")
+        if(len(self.oficial_outputs) > 4):
+            self.prediccion = 0
+        else:
+            self.prediccion = 1
 
         print("\n-------Before pruning--------")
         #Se validan los datos con arbol sin podar
-        self.validar_datos()
+        print("-> Training Set")
+        self.validar_datos(self.samples_train)
+        print("-> Test Set")
+        self.validar_datos(self.samples_test)
         
         #Se poda el arbol
         self.main_tree = self.pruning_tree(datos, self.main_tree)
 
-        #Funcion para pintar arbol despues de la poda
-        #t = Tree(self.recorrer_arbol(self.main_tree)+";", format=1)
-        #print (t.get_ascii(attributes=["name", "label"])+"\n")
-
         print("\n-------After pruning--------")
         #Se validan los datos con arbol podado
-        self.validar_datos()
+        print("-> Training Set")
+        result += self.validar_datos(self.samples_train)
+        print("-> Test Set")
+        result += self.validar_datos(self.samples_test)
+        #print(result)
         print("\nEnding execution\n")
-
+        return result
