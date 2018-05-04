@@ -11,17 +11,17 @@ Outputs: Initialized attributes according to the type.
 
 def test_new_tree():
     tree = DTree()
-    assert tree.hijos == []
-    assert tree.condicion == []
-    assert tree.atributo is None
+    assert tree.leaf_nodes == []
+    assert tree.nodes_conditions == []
+    assert tree.attribute is None
 
 
 '''
-[TREE] Check the output of the function that calculates the gain to an attribute
-according to a set of data.
+[TREE] Check the output of the function that calculates the gain to an attribute according 
+to a set of data.
 Parameters: None
-Requirements: Declare a data set (samples_train) and enter the attribute (0)
-that will be evaluated.
+Requirements: Declare a data set (samples_train) and enter the attribute (0) that will
+be evaluated.
 It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
 Outputs: result gain float number.
 '''
@@ -64,19 +64,16 @@ def test_gain():
 and a specific attribute, takes the values of the children of the attribute,
 the quantity for each one and the outputs.
 Parameters: None
-Requirements: Declare a data set (samples_train) and enter the attribute (0)
-that will be evaluated.
+Requirements: Declare a data set (samples_train) and enter the attribute (0) that will 
+be evaluated.
 It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
-Outputs: - lista_atributos: list with string values. Contains the attribute
- values.
-         - valores_atributos: list with int values. Contains the amount
-          of attributes values.
-         - lista_answers: list with string values. Contains the outputs
-          values.
-         - valores_answers:  list with int values. Contains the amount of
-          outputs values.
-         - total: list with sublist int values. Contains the amount of
-          outputs values per attribute value.
+Outputs: - attributes_list: list with string values. Contains the attribute values.
+         - attributes_values: list with int values. Contains the amount of attributes 
+         values.
+         - outputs_list: list with string values. Contains the outputs values.
+         - outputs_values:  list with int values. Contains the amount of outputs values.
+         - total: list with sublist int values. Contains the amount of outputs values 
+         per attribute value.
 '''
 
 
@@ -109,58 +106,53 @@ def test_take_out_information():
     decisionTree = DecisionTree(samples_train, [], "", 0)
     decisionTree.take_out_information(
         0, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-    assert decisionTree.lista_atributos == ['some', 'full', 'none']
-    assert decisionTree.valores_atributos == [4, 6, 2]
+    assert decisionTree.attributes_list == ['some', 'full', 'none']
+    assert decisionTree.attributes_values == [4, 6, 2]
     assert decisionTree.total == [[4, 0], [2, 4], [0, 2]]
-    assert decisionTree.lista_answers == ['yes', 'no']
-    assert decisionTree.valores_answers == [6, 6]
+    assert decisionTree.outputs_list == ['yes', 'no']
+    assert decisionTree.outputs_values == [6, 6]
 
 
 '''
-[TREE] Check the output of the general_entropy function which returns
- the entropy of the parent attribute.
+[TREE] Check the output of the general_entropy function which returns the entropy of
+ the parent attribute.
 Parameters: None
 Requirements: Declare the list that contains the amount of output values
-(valores_answers) and the total amount of outputs (N).
-If the outputs are ["PAC", "RN","BLANCOS","NULOS"] the list will be
- [5,4,7,8] depending on the data,
-and N will be 5+4+7+8.
+(outputs_values) and the total amount of outputs (N).
+If the outputs are ["PAC", "RN","BLANCOS","NULOS"] the list will be [5,4,7,8] depending
+on the data, and N will be 5+4+7+8.
 Outputs: numeric value of the entropy of the attribute.
 '''
 
 
 def test_general_entropy():
     decisionTree = DecisionTree([], [], "", 0)
-    decisionTree.valores_answers = [6, 6]
+    decisionTree.outputs_values = [6, 6]
     decisionTree.N = 12
     decisionTree.general_entropy()
-    assert decisionTree.entropia_general == 1
+    assert decisionTree.attribute_entropy == 1
 
 
 '''
-[TREE] Check the output of the total_gain function which returns the
- gain of the parent attribute.
+[TREE] Check the output of the total_gain function which returns the gain of the parent attribute.
 Parameters: None
 Requirements:
-	- valores_atributos: list with int values. Contains the amount of
-  attributes values.
-	- valores_answers:  list with int values. Contains the amount of
-   outputs values.
-	- total: list with sublist int values. Contains the amount of
-   outputs values per attribute value.
+	- attributes_values: list with int values. Contains the amount of attributes values.
+	- outputs_values:  list with int values. Contains the amount of outputs values.
+	- total: list with sublist int values. Contains the amount of outputs values per attribute value.
 	- N: len(examples).
-	- entropia_general: entropy of the parent attribute.
+	- attribute_entropy: entropy of the parent attribute.
 Outputs: numeric value of the gain of the attribute.
 '''
 
 
 def test_total_gain():
     decisionTree = DecisionTree([], [], "", 0)
-    decisionTree.valores_atributos = [4, 6, 2]
-    decisionTree.valores_answers = [6, 6]
+    decisionTree.attributes_values = [4, 6, 2]
+    decisionTree.outputs_values = [6, 6]
     decisionTree.total = [[4, 0], [2, 4], [0, 2]]
     decisionTree.N = 12
-    decisionTree.entropia_general = 1
+    decisionTree.attribute_entropy = 1
     assert decisionTree.total_gain() == 0.5408520829727552
 
 
@@ -183,15 +175,14 @@ def test_generate_ranges():
 
 
 '''
-[TREE] Check that the decision_tree_learning function returns a tree
- according to a set of data.
+[TREE] Check that the decision_tree_learning function returns a tree according to a set of data.
 Parameters: None
 Requirements: Declare a data set (samples_train).
 It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
 Outputs:
-	- tree.condicion: list with String values. Contains the attributes values.
-	- tree.hijos:  list with String values. Contains the outputs values.
-	- atributo: int value. The attribute that evaluates.
+	- tree.nodes_conditions: list with String values. Contains the attributes values.
+	- tree.leaf_nodes:  list with String values. Contains the outputs values.
+	- tree.attribute: int value. The attribute that evaluates.
 '''
 
 
@@ -224,14 +215,14 @@ def test_decision_tree_learning():
     decisionTree = DecisionTree(samples_train, [], "", 0)
     tree = decisionTree.decision_tree_learning([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], [
                                                0], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-    assert tree.hijos == ['yes', 'no', 'no']
-    assert tree.condicion == ['some', 'full', 'none']
-    assert tree.atributo == 0
+    assert tree.leaf_nodes == ['yes', 'no', 'no']
+    assert tree.nodes_conditions == ['some', 'full', 'none']
+    assert tree.attribute == 0
 
 
 '''
-[TREE] Check that the classification function returns False when the outputs
- of the samples_train are not the same.
+[TREE] Check that the classification function returns False when the outputs of the samples_train 
+are not the same.
 Parameters: None
 Requirements: Declare a data set (samples_train).
 It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
@@ -247,8 +238,8 @@ def test_false_classification():
 
 
 '''
-[TREE] Check that the classification function returns True when the outputs
- of the samples_train are the same.
+[TREE] Check that the classification function returns True when the outputs of the samples_train 
+are the same.
 Parameters: None
 Requirements: Declare a data set (samples_train).
 It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
@@ -264,8 +255,8 @@ def test_true_classification():
 
 
 '''
-[TREE] Check that the plurality value function returns the input value
- with the highest number of occurrences in the list.
+[TREE] Check that the plurality value function returns the input value with the highest number 
+of occurrences in the list.
 Parameters: None
 Requirements: Declare a data set (samples_train).
 It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
@@ -281,8 +272,7 @@ def test_plurality_value():
 
 
 '''
-[TREE] Check that the function total_deviation returns the deviation
- of an attribute
+[TREE] Check that the function total_deviation returns the deviation of an attribute
 (node of the tree), evaluating in the table of chi squared.
 Parameters: None
 Requirements: Declare a data set (samples_train).
@@ -324,16 +314,14 @@ def test_total_deviation():
 
 
 '''
-[TREE] Verify that the threshold_pruning_tree function does not prune
- the tree if the
+[TREE] Verify that the threshold_pruning_tree function does not prune the tree if the
 threshold is higher than the entropy of the nodes.
 Parameters: None
 Requirements:
 	- Declare a data set (samples_train) and initialize it.
 	  It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
 	- Declare a DTree and initialize it.
-	- Parameter examples: list of int values that corresponds to the index
-   of the values of samples_train[0].
+	- Parameter examples: list of int values that corresponds to the index of the values of samples_train[0].
 	- Threshold: in this case is 0.25.
 Outputs: DTree value intact.
 '''
@@ -366,27 +354,25 @@ def test_high_threshold_pruning_tree():
                       "yes"]]
     decisionTree = DecisionTree(samples_train, [], "", 0.25)
     tree = DTree()
-    tree.hijos = ['yes', 'no', 'no']
-    tree.condicion = ['some', 'full', 'none']
-    tree.atributo = 0
+    tree.leaf_nodes = ['yes', 'no', 'no']
+    tree.nodes_conditions = ['some', 'full', 'none']
+    tree.attribute = 0
     result = decisionTree.pruning_tree(
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], tree)
-    assert result.atributo == tree.atributo
-    assert result.hijos == tree.hijos
-    assert result.condicion == tree.condicion
+    assert result.attribute == tree.attribute
+    assert result.leaf_nodes == tree.leaf_nodes
+    assert result.nodes_conditions == tree.nodes_conditions
 
 
 '''
-[TREE] Verify that the threshold_pruning_tree function does prune the
- tree if the
+[TREE] Verify that the threshold_pruning_tree function does prune the tree if the
 threshold is lower than the entropy of the nodes.
 Parameters: None
 Requirements:
 	- Declare a data set (samples_train) and initialize it.
 	  It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
 	- Declare a DTree and initialize it.
-	- Parameter examples: list of int values that corresponds to the index of
-   the values of samples_train[0].
+	- Parameter examples: list of int values that corresponds to the index of the values of samples_train[0].
 	- Threshold: in this case is 0.02.
 Outputs: Prune DTree. In this case is a String value.
 '''
@@ -419,25 +405,24 @@ def test_low_threshold_pruning_tree():
                       "yes"]]
     decisionTree = DecisionTree(samples_train, [], "", 0.02)
     tree = DTree()
-    tree.hijos = ['yes', 'no', 'no']
-    tree.condicion = ['some', 'full', 'none']
-    tree.atributo = 0
+    tree.leaf_nodes = ['yes', 'no', 'no']
+    tree.nodes_conditions = ['some', 'full', 'none']
+    tree.attribute = 0
     result = decisionTree.pruning_tree(
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], tree)
     assert result == "yes"
 
 
 '''
-[TREE] Verify that the validate_data function uses the created tree and returns
+[TREE] Verify that the validate_data function use the created tree and returns
 the classification of the data.
 Parameters: None
 Requirements:
 	- Declare a data set (samples_train) and initialize it.
 	  It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
 	- Declare a DTree and initialize it.
-	- votos: List with sublists of options that will make the conversion of
-   String outputs to int outputs.
-	- prediccion: index of the "votos" sublist that will be used.
+	- votes: List with sublists of options that will make the conversion of String outputs to int outputs.
+	- prediction: index of the "votes" sublist that will be used.
 Outputs: List with int values. Classification of the data list.
 '''
 
@@ -447,12 +432,12 @@ def test_validate_data():
                      ["yes", "no", "no", "no"]]
     decisionTree = DecisionTree([], [], "", 0)
     tree = DTree()
-    tree.hijos = ['yes', 'no', 'no']
-    tree.condicion = ['some', 'full', 'none']
-    tree.atributo = 0
+    tree.leaf_nodes = ['yes', 'no', 'no']
+    tree.nodes_conditions = ['some', 'full', 'none']
+    tree.attribute = 0
     decisionTree.main_tree = tree
-    decisionTree.votos = [["yes", "no"]]
-    decisionTree.prediccion = 0
+    decisionTree.votes = [["yes", "no"]]
+    decisionTree.prediction = 0
     result = decisionTree.validate_data(samples_train)
     assert result == [0, 1, 1, 1]
 
@@ -462,11 +447,11 @@ def test_validate_data():
  according to the values provided.
 Parameters: None
 Requirements:
-	- Declare a data set (samples_train) and initialize it.
-	  It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
-	- Declare a k-d Tree and initialize it.
-	- level: Depth of the k-d tree in which the algorithm is building.
-	- prediccion: index of the "votos" sublist that will be used.
+  - Declare a data set (samples_train) and initialize it.
+    It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
+  - Declare a k-d Tree and initialize it.
+  - level: Depth of the k-d tree in which the algorithm is building.
+  - prediccion: index of the "votos" sublist that will be used.
 Outputs: Dictionary that simulates the k-d tree. Its nodes have the sample,
  vote and branches.
 '''
@@ -517,11 +502,11 @@ def test_create_kdtree_1():
  according to the values provided.
 Parameters: None
 Requirements:
-	- Declare a data set (samples_train) and initialize it.
-	  It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
-	- Declare a k-d Tree and initialize it.
-	- level: Depth of the k-d tree in which the algorithm is building.
-	- prediccion: index of the "votos" sublist that will be used.
+  - Declare a data set (samples_train) and initialize it.
+    It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
+  - Declare a k-d Tree and initialize it.
+  - level: Depth of the k-d tree in which the algorithm is building.
+  - prediccion: index of the "votos" sublist that will be used.
 Outputs: Dictionary that simulates the k-d tree. Its nodes have the sample, vote
  and branches.
 '''
@@ -576,8 +561,8 @@ def test_create_kdtree_2():
  the distance between two points correctly.
 Parameters: None
 Requirements:
-	- Declare a k-d Tree and initialize it.
-	- The points being compared must be lists of same size.
+  - Declare a k-d Tree and initialize it.
+  - The points being compared must be lists of same size.
 Outputs: Float that indicates the distance between the points.
 '''
 
@@ -598,8 +583,8 @@ def test_calculate_manhattan_distance_1():
  distance between two points correctly.
 Parameters: None
 Requirements:
-	- Declare a k-d Tree and initialize it.
-	- The points being compared must be lists of same size.
+  - Declare a k-d Tree and initialize it.
+  - The points being compared must be lists of same size.
 Outputs: Float that indicates the distance between the points.
 '''
 
@@ -620,14 +605,14 @@ def test_calculate_manhattan_distance_2():
 Parameters: None
 Requirements:
     - Declare the root of the tree and initialize it.
-	  It must be a dictionary and each node must have the structure {
+    It must be a dictionary and each node must have the structure {
             'sample': sample,
             'vote': vote,
             'left_son': left_son,
             'right_son': right_son
         }
-	- Declare a k-d Tree and initialize it.
-	- The point being compared must be a list of same size of the samples in the tree.
+  - Declare a k-d Tree and initialize it.
+  - The point being compared must be a list of same size of the samples in the tree.
 Outputs: A list of lists. The first list is the vote of the closest sample, the second
  list is the distance between the point and the closest one.
 '''
@@ -678,15 +663,15 @@ def test_kdtree_closest_point_k1():
 the k=3 nearest point correctly.
 Parameters: None
 Requirements:
-	- Declare the root of the tree and initialize it.
-		  It must be a dictionary and each node must have the structure {
+  - Declare the root of the tree and initialize it.
+      It must be a dictionary and each node must have the structure {
             'sample': sample,
             'vote': vote,
             'left_son': left_son,
             'right_son': right_son
         }
     - Declare the k-d tree and initialize it.
-	- The point being compared must be a list of same size of the samples in the tree.
+  - The point being compared must be a list of same size of the samples in the tree.
 Outputs: A list of lists. The first list is the vote of the 3 closest samples,
 the second list is the distance between the point and the 3 closest ones.
 '''
