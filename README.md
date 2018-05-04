@@ -160,7 +160,7 @@ For logistic regression we had to compare how it performs with regularization L1
 * Batch size = 1000
 * Regularization Coefficient = 0.01
 
-The results are:
+The results were:
 
 <table>
     <thead>
@@ -236,6 +236,94 @@ According to the results for logistic regression using L1 and L2 regularization,
 * A reason provoking low accuracy rates on this specific model it may be because the space is linearly non-separable, so the error will never be near to zero. Linearly non-separable spaces are the ones that with a linear function you can't separate the classes perfectly. This concept is related with Logistic Regression because the implementation on this model is based on linear models.
 
 ### Neural Network
+
+For neural network model we had to compare how it performs with different structures and different activation functions. All the experiment combinations were ran 10 times and the value in the table is the mean. Also, all the experiments were ran with normalized samples covering the whole country, the samples were normalized and the labels were transformed to one hot encoding. The algorithm was implemented using Keras on top of Tensorflow and you can follow the process in [Neural_Network.py](../master/tec/ic/ia/p1/models/Neural_Network.py). In these tests we used the next hyper-parameters to get the best results:
+* Learning rate = 0.01
+* Training epochs = 3000
+* Batch size = 500
+
+Structures had the input layer's and output layer's amount of units accordingly to the specific prediction round (e.g. the round 1 had 15 units on output layer). We test different hidden layers amount:
+* 1 hidden layers with 20 units.
+* 2 hidden layers fully connected with 30 and 20 respectively.
+* 3 hidden layers fully connected with 30, 20 and 10 respectively.
+
+The activation functions tested were:
+* ReLU
+
+![alt-text(https://i.imgur.com/gKA4kA9.jpg "ReLU function, obtained from kaggle.com")
+* Hard Sigmoid
+
+![alt-text(http://www.thoughtly.co/blog/wp-content/uploads/2016/04/hard_sigmoid2.png "Hard Sigmoid function, obtained from cnblogs.com")
+
+The results were:
+
+* First structure: 1 hidden layers with 20 units.
+
+<table>
+    <thead>
+        <tr>
+            <th>Round</th>
+            <th colspan=4>ReLU</th>
+            <th colspan=4>Hard Sigmoid</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td colspan=2 align="center">Acurracy</td>
+            <td colspan=2 align="center">Loss</td>
+            <td colspan=2 align="center">Acurracy</td>
+            <td colspan=2 align="center">Loss</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+        </tr>
+        <tr>
+            <td>r1</td>
+            <td>0.2955</td>
+            <th>0.27985</th>
+            <td>1.87434</td>
+            <td>1.8835</td>
+            <td>0.26577</td>
+            <td>0.26475</td>
+            <td>1.9004</td>
+            <td>1.88837</td>
+        </tr>
+        <tr>
+            <td>r2</td>
+            <td>0.63767</td>
+            <td>0.6221</td>
+            <td>0.69096</td>
+            <td>0.70923</td>
+            <td>0.62474</td>
+            <th>0.6299</th>
+            <td>0.70856</td>
+            <td>0.70884</td>
+        </tr>
+        <tr>
+            <td>r2 with r1</td>
+            <td>0.6384</td>
+            <td>0.6187</td>
+            <td>0.69025</td>
+            <td>0.712</td>
+            <td>0.62685</td>
+            <th>0.62925</th>
+            <td>0.7065</td>
+            <td>0.70788</td>
+        </tr>
+    </tbody>
+</table>
+
+* Second structure: 2 hidden layers fully connected with 30 and 20 respectively.
+* Third structure: 3 hidden layers fully connected with 30, 20 and 10 respectively.
 
 ### Decision Tree
 
