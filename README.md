@@ -707,8 +707,6 @@ For the Nearest Neighbors with k-d Tree model we had to compare how it performs 
 
 First we compared the accuracy of the k-d tree without with different k values, with the country results. Including the classification r1, r2 and r2 with r1. We make this to see the behavior of the accuracy as the k value changes, comparing the training set with test set.
 
-The threshold is in the range of 0 to 1, where 1 is 100%. It is important to mention that as the node of a tree classifies the data, how closer to 1 is its deviation (value of the chi square), the classification will be worse.
-
 The results are:
 
 <table>
