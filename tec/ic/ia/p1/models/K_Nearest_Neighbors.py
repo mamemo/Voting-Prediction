@@ -2,17 +2,20 @@ from tec.ic.ia.p1.models.Model import Model
 import numpy as np
 from collections import Counter
 
-# This model creates a knn kd tree to predict votes in 1st and 2nd round
+""" 
+This model creates a knn kd tree to predict votes in 1st and 2nd round
+"""
 
 
 class KNearestNeighbors(Model):
     def __init__(self, samples_train, samples_test, prefix, k):
         super().__init__(samples_train, samples_test, prefix)
         self.k = k
-
-    # Recursive function that creates the kd tree using a dictionary.
-    # Input: The samples being distributed and the dimension of the tree.
-    # Output: A dictionary containing the built tree.
+    """
+    Recursive function that creates the kd tree using a dictionary.
+    Input: The samples being distributed and the dimension of the tree.
+    Output: A dictionary containing the built tree.
+    """
     def create_kdtree(self, samples, level=0):
         # The samples' informaction is separated.
         samples_data = samples[0]
@@ -38,18 +41,22 @@ class KNearestNeighbors(Model):
                 ordered_votes[half + 1:]], level + 1)
         }
 
-    # Function that calculates the Manhattan Distance (L1) between two points.
-    # Input: The two points being measured.
-    # Output: A float,the distance between the points.
+    """
+    Function that calculates the Manhattan Distance (L1) between two points.
+    Input: The two points being measured.
+    Output: A float,the distance between the points.
+    """
     def calculate_manhattan_distance(self, p1, p2):
         return sum(abs(x - y) for x, y in zip(p1, p2))
 
-    # Recursive function that looks for the k closest points to the one being
-    # classified.
-    # Input: The root of the kd tree, the point being classified and the current
-    # level of the tree.
-    # Output: A list containing the list of votes of the closest points, and a
-    # list of their distances to the point.
+    """
+    Recursive function that looks for the k closest points to the one being
+    classified.
+    Input: The root of the kd tree, the point being classified and the current
+    level of the tree.
+    Output: A list containing the list of votes of the closest points, and a
+    list of their distances to the point.
+    """
     def kdtree_closest_point(self, root, point, level=0):
         knn_best = []
         knn_distances = []
@@ -102,11 +109,13 @@ class KNearestNeighbors(Model):
         # Only the k closest neighbors are returned.
         return [knn_best[:self.k], knn_distances[:self.k]]
 
-    # Function that its called to execute the model. It creates the tree, and tests 
-    # it using the training and testing set.
-    # Input: -
-    # Output: A list containing the predicted votes for the training and
-    # testing set.
+    """
+    Function that its called to execute the model. It creates the tree, and tests 
+    it using the training and testing set.
+    Input: -
+    Output: A list containing the predicted votes for the training and
+    testing set.
+    """
     def execute(self):
         print("\n\n----------KNN kdtree-----------\n\n")
 
