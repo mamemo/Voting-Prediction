@@ -301,13 +301,20 @@ class DecisionTree(Model):
         
         #Se poda el arbol
         self.main_tree = self.pruning_tree(datos, self.main_tree)
-
         print("\n-------After pruning--------")
-        #Se validan los datos con arbol podado
-        print("-> Training Set")
-        result += self.validar_datos(self.samples_train)
-        print("-> Test Set")
-        result += self.validar_datos(self.samples_test)
-        #print(result)
-        print("\nEnding execution\n")
-        return result
+        if(type(self.main_tree) == type("")):
+            print("Tree ended as a single leaf: ", self.main_tree)
+            print("-> Training Set")
+            print("Aciertos: ", self.samples_train[1].count(self.main_tree)," De: ", len(self.samples_train[0]), " Accuracy: ", (self.samples_train[1].count(self.main_tree)/len(self.samples_train[0]))*100,"%")
+            print("-> Test Set")
+            print("Aciertos: ", self.samples_test[1].count(self.main_tree)," De: ", len(self.samples_test[0]), " Accuracy: ", (self.samples_test[1].count(self.main_tree)/len(self.samples_test[0]))*100,"%")
+            return([self.votos[self.prediccion].index(self.main_tree)]*((len(self.samples_train[0])+len(self.samples_test[0]))))
+        else:
+            #Se validan los datos con arbol podado
+            print("-> Training Set")
+            result += self.validar_datos(self.samples_train)
+            print("-> Test Set")
+            result += self.validar_datos(self.samples_test)
+            #print(result)
+            print("\nEnding execution\n")
+            return result
