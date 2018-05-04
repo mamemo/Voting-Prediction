@@ -144,11 +144,17 @@ To run support vector machine you will need:
 
 ## Models' Report:
 
-This section contains the analysis of using each model and how well it performs with different parameters.
+This section contains the analysis of using each model and how well it performs with different parameters. Every model is called from [g07.py](../master/tec/ic/ia/p1/g07.py) and the process is the following:
+1. Waiting parameters.
+2. Receiving parameters.
+3. Creating the respectively model.
+3. Generating and normalizing samples (some models differ in normalization methods).
+4. Running the model for each round prediction and storing the samples predictions for later.
+5. Generating an output file with each sample and its respectively round prediction. The output file is named with a prefix that comes on the parameters.
 
 ### Logistic Regression
 
-For logistic regression we had to compare how it performs with regularization L1 and L2. All the experiment combinations were ran 10 times and the value in the table is the mean. Also, all the experiments were ran with normalized samples covering the whole country, the samples were normalized and the labels were transformed to one hot encoding. The algorithm was implemented using Tensorflow and you can follow the process in [Logistic_Regression.py](../blob/master/tec/ic/ia/p1/models/Logistic_Regression.py). In these tests we used the next hyper-parameters to get the best results:
+For logistic regression we had to compare how it performs with regularization L1 and L2. All the experiment combinations were ran 10 times and the value in the table is the mean. Also, all the experiments were ran with normalized samples covering the whole country, the samples were normalized and the labels were transformed to one hot encoding. The algorithm was implemented using Tensorflow and you can follow the process in [Logistic_Regression.py](../master/tec/ic/ia/p1/models/Logistic_Regression.py). In these tests we used the next hyper-parameters to get the best results:
 * Learning rate = 0.01
 * Training epochs = 5000
 * Batch size = 1000
@@ -233,7 +239,7 @@ According to the results for logistic regression using L1 and L2 regularization,
 
 ### Decision Tree
 
-For the decision tree we had to compare how it performs with different thresholds, different amounts of attributes (r1, r2 and r2 with r1) and other combinations. All the experiment combinations were tested 10 times and the value in the table is the mean of all.
+For the decision tree we had to compare how it performs with different thresholds, different amounts of attributes (r1, r2 and r2 with r1) and other combinations. All the experiment combinations were tested 10 times and the value in the table is the mean of all. The decision tree model was implemented from scratch and you can follow the algorithm on [Decision_Tree.py](../master/tec/ic/ia/p1/models/Decision_Tree.py).
 
 First we compared the accuracy of the tree without pruning with different thresholds, with the country results. Including the classification r1, r2 and r2 with r1. We make this to see the behavior of the accuracy as it goes down the threshold, comparing the training set with test set.
 
@@ -276,7 +282,7 @@ The results are:
             <td>26,715%</td>
             <td>27,040%</td>
             <td>26,385%</td>
-            <td>27,155%</td>
+            <th>27,155%</th>
         </tr>
     </tbody>
 </table>
@@ -316,7 +322,7 @@ The results are:
             <td>61,740%</td>
             <td>61,880%</td>
             <td>61,995%</td>
-            <td>62,510%</td>
+            <th>62,510%</th>
         </tr>
     </tbody>
 </table>
@@ -357,7 +363,7 @@ The results are:
             <td>61,870%</td>
             <td>61,715%</td>
             <td>62,195%</td>
-            <td>62,555%</td>
+            <th>62,555%</th>
         </tr>
     </tbody>
 </table>
@@ -484,7 +490,11 @@ It can be concluded that, including the restriction, there is no increase in the
 
 
 ## Samples Generator
-The creation of samples was done by using a Python module developed by our work team called tec.ic.ia.pc1.g07, which contains all the logic necessary to recreate a population of n Costa Ricans and their the vote for the first and second round of the 2018 electoral process. This module needs three auxiliary files to produce the samples: Juntas.csv, VotosxPartidoxJunta.csv and Indicadores_x_Canton.csv, because each of them has important details regarding the population that helps the generator to be as precise as possible and to be faithful to the reality of Costa Rica's population.
+The creation of samples was done by using a Python module developed by our work team called tec.ic.ia.pc1.g07, which contains all the logic necessary to recreate a population of N Costa Ricans and their the vote for the first and second round of the 2018 electoral process. The discribed module tec.ic.ia.pc1.g07 can be found on [pc1](../master/tec/ic/ia/pc1) or can be installed using pip:
+```pip install tec.ic.ia.pc1.g07```
+
+
+This module needs three auxiliary files to produce the samples: [Juntas.csv](../master/Juntas.csv), [VotosxPartidoxJunta.csv](../master/VotosxPartidoxJunta.csv) and [Indicadores_x_Canton.csv](../master/Indicadores_x_Canton.csv), because each of them has important details regarding the population that helps the generator to be as precise as possible and to be faithful to the reality of Costa Rica's population.
 These three mentioned files contain data from the scrutiny records of the elections, the maping of the voting boards to their locations, and the location indicators (regarding its population).
 First, in Juntas.csv each of its rows represents a voting board, and its columns represent the following data in the same order:
 
@@ -708,5 +718,3 @@ For the prediction models developed, the indexes 2, 3, 4, 5, 6, 10, 11, 16, 20, 
 >To generate the Assistance Percentage to Regular Education for Their Age, the 5-17 years range is taken as the 15-19 years range, and the 18-24 years range as the 20-24 years range, because of lack of data accuracy between the age ranges for the samples, and the age ranges from the Assistance Percentage to Regular Education Information used.
 >
 >It is only considered the possibility of a person being outside of the work force because of being retired if their age exceeds 60 years, that due to the Costa Rican legislation in the matter.
-
-The discribed module tec.ic.ia.pc1.g07 can be installed using pip: pip install tec.ic.ia.pc1.g07.
