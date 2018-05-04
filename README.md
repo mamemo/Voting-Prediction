@@ -473,6 +473,7 @@ It can be concluded that, including the restriction, there is no increase in the
 The creation of samples was done by using a Python module developed by our work team called tec.ic.ia.pc1.g07, which contains all the logic necessary to recreate a population of n Costa Ricans and their the vote for the first and second round of the 2018 electoral process. This module needs three auxiliary files to produce the samples: Juntas.csv, VotosxPartidoxJunta.csv and Indicadores_x_Canton.csv, because each of them has important details regarding the population that helps the generator to be as precise as possible and to be faithful to the reality of Costa Rica's population.
 These three mentioned files contain data from the scrutiny records of the elections, the maping of the voting boards to their locations, and the location indicators (regarding its population).
 First, in Juntas.csv each of its rows represents a voting board, and its columns represent the following data in the same order: 
+
     1.  Province
     2.  Canton
     3.  District
@@ -481,7 +482,9 @@ First, in Juntas.csv each of its rows represents a voting board, and its columns
     6.  Number of Electors
     7.  Received Votes (Firts Round)
     8.  Received Votes (Second Round).
+
 In the case of VotosxPartidoxJunta.csv, each row represents the votes from each voting board for each party, and the columns represent the following data in the same order: 
+
     1. Board Number 
     2. Accesibilidad sin Exclusión
     3. Acción Ciudadana
@@ -501,7 +504,9 @@ In the case of VotosxPartidoxJunta.csv, each row represents the votes from each 
     17. Restauración Nacional (Second Round)
     18. Null Votes (Second Round)
     19. Blank Votes (Second Round).
+
 Lastly, in Indicadores_x_Canton.csv each row represents a canton in Costa Rica, and each column represents the following data in the same order:
+
     1. Province
     2. Canton
     3. Total Population
@@ -605,9 +610,12 @@ Lastly, in Indicadores_x_Canton.csv each row represents a canton in Costa Rica, 
     101. People With Water
 
 
->Note: Voting boards abroad were not taken into account.
+>Note: 
+>
+>Voting boards abroad were not taken into account.
 
 Now, the general operation of the generator is going to be explained by the steps it goes through to create the samples:
+
     1. It contains two different functions in case the samples must belong to the country or a single province, so one of the must be called and be told how many samples must be created (and the name of the province if needed).
     1.1. If the samples must belong to the whole country, the function opens the files mentioned above, and for each sample it chooses a random voting board. This is done by taking the number of electors of the voting boards, calculating their ranges, generating a random number and classifying it in a range.
     1.2  If the samples must belong to a single province, the function opens the files mentioned above, calculates the indexes for the province data, and for each sample it chooses a random voting board. This is done by taking the number of electors of the voting boards, calculating their ranges, generating a random number and classifying it in a range.
@@ -616,6 +624,7 @@ Now, the general operation of the generator is going to be explained by the step
     4. All the samples are returned.
 
 The following list shows all the attributes generated for each sample: 
+
     1.  Province
     2.  Canton
     3.  District
@@ -677,9 +686,13 @@ The following list shows all the attributes generated for each sample:
 For the prediction models developed, the indexes 2, 3, 4, 5, 6, 10, 11, 16, 20, 22, 25, 26, 28, 31, 32, 33, 38, 39, 41, 45 where ignored as they were not significant and may produce noise.
 
 >Note: 
+>
 >It is only considered the possibility of a generated sample to be illiterate if they don't have an education, or they have incomplete primary school studies, because the Costa Rican education system ensures that a person with complete primary school studies cannot be illiterate.
+>
 >To generate the Average Education For Their Age, the 25-49 years range is taken as if it started at 18 because of lack of data for ages lower than 25 years.
+>
 >To generate the Assistance Percentage to Regular Education for Their Age, the 5-17 years range is taken as the 15-19 years range, and the 18-24 years range as the 20-24 years range, because of lack of data accuracy between the age ranges for the samples, and the age ranges from the Assistance Percentage to Regular Education Information used.
+>
 >It is only considered the possibility of a person being outside of the work force because of being retired if their age exceeds 60 years, that due to the Costa Rican legislation in the matter.
 
 The discribed module tec.ic.ia.pc1.g07 can be installed using pip: pip install tec.ic.ia.pc1.g07.
