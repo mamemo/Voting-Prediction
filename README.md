@@ -353,10 +353,10 @@ The results were:
         </tr>
         <tr>
             <td>r1</td>
-            <td></td>
-            <th></th>
-            <td></td>
-            <td></td>
+            <td>0.28854</td>
+            <th>0.2773</th>
+            <td>1.88636</td>
+            <td>1.8903</td>
             <td>0.24879</td>
             <td>0.24765</td>
             <td>1.90916</td>
@@ -364,23 +364,23 @@ The results were:
         </tr>
         <tr>
             <td>r2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>0.63499</td>
+            <th>0.61385</th>
+            <td>0.69893</td>
+            <td>0.71269</td>
             <td>0.59294</td>
-            <th>0.5923</th>
+            <td>0.5923</td>
             <td>0.72854</td>
             <td>0.73106</td>
         </tr>
         <tr>
             <td>r2 with r1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>0.63827</td>
+            <th>0.61195</th>
+            <td>0.6934</td>
+            <td>0.71736</td>
             <td>0.59294</td>
-            <th>0.5923</th>
+            <td>0.5923</td>
             <td>0.72854</td>
             <td>0.73106</td>
         </tr>
@@ -418,10 +418,10 @@ The results were:
         </tr>
         <tr>
             <td>r1</td>
-            <td></td>
-            <th></th>
-            <td></td>
-            <td></td>
+            <td>0.24814</td>
+            <th>0.2513</th>
+            <td>1.90623</td>
+            <td>1.90478</td>
             <td></td>
             <td></td>
             <td></td>
@@ -429,10 +429,10 @@ The results were:
         </tr>
         <tr>
             <td>r2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>0.59471</td>
+            <td>0.596</td>
+            <td>0.73018</td>
+            <td>0.73422</td>
             <td></td>
             <th></th>
             <td></td>
@@ -440,10 +440,10 @@ The results were:
         </tr>
         <tr>
             <td>r2 with r1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>0.59471</td>
+            <td>0.596</td>
+            <td>0.73018</td>
+            <td>0.7342</td>
             <td></td>
             <th></th>
             <td></td>
