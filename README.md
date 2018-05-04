@@ -470,3 +470,216 @@ It can be concluded that, including the restriction, there is no increase in the
 
 
 ## Samples Generator
+    The creation of samples was done by using a Python module developed by our work team called tec.ic.ia.pc1.g07, which contains all the logic necessary to recreate a population of n Costa Ricans and their the vote for the first and second round of the 2018 electoral process. This module needs three auxiliary files to produce the samples: Juntas.csv, VotosxPartidoxJunta.csv and Indicadores_x_Canton.csv, because each of them has important details regarding the population that helps the generator to be as precise as possible and to be faithful to the reality of Costa Rica's population.
+    These three mentioned files contain data from the scrutiny records of the elections, the maping of the voting boards to their locations, and the location indicators (regarding its population).
+    First, in Juntas.csv each of its rows represents a voting board, and its columns represent the following data in the same order: 
+    1.  Province
+    2.  Canton
+    3.  District
+    4.  Neighborhood
+    5.  Board Number
+    6.  Number of Electors
+    7.  Received Votes (Firts Round)
+    8.  Received Votes (Second Round).
+    In the case of VotosxPartidoxJunta.csv, each row represents the votes from each voting board for each party, and the columns represent the following data in the same order: 
+    1. Board Number 
+    2. Accesibilidad sin Exclusión
+    3. Acción Ciudadana
+    4. Alianza Demócrata Cristiana
+    5. De Los Trabajadores
+    6. Frente Amplio
+    7. Integración Nacional
+    8. Liberación Nacional
+    9. Movimiento Libertario
+    10. Nueva Generación
+    11. Renovación Costarricense
+    12. Republicano Social Cristiano
+    13. Restauración Nacional
+    14. Unidad Social Cristiana
+    15. Null Votes, Blank Votes
+    16. Acción Ciudadana (Second Round)
+    17. Restauración Nacional (Second Round)
+    18. Null Votes (Second Round)
+    19. Blank Votes (Second Round).
+    Lastly, in Indicadores_x_Canton.csv each row represents a canton in Costa Rica, and each column represents the following data in the same order:
+    1. Province
+    2. Canton
+    3. Total Population
+    4. Canton Surface (Km2)
+    5. Density (People per Km2)
+    6. Urban Population Percentage 
+    7. Urban Population
+    8. Non-urban Population
+    9. Relation Men-Women (Men per 100 Women)
+    10. Number of Women
+    11. Number of Men
+    12. Demographic Dependency Relation: Dependent people (People youger than 15 years old or older than 65 years old)
+    13. Women in the age range of 15 to 19
+    14. Women in the age range of 20 to 24
+    15. Women in the age range of 25 to 29
+    16. Women in the age range of 30 to 34
+    17. Women in the age range of 35 to 39
+    18. Women in the age range of 40 to 44
+    19. Women in the age range of 45 to 49
+    20. Women in the age range of 50 to 54
+    21. Women in the age range of 55 to 59
+    22. Women in the age range of 60 to 64
+    23. Women in the age range of 65 to 69
+    24. Women in the age range of 70 to 74
+    25. Women in the age range of 75 to 79
+    26. Women in the age range of 80 to 84
+    27. Women in the age range of 85 or more
+    28. Men in the age range of 15 to 19
+    29. Men in the age range of 20 to 24
+    30. Men in the age range of 25 to 29
+    31. Men in the age range of 30 to 34
+    32. Men in the age range of 35 to 39
+    33. Men in the age range of 40 to 44
+    34. Men in the age range of 45 to 49
+    35. Men in the age range of 50 to 54
+    36. Men in the age range of 55 to 59
+    37. Men in the age range of 60 to 64
+    38. Men in the age range of 65 to 69
+    39. Men in the age range of 70 to 74
+    40. Men in the age range of 75 to 7
+    41. Men in the age range of 80 to 84
+    42. Men in the age range of 85 or more
+    43. Individual Occupied Houses
+    44. Average Ocupants by Individual Occupied House
+    45. Average Houses in Good Condition
+    46. Number of Houses in Good Condition
+    47. Number of Houses in Bad Condition
+    48. Crowded Houses Percentage (more than 3 people by dormitory per each 100 occupied houses).
+    49. Number of Crowded Houses
+    50. Number of Non-crowded Houses
+    51. Literacy Percentage
+    52. Literacy Percentage in 10-24 Year Olds
+    53. Literacy Percentage in 25+ Year Olds
+    54. Average Education (Average Approved Years In Regular Education)
+    55. Average Education in 25-49 Year Olds
+    56. Average Education in 50+ Year Olds
+    57. Assistance Percentage in Regular Education
+    58. Assistance Percentage in Regular Education in 0-5 Year Olds
+    59. Assistance Percentage in Regular Education in 5-17 Year Olds
+    60. Assistance Percentage in Regular Education in 18-24 Year Olds
+    61. Assistance Percentage in Regular Education in 25+ Years Olds
+    62. People With No Education
+    63. People With Incomplete Primary School
+    64. People With Complete Primary School
+    65. People With Incomplete High School
+    66. People With Complete High School
+    67. People With Superior Education
+    68. Percentage of People Outside of the Work Force
+    69. Retired People
+    70. Rentier People
+    71. Students
+    72. People in Domestic Work
+    73. People with Other Reason of Unemployment
+    74. Percentaje of People Inside the Work Force
+    75. Percentaje of Men Inside the Work Force
+    76. Percentaje of Women Inside the Work Force
+    77. People Working In The Primary Sector
+    78. People Working In The Secondary Sector
+    79. People Working In The Third Sector
+    80. Percentage of Not Insured Occupied People
+    81. Percentage of People Born Abroad
+    82. Number of People Born Abroad
+    83. Number of People Not Born Abroad
+    84. Percentage of People With Disability
+    85. Number of People With Disability
+    86. Number of People Without Disability
+    87. Percentage of Not Insured People
+    88. Number of Not Insured People
+    89. Number of Insured People
+    90. Direct Insured People
+    91. Indirect Insured People
+    92. Insured People by Other Way
+    93. Percentage of Houses With Female Head
+    94. Percentage of Houses With Shared Head
+    95. People With Cell Phone
+    96. People With House Phone
+    97. People With Computer
+    98. People With Internet
+    99. People With Electricity
+    100. People With Toilet
+    101. People With Water
+
+
+>Note: Voting boards abroad were not taken into account.
+
+    Now, the general operation of the generator is going to be explained by the steps it goes through to create the samples:
+    1. It contains two different functions in case the samples must belong to the country or a single province, so one of the must be called and be told how many samples must be created (and the name of the province if needed).
+    1.1. If the samples must belong to the whole country, the function opens the files mentioned above, and for each sample it chooses a random voting board. This is done by taking the number of electors of the voting boards, calculating their ranges, generating a random number and classifying it in a range.
+    1.2  If the samples must belong to a single province, the function opens the files mentioned above, calculates the indexes for the province data, and for each sample it chooses a random voting board. This is done by taking the number of electors of the voting boards, calculating their ranges, generating a random number and classifying it in a range.
+    2.  For each sample, the generator locates the data from the selected voting board, and that way it gets the demographic and geographic information for it. The general canton information that doesn't need to be calculated is just taken from the files and copied to the sample.
+    3.  For each sample, the attributes that must be calculated and randomized are calculated the same way the number of voting board is: taking the values for each attribute from the files, calculating their ranges, generating a random number and classifying it in a range.
+    4. All the samples are returned.
+
+     The following list shows all the attributes generated for each sample: 
+    1.  Province
+    2.  Canton
+    3.  District
+    4.  Neighborhood
+    5.  Board Number
+    6.  Number of Electors
+    7.  Received Votes (Firts Round)
+    8.  Received Votes (Second Round).
+    9. Total Population
+    10. Canton Surface (Km2)
+    11. Density (People per Km2)
+    12. Urban Population Percentage 
+    13. If The Sample Belongs to Urban Population or Not
+    14. Relation Men-Women (Men per 100 Women)
+    15. Man/Woman
+    16. Demographic Dependency Relation: Dependent people (People youger than 15 years old or older than 65 years old)
+    17. Age Range According to Their Gender
+    18. Individual Occupied Houses
+    19. Average Ocupants by Individual Occupied House
+    20. Average Houses in Good Condition
+    21. If the Sample Lives in a House in Good/Bad Condition
+    22. Crowded Houses Percentage (more than 3 people by dormitory per each 100 occupied houses).
+    23. If the Sample Lives in a Corwded House or not
+    24. Education Level
+    25. Literacy Percentage
+    26. Literacy Percentage in Their Age Range
+    27. If The Sample Is Literate Or Not (it is only considered the possibility of illiteracy if the sample doesn't have an education or has incomplete primary school studies).
+    28. Average Education (Average Approved Years In Regular Education)
+    29. Average Education in Their Age Range (the 25-49 years range is taken as if it started at 18 because of lack of data)
+    30. Assistance Percentage in Regular Education
+    31. Assistance Percentage in Regular Education in Their Age Range (the 5-17 years range is taken as the 15-19 years range, and the 18-24 years range as the 20-24 years range, because of lack of data accuracy).
+    32. Percentage of People Outside of the Work Force
+    33. Percentaje of People Inside the Work Force
+    34. Percentaje of Men Inside the Work Force
+    35. Percentaje of Women Inside the Work Force
+    36. If The Sample Is Inside/Outside the Work Force
+    37. Reason for Being Outside The Work Force (if its the case), or The Sector in Which The Sample Works (if its the case)
+    38. Percentage of Not Insured Occupied People
+    39. Percentage of People Born Abroad
+    40. If the Sample Was Born Abroad Or Not
+    41. Percentage of People With Disability
+    42. If The Sample Has a Disability or Not
+    43. Percentage of Not Insured People
+    44. If The Sample Is Insured or Not
+    45. Insurance Way (if its the case)
+    46. Percentage of Houses With Female Head
+    47. Percentage of Houses With Shared Head
+    48. Type of Head (lidership) In The Samples House
+    49. If The Sample Has A Cell Phone
+    50. If The Sample Has A House Phone
+    51. If The Sample Has A Computer
+    52. If The Sample Has Internet
+    53. If The Sample Has A Electricity
+    54. If The Sample Has A Toilet
+    55. If The Sample Has A Water
+    56. Sample's First Round Vote
+    57. Sample's Second Round Vote
+
+For the prediction models developed, the indexes 2, 3, 4, 5, 6, 10, 11, 16, 20, 22, 25, 26, 28, 31, 32, 33, 38, 39, 41, 45 where ignored as they were not significant and may produce noise.
+
+>Note: 
+>It is only considered the possibility of a generated sample to be illiterate if they don't have an education, or they have incomplete primary school studies, because the Costa Rican education system ensures that a person with complete primary school studies cannot be illiterate.
+>To generate the Average Education For Their Age, the 25-49 years range is taken as if it started at 18 because of lack of data for ages lower than 25 years.
+>To generate the Assistance Percentage to Regular Education for Their Age, the 5-17 years range is taken as the 15-19 years range, and the 18-24 years range as the 20-24 years range, because of lack of data accuracy between the age ranges for the samples, and the age ranges from the Assistance Percentage to Regular Education Information used.
+>It is only considered the possibility of a person being outside of the work force because of being retired if their age exceeds 60 years, that due to the Costa Rican legislation in the matter.
+
+    The discribed module tec.ic.ia.pc1.g07 can be installed using pip: pip install tec.ic.ia.pc1.g07.
