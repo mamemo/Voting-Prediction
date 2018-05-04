@@ -154,7 +154,7 @@ This section contains the analysis of using each model and how well it performs 
 
 ### Logistic Regression
 
-For logistic regression we had to compare how it performs with regularization L1 and L2. All the experiment combinations were ran 10 times and the value in the table is the mean. Also, all the experiments were ran with normalized samples covering the whole country, the samples were normalized and the labels were transformed to one hot encoding. The algorithm was implemented using Tensorflow and you can follow the process in [Logistic_Regression.py](../master/tec/ic/ia/p1/models/Logistic_Regression.py). In these tests we used the next hyper-parameters to get the best results:
+For logistic regression we had to compare how it performs with regularization L1 and L2. All the experiment combinations were ran 10 times and the value in the table is the mean. Also, all the experiments were ran with normalized samples covering the whole country, the samples were normalized and the labels were transformed to one hot encoding. The algorithm was implemented using Tensorflow and you can follow the process with specific commented functions at [Logistic_Regression.py](../master/tec/ic/ia/p1/models/Logistic_Regression.py). In these tests we used the next hyper-parameters to get the best results:
 * Learning rate = 0.01
 * Training epochs = 5000
 * Batch size = 1000
@@ -237,7 +237,7 @@ According to the results for logistic regression using L1 and L2 regularization,
 
 ### Neural Network
 
-For neural network model we had to compare how it performs with different structures and different activation functions. All the experiment combinations were ran 10 times and the value in the table is the mean. Also, all the experiments were ran with normalized samples covering the whole country, the samples were normalized and the labels were transformed to one hot encoding. The algorithm was implemented using Keras on top of Tensorflow and you can follow the process in [Neural_Network.py](../master/tec/ic/ia/p1/models/Neural_Network.py). In these tests we used the next hyper-parameters to get the best results:
+For neural network model we had to compare how it performs with different structures and different activation functions. All the experiment combinations were ran 10 times and the value in the table is the mean. Also, all the experiments were ran with normalized samples covering the whole country, the samples were normalized and the labels were transformed to one hot encoding. The algorithm was implemented using Keras on top of Tensorflow and you can follow the process with specific commented functions at [Neural_Network.py](../master/tec/ic/ia/p1/models/Neural_Network.py). In these tests we used the next hyper-parameters to get the best results:
 * Learning rate = 0.01
 * Training epochs = 3000
 * Batch size = 500
@@ -250,10 +250,10 @@ Structures had the input layer's and output layer's amount of units accordingly 
 The activation functions tested were:
 * ReLU
 
-![alt-text(https://i.imgur.com/gKA4kA9.jpg "ReLU function, obtained from kaggle.com")
-* Hard Sigmoid
+![alt-text](https://i.imgur.com/gKA4kA9.jpg "ReLU function, obtained from kaggle.com")
+* Hard Sigmoid (**the red one**)
 
-![alt-text(http://www.thoughtly.co/blog/wp-content/uploads/2016/04/hard_sigmoid2.png "Hard Sigmoid function, obtained from cnblogs.com")
+![alt-text](http://i.imgur.com/OQzvKvA.png "Hard Sigmoid function, obtained from cnblogs.com")
 
 The results were:
 
@@ -323,11 +323,140 @@ The results were:
 </table>
 
 * Second structure: 2 hidden layers fully connected with 30 and 20 respectively.
+
+<table>
+    <thead>
+        <tr>
+            <th>Round</th>
+            <th colspan=4>ReLU</th>
+            <th colspan=4>Hard Sigmoid</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td colspan=2 align="center">Acurracy</td>
+            <td colspan=2 align="center">Loss</td>
+            <td colspan=2 align="center">Acurracy</td>
+            <td colspan=2 align="center">Loss</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+        </tr>
+        <tr>
+            <td>r1</td>
+            <td></td>
+            <th></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>r2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th></th>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>r2 with r1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th></th>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
 * Third structure: 3 hidden layers fully connected with 30, 20 and 10 respectively.
+
+<table>
+    <thead>
+        <tr>
+            <th>Round</th>
+            <th colspan=4>ReLU</th>
+            <th colspan=4>Hard Sigmoid</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td colspan=2 align="center">Acurracy</td>
+            <td colspan=2 align="center">Loss</td>
+            <td colspan=2 align="center">Acurracy</td>
+            <td colspan=2 align="center">Loss</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+        </tr>
+        <tr>
+            <td>r1</td>
+            <td></td>
+            <th></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>r2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th></th>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>r2 with r1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th></th>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+HABLADA DE POQUE PASA LO QUE PASA.
 
 ### Decision Tree
 
-For the decision tree we had to compare how it performs with different thresholds, different amounts of attributes (r1, r2 and r2 with r1) and other combinations. All the experiment combinations were tested 10 times and the value in the table is the mean of all. The decision tree model was implemented from scratch and you can follow the algorithm on [Decision_Tree.py](../master/tec/ic/ia/p1/models/Decision_Tree.py).
+For the decision tree we had to compare how it performs with different thresholds, different amounts of attributes (r1, r2 and r2 with r1) and other combinations. All the experiment combinations were tested 10 times and the value in the table is the mean of all. The decision tree model was implemented from scratch and you can follow the algorithm with specific commented functions at [Decision_Tree.py](../master/tec/ic/ia/p1/models/Decision_Tree.py).
 
 First we compared the accuracy of the tree without pruning with different thresholds, with the country results. Including the classification r1, r2 and r2 with r1. We make this to see the behavior of the accuracy as it goes down the threshold, comparing the training set with test set.
 
