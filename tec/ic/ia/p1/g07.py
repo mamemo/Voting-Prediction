@@ -25,7 +25,7 @@ parser.add_argument("--red-neuronal", action="store_true",
                     help="Neural Network Model.")
 parser.add_argument("--numero-capas", type=int, help="Number of Layers.")
 parser.add_argument("--unidades-por-capa",
-                    help="Number of Units per Layer.")
+                    help="Number of Units per Layer on Python list.")
 parser.add_argument("--funcion-activacion",
                     choices=["softmax", "elu", "selu", "softplus", "softsign", "relu", "tanh", "sigmoid",
                              "hard_sigmoid", "linear"], help="Activation Function.")

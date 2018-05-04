@@ -51,8 +51,8 @@ class NeuralNetwork(Model):
         # Print the results of training
         print("\nResults:")
         print("Loss on Training set:", history.history['loss'][-1])
-        print("Loss on Test set:", history.history['loss'][-1])
-        print("Accuracy on Training set:", history.history['val_loss'][-1])
+        print("Loss on Test set:", history.history['val_loss'][-1])
+        print("Accuracy on Training set:", history.history['acc'][-1])
         print("Accuracy on Test set:", history.history['val_acc'][-1])
 
         # scores = model.evaluate(self.samples_test[0], self.samples_test[1])
