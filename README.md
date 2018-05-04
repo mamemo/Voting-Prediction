@@ -354,13 +354,13 @@ According to the results obtained with the threshold change and without pruning,
 
 * As the threshold is decreased, the performance of the training set is reduced, while the performance of the test set increases gradually.
 
-* It can be seen that in each vote estimate, if the threshold value is close to 0, the performance of the training test and the test test is reasonably similar.
+* It can be seen that in each estimate vote, if the threshold value is close to 0, the performance of the training test and the test test is reasonably similar.
 
 * With a threshold of 0.02, the performance of the model increases almost ten percent of its original accuracy with the tree without pruning.
 
 * We can observe that the r2 and r2_with_r1 have a similar behavior, the accuracy of the tree without pruning is 53% and with a threshold of 0.02, 62.5%. Including the vote of the first round to estimate the vote of the second round has no direct effect, the classification of the second round that does not take into consideration the first round behaves practically the same.
 
-* Although we can observe that there are two performance decreases (r1 with 0.05 and r2_with_r1 with 0.10) as the threshold increases, the highest accuracy results can always be observed at the 0.02 threshold.
+* Although we can observe that there are two accuracy decreases (r1 with 0.05 and r2_with_r1 with 0.10) as the threshold increases, the highest accuracy results can always be observed at the 0.02 threshold.
 
 Now we see some particular behaviors that have been found in the model. First, we will see the behavior by provinces, specifically Cartago and Puntarenas, to analyze if there are differences in accuracy. Next we will see the behavior of the accuracy when it is trained, but with the restriction that it can not repeat attributes in the whole tree.
 
@@ -406,13 +406,17 @@ In the following table the threshold is chosen 0.02 because it is the one that r
     </tbody>
 </table>
 
-In the table of provinces we can notice some behaviors different to the estimation behavior by country, but first it is important to mention what differentiates the provinces to understand the results:
+In the table of provinces we can notice some behaviors different to the estimation behavior by country. The predictions of Cartago surpass the 73% percent accuracy in r2 and r2_with_r1, surpassing by 10% the predictions by country. On the other hand, the opposite effect is seen in Puntarenas, where the accuracy is 55%, being 10% lower than the predictions per country.
+
+In the r1 prediction of Puntarenas, with a threshold of 0.02 the tree is pruned completely, therefore all the outputs are Restauracion Nacional in most of the occasions. We see an accuracy of 35% that obeys the proportion of votes obtained by the aforementioned RN.
+
+It is important to mention what differentiates the provinces to understand the results:
 
 * Cartago was the province that in its two rounds of voting had the lowest proportion of abstinence, while Puntarenas was one of the provinces with the highest proportion of abstinence.  
 
 How does that difference affect? By taking only the people who voted, Cartago is more accurate because there is more data from the entire province, but in Puntarenas you have data from a smaller sector, so the data contains noise when you match the indicators of the entire population of Puntarenas. The indicators used include the population that did not vote, which also affect the model.
 
-The following table also uses the 0.02 threshold because it is the one that returns the best accuracy when pruning the tree according to the tables analyzed previously. In this case the accuracy of the unpruned tree is shown, because the results are important to mention.
+The following table also uses the 0.02 threshold because it is the one that returns the best accuracy when pruning the tree according to the tables analyzed previously. The difference of the following prediction to the ones analyzed above, is that the tree was trained with a restriction that will be mentioned later. In this case the accuracy of the unpruned tree is shown, because the results have a different behavior.
 
 <table>
     <thead>
@@ -454,6 +458,7 @@ The following table also uses the 0.02 threshold because it is the one that retu
 </table>
 
 We can see that training a tree with a restriction can cause the accuracy to increase considerably, to the point that by applying the 0.02 pruning (when before it was the threshold that caused the highest accuracy) the accuracy can decrease instead of increase.
+
 The restriction is that an attribute can be used only once, not repeatedly as in the previous iterations. With only the training, the performance of the training and testing set is similar, which indicates that there is no overfitting as it exists when the tree is trained allowing repeating attributes.
 It can be concluded that, including the restriction, there is no increase in the overall performance of the predictions, but there is a clear decrease in overfitting in their initial training.
 
