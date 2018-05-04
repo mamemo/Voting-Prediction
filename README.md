@@ -481,25 +481,25 @@ The results were:
     <tbody>
         <tr>
             <td>Training</td>
-            <td>99.814%</td>
-            <td>78,849%</td>
-            <td>42,965%</td>
-            <td>34,932%</td>
-            <td>28,290%</td>
-            <td>27,717%</td>
-            <td>27,482%</td>
-            <td>27,289%</td>
+            <td>0.99814</td>
+            <td>0.78849</td>
+            <td>0.42965</td>
+            <td>0.34932</td>
+            <td>0.28290</td>
+            <td>0.27717</td>
+            <td>0.27482</td>
+            <td>0.27289</td>
         </tr>
         <tr>
             <td>Test</td>
-            <td>18,880%</td>
-            <td>20,530%</td>
-            <td>23,864%</td>
-            <td>25,755%</td>
-            <td>26,715%</td>
-            <td>27,040%</td>
-            <td>26,385%</td>
-            <th>27,155%</th>
+            <td>0.18880</td>
+            <td>0.20530</td>
+            <td>0.23864</td>
+            <td>0.25755</td>
+            <td>0.26715</td>
+            <td>0.27040</td>
+            <td>0.26385</td>
+            <th>0.27155</th>
         </tr>
     </tbody>
 </table>
@@ -521,25 +521,25 @@ The results were:
     <tbody>
         <tr>
             <td>Training</td>
-            <td>99,911%</td>
-            <td>95,178%</td>
-            <td>83,981%</td>
-            <td>72,201%</td>
-            <td>65,539%</td>
-            <td>63,788%</td>
-            <td>63,394%</td>
-            <td>62,916%</td>
+            <td>0.99911</td>
+            <td>0.95178</td>
+            <td>0.83981</td>
+            <td>0.72201</td>
+            <td>0.65539</td>
+            <td>0.63788</td>
+            <td>0.63394</td>
+            <td>0.62916</td>
         </tr>
         <tr>
             <td>Test</td>
-            <td>53,316%</td>
-            <td>54,505%</td>
-            <td>57,860%</td>
-            <td>60,045%</td>
-            <td>61,740%</td>
-            <td>61,880%</td>
-            <td>61,995%</td>
-            <th>62,510%</th>
+            <td>0.53316</td>
+            <td>0.54505</td>
+            <td>0.57860</td>
+            <td>0.60045</td>
+            <td>0.61740</td>
+            <td>0.61880</td>
+            <td>0.61995</td>
+            <th>0.62510</th>
         </tr>
     </tbody>
 </table>
@@ -562,25 +562,25 @@ The results were:
     <tbody>
         <tr>
             <td>Training</td>
-            <td>99,983%</td>
-            <td>90,336%</td>
-            <td>79,884%</td>
-            <td>71,436%</td>
-            <td>65,473%</td>
-            <td>63,694%</td>
-            <td>63,415%</td>
-            <td>62,975%</td>
+            <td>0.99983</td>
+            <td>0.90336</td>
+            <td>0.79884</td>
+            <td>0.71436</td>
+            <td>0.65473</td>
+            <td>0.63694</td>
+            <td>0.63415</td>
+            <td>0.62975</td>
         </tr>
         <tr>
             <td>Test</td>
-            <td>53,975%</td>
-            <td>56,239%</td>
-            <td>58,720%</td>
-            <td>60,085%</td>
-            <td>61,870%</td>
-            <td>61,715%</td>
-            <td>62,195%</td>
-            <th>62,555%</th>
+            <td>0.53975</td>
+            <td>0.56239</td>
+            <td>0.58720</td>
+            <td>0.60085</td>
+            <td>0.61870</td>
+            <td>0.61715</td>
+            <td>0.62195</td>
+            <th>0.62555</th>
         </tr>
     </tbody>
 </table>
@@ -624,21 +624,21 @@ In the following table the threshold is 0.02 because it is the one that returns 
         </tr>
         <tr>
             <td align="center">Training</td>
-            <td>26.450%</td>
-            <td>73.903%</td>
-            <td>73.894%</td>
-            <td>35.012%</td>
-            <td>55.992%</td>
-            <td>56.211%</td>
+            <td>0.26450</td>
+            <td>0.73903</td>
+            <td>0.73894</td>
+            <td>0.35012</td>
+            <td>0.55992</td>
+            <td>0.56211</td>
         </tr>
         <tr>
             <td align="center">Test</td>
-            <td>26.070%</td>
-            <td>73.855%</td>
-            <td>73.800%</td>
-            <td>35.336%</td>
-            <td>55.745%</td>
-            <td>55.735%</td>
+            <td>0.26070</td>
+            <td>0.73855</td>
+            <td>0.73800</td>
+            <td>0.35336</td>
+            <td>0.55745</td>
+            <td>0.55735</td>
         </tr>
     </tbody>
 </table>
@@ -675,21 +675,21 @@ The following table also uses the 0.02 threshold because it is the one that retu
         </tr>
         <tr>
             <td align="center">Training</td>
-            <td>27.905%</td>
-            <td>62.752%</td>
-            <td>62.801%</td>
-            <td>27.261%</td>
-            <td>62.396%</td>
-            <td>62.412%</td>
+            <td>0.27905</td>
+            <td>0.62752</td>
+            <td>0.62801</td>
+            <td>0.27261</td>
+            <td>0.62396</td>
+            <td>0.62412</td>
         </tr>
         <tr>
             <td align="center">Test</td>
-            <td>26.705%</td>
-            <td>62.085%</td>
-            <td>62.160%</td>
-            <td>26.980%</td>
-            <td>62.315%</td>
-            <td>62.320%</td>
+            <td>0.26705</td>
+            <td>0.62085</td>
+            <td>0.62160</td>
+            <td>0.26980</td>
+            <td>0.62315</td>
+            <td>0.62320</td>
         </tr>
     </tbody>
 </table>
