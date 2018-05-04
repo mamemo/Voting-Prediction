@@ -72,6 +72,9 @@ This will display all the flags that you can work with:
   --knn                 K Nearest Neighbors Model.
   --k K                 Number of Layers.
   --svm                 Support Vector Machine Model.
+  --c C                 Penalty parameter C of the error term.
+  --kernel {linear,rbf}
+                        Specifies the kernel type to be used in the algorithm.
   --prefijo PREFIJO     Prefix of all generated files.
   --poblacion POBLACION
                         Number of Samples.
@@ -133,6 +136,9 @@ To run support vector machine you will need:
 
 ```
   --svm                 Support Vector Machine Model.
+  --c C                 Penalty parameter C of the error term.
+  --kernel {linear,rbf}
+                        Specifies the kernel type to be used in the algorithm.
 ```
 
 
@@ -142,7 +148,7 @@ This section contains the analysis of using each model and how well it performs 
 
 ### Logistic Regression
 
-For logistic regression we had to compare how it performs with regularization L1 and L2. All the experiment combinations were ran 10 times and the value in the table is the mean. This algorithm uses the normalized samples NOMBRE. In these tests we used the next hyper-parameters to get the best results:
+For logistic regression we had to compare how it performs with regularization L1 and L2. All the experiment combinations were ran 10 times and the value in the table is the mean. Also, all the experiments were ran with normalized samples covering the whole country, the samples were normalized and the labels were transformed to one hot encoding. The algorithm was implemented using Tensorflow and you can follow the process in [Logistic_Regression.py](../blob/master/tec/ic/ia/p1/models/Logistic_Regression.py). In these tests we used the next hyper-parameters to get the best results:
 * Learning rate = 0.01
 * Training epochs = 5000
 * Batch size = 1000
@@ -153,7 +159,7 @@ The results are:
 <table>
     <thead>
         <tr>
-            <th>Prediction</th>
+            <th>Round</th>
             <th colspan=4>L1</th>
             <th colspan=4>L2</th>
         </tr>
@@ -213,13 +219,21 @@ The results are:
     </tbody>
 </table>
 
-HABLADA DICIENDO PORQUE LOS RESULTADOS DIERON ASI
+According to the results for logistic regression using L1 and L2 regularization, we can conclude:
+
+* For Round 1, the L1 regularization gives the minimal error in the prediction at test set. L1 specializes on sparse feature spaces, given the nature of the samples on round 1 (15 classes to predict, and 4 classes with the majority of samples) we can infer L1 performs better because we have the features space on round 1 being more sparse than other rounds. Sparsity on the space means that the dataset have a lot of gaps between different samples and prediction will be harder to get a reasonable accuracy.
+
+* However, looking closely to the table, L2 on Round 1 is very close to L1. But, we can see the L2 regularization doing a little overfitting on training set, which not happens on L1.
+
+* For Round 2 and Round 2 with round 1, we can see accuracy rates very close. The nature of these two groups of samples are the same (4 classes to predict, 2 classes with majority of samples) and with only one difference (Round 2 with round 1 add two attributes: numbers of voters in previous round and vote on previous round). For more details on samples used, go to [Samples Generator](#samples-generator).
+
+* A reason provoking low accuracy rates on this specific model it may be because the space is linearly non-separable, so the error will never be near to zero. Linearly non-separable spaces are the ones that with a linear function you can't separate the classes perfectly. This concept is related with Logistic Regression because the implementation on this model is based on linear models.
 
 ### Neural Network
 
 ### Decision Tree
 
-For the decision tree we had to compare how it performs with different thresholds, different amounts of attributes (r1, r2 and r2 with r1) and other combinations. All the experiment combinations were tested 10 times and the value in the table is the mean of all. 
+For the decision tree we had to compare how it performs with different thresholds, different amounts of attributes (r1, r2 and r2 with r1) and other combinations. All the experiment combinations were tested 10 times and the value in the table is the mean of all.
 
 First we compared the accuracy of the tree without pruning with different thresholds, with the country results. Including the classification r1, r2 and r2 with r1. We make this to see the behavior of the accuracy as it goes down the threshold, comparing the training set with test set.
 
@@ -354,7 +368,7 @@ According to the results obtained with the threshold change and without pruning,
 
 * As the threshold is decreased, the performance of the training set is reduced, while the performance of the test set increases gradually.
 
-* It can be seen that in each estimate vote, if the threshold value is close to 0, the performance of the training test and the test test is reasonably similar.
+* It can be seen that in each estimate vote, if the threshold value is close to 0, the performance of the training set and the test set is reasonably similar.
 
 * With a threshold of 0.02, the performance of the model increases almost ten percent of its original accuracy with the tree without pruning.
 
@@ -414,7 +428,7 @@ It is important to mention what differentiates the provinces to understand the r
 
 * Cartago was the province that in its two rounds of voting had the lowest proportion of abstinence, while Puntarenas was one of the provinces with the highest proportion of abstinence.  
 
-How does that difference affect? By taking only the people who voted, Cartago is more accurate because there is more data from the entire province, but in Puntarenas you have data from a smaller sector, so the data contains noise when you match the indicators of the entire population of Puntarenas. The indicators used include the population that did not vote, which also affect the model.
+How does that difference affect? By taking only the people who voted, Cartago is more accurate because there is more data from the entire province, but in Puntarenas you have data from a smaller sector, so the data contains noise when you match the indicators of the entire population of Puntarenas. The indicators used for generating samples, include the population that did not vote, which also affect the model.
 
 The following table also uses the 0.02 threshold because it is the one that returns the best accuracy when pruning the tree according to the tables analyzed previously. The difference of the following prediction to the ones analyzed above, is that the tree was trained with a restriction that will be mentioned later. In this case the accuracy of the unpruned tree is shown, because the results have a different behavior.
 
@@ -472,7 +486,7 @@ It can be concluded that, including the restriction, there is no increase in the
 ## Samples Generator
 The creation of samples was done by using a Python module developed by our work team called tec.ic.ia.pc1.g07, which contains all the logic necessary to recreate a population of n Costa Ricans and their the vote for the first and second round of the 2018 electoral process. This module needs three auxiliary files to produce the samples: Juntas.csv, VotosxPartidoxJunta.csv and Indicadores_x_Canton.csv, because each of them has important details regarding the population that helps the generator to be as precise as possible and to be faithful to the reality of Costa Rica's population.
 These three mentioned files contain data from the scrutiny records of the elections, the maping of the voting boards to their locations, and the location indicators (regarding its population).
-First, in Juntas.csv each of its rows represents a voting board, and its columns represent the following data in the same order: 
+First, in Juntas.csv each of its rows represents a voting board, and its columns represent the following data in the same order:
 
     1.  Province
     2.  Canton
@@ -483,9 +497,9 @@ First, in Juntas.csv each of its rows represents a voting board, and its columns
     7.  Received Votes (Firts Round)
     8.  Received Votes (Second Round).
 
-In the case of VotosxPartidoxJunta.csv, each row represents the votes from each voting board for each party, and the columns represent the following data in the same order: 
+In the case of VotosxPartidoxJunta.csv, each row represents the votes from each voting board for each party, and the columns represent the following data in the same order:
 
-    1. Board Number 
+    1. Board Number
     2. Accesibilidad sin Exclusión
     3. Acción Ciudadana
     4. Alianza Demócrata Cristiana
@@ -512,7 +526,7 @@ Lastly, in Indicadores_x_Canton.csv each row represents a canton in Costa Rica, 
     3. Total Population
     4. Canton Surface (Km2)
     5. Density (People per Km2)
-    6. Urban Population Percentage 
+    6. Urban Population Percentage
     7. Urban Population
     8. Non-urban Population
     9. Relation Men-Women (Men per 100 Women)
@@ -610,7 +624,7 @@ Lastly, in Indicadores_x_Canton.csv each row represents a canton in Costa Rica, 
     101. People With Water
 
 
->Note: 
+>Note:
 >
 >Voting boards abroad were not taken into account.
 
@@ -623,7 +637,7 @@ Now, the general operation of the generator is going to be explained by the step
     3.  For each sample, the attributes that must be calculated and randomized are calculated the same way the number of voting board is: taking the values for each attribute from the files, calculating their ranges, generating a random number and classifying it in a range.
     4. All the samples are returned.
 
-The following list shows all the attributes generated for each sample: 
+The following list shows all the attributes generated for each sample:
 
     1.  Province
     2.  Canton
@@ -636,7 +650,7 @@ The following list shows all the attributes generated for each sample:
     9. Total Population
     10. Canton Surface (Km2)
     11. Density (People per Km2)
-    12. Urban Population Percentage 
+    12. Urban Population Percentage
     13. If The Sample Belongs to Urban Population or Not
     14. Relation Men-Women (Men per 100 Women)
     15. Man/Woman
@@ -685,7 +699,7 @@ The following list shows all the attributes generated for each sample:
 
 For the prediction models developed, the indexes 2, 3, 4, 5, 6, 10, 11, 16, 20, 22, 25, 26, 28, 31, 32, 33, 38, 39, 41, 45 where ignored as they were not significant and may produce noise.
 
->Note: 
+>Note:
 >
 >It is only considered the possibility of a generated sample to be illiterate if they don't have an education, or they have incomplete primary school studies, because the Costa Rican education system ensures that a person with complete primary school studies cannot be illiterate.
 >
