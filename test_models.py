@@ -8,9 +8,9 @@ Outputs: Initialized attributes according to the type.
 '''
 def test_new_tree():
     tree = DTree()
-    assert tree.hijos == []
-    assert tree.condicion == []
-    assert tree.atributo == None
+    assert tree.leaf_nodes == []
+    assert tree.nodes_conditions == []
+    assert tree.attribute == None
 
 '''
 [TREE] Check the output of the function that calculates the gain to an attribute according to a set of data.
@@ -36,10 +36,10 @@ the quantity for each one and the outputs.
 Parameters: None
 Requirements: Declare a data set (samples_train) and enter the attribute (0) that will be evaluated.
 It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
-Outputs: - lista_atributos: list with string values. Contains the attribute values.
-         - valores_atributos: list with int values. Contains the amount of attributes values.
-         - lista_answers: list with string values. Contains the outputs values.
-         - valores_answers:  list with int values. Contains the amount of outputs values.
+Outputs: - attributes_list: list with string values. Contains the attribute values.
+         - attributes_values: list with int values. Contains the amount of attributes values.
+         - outputs_list: list with string values. Contains the outputs values.
+         - outputs_values:  list with int values. Contains the amount of outputs values.
          - total: list with sublist int values. Contains the amount of outputs values per attribute value.
 '''
 def test_take_out_information():
@@ -49,46 +49,46 @@ def test_take_out_information():
 
 	decisionTree = DecisionTree(samples_train, [], "", 0)
 	decisionTree.take_out_information(0,[0,1,2,3,4,5,6,7,8,9,10,11])
-	assert decisionTree.lista_atributos == ['some', 'full', 'none']
-	assert decisionTree.valores_atributos == [4, 6, 2]
+	assert decisionTree.attributes_list == ['some', 'full', 'none']
+	assert decisionTree.attributes_values == [4, 6, 2]
 	assert decisionTree.total == [[4, 0], [2, 4], [0, 2]]
-	assert decisionTree.lista_answers == ['yes', 'no']
-	assert decisionTree.valores_answers == [6, 6]
+	assert decisionTree.outputs_list == ['yes', 'no']
+	assert decisionTree.outputs_values == [6, 6]
 
 '''
 [TREE] Check the output of the general_entropy function which returns the entropy of the parent attribute.
 Parameters: None
 Requirements: Declare the list that contains the amount of output values
-(valores_answers) and the total amount of outputs (N).
+(outputs_values) and the total amount of outputs (N).
 If the outputs are ["PAC", "RN","BLANCOS","NULOS"] the list will be [5,4,7,8] depending on the data,
 and N will be 5+4+7+8.
 Outputs: numeric value of the entropy of the attribute.
 '''
 def test_general_entropy():
 	decisionTree = DecisionTree([], [], "", 0)
-	decisionTree.valores_answers = [6, 6]
+	decisionTree.outputs_values = [6, 6]
 	decisionTree.N = 12
 	decisionTree.general_entropy()
-	assert decisionTree.entropia_general == 1
+	assert decisionTree.attribute_entropy == 1
 
 '''
 [TREE] Check the output of the total_gain function which returns the gain of the parent attribute.
 Parameters: None
 Requirements: 
-	- valores_atributos: list with int values. Contains the amount of attributes values.
-	- valores_answers:  list with int values. Contains the amount of outputs values.
+	- attributes_values: list with int values. Contains the amount of attributes values.
+	- outputs_values:  list with int values. Contains the amount of outputs values.
 	- total: list with sublist int values. Contains the amount of outputs values per attribute value.
 	- N: len(examples).
-	- entropia_general: entropy of the parent attribute.
+	- attribute_entropy: entropy of the parent attribute.
 Outputs: numeric value of the gain of the attribute.
 '''
 def test_total_gain():
 	decisionTree = DecisionTree([], [], "", 0)
-	decisionTree.valores_atributos = [4, 6, 2]
-	decisionTree.valores_answers = [6, 6]
+	decisionTree.attributes_values = [4, 6, 2]
+	decisionTree.outputs_values = [6, 6]
 	decisionTree.total = [[4, 0], [2, 4], [0, 2]]
 	decisionTree.N = 12
-	decisionTree.entropia_general = 1
+	decisionTree.attribute_entropy = 1
 	assert decisionTree.total_gain() == 0.5408520829727552
 
 '''
@@ -111,9 +111,9 @@ Parameters: None
 Requirements: Declare a data set (samples_train).
 It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
 Outputs: 
-	- tree.condicion: list with String values. Contains the attributes values.
-	- tree.hijos:  list with String values. Contains the outputs values.
-	- atributo: int value. The attribute that evaluates. 
+	- tree.nodes_conditions: list with String values. Contains the attributes values.
+	- tree.leaf_nodes:  list with String values. Contains the outputs values.
+	- tree.attribute: int value. The attribute that evaluates. 
 '''
 def test_decision_tree_learning():
 	samples_train = [[["some"],["full" ],["some" ],["full" ],["full" ],["some" ],
@@ -122,9 +122,9 @@ def test_decision_tree_learning():
 
 	decisionTree = DecisionTree(samples_train, [], "", 0)
 	tree = decisionTree.decision_tree_learning([0,1,2,3,4,5,6,7,8,9,10,11],[0],[0,1,2,3,4,5,6,7,8,9,10,11])
-	assert  tree.hijos == ['yes', 'no', 'no']
-	assert  tree.condicion == ['some', 'full', 'none']
-	assert  tree.atributo == 0
+	assert  tree.leaf_nodes == ['yes', 'no', 'no']
+	assert  tree.nodes_conditions == ['some', 'full', 'none']
+	assert  tree.attribute == 0
 
 '''
 [TREE] Check that the classification function returns False when the outputs of the samples_train are not the same.
@@ -200,13 +200,13 @@ def test_high_threshold_pruning_tree():
 			         ["yes", "no" , "yes", "yes", "no" , "yes", "no" , "yes", "no" , "no" , "no" , "yes"]]
 	decisionTree = DecisionTree(samples_train, [], "", 0.25)
 	tree = DTree()
-	tree.hijos = ['yes', 'no', 'no']
-	tree.condicion = ['some', 'full', 'none']
-	tree.atributo = 0
+	tree.leaf_nodes = ['yes', 'no', 'no']
+	tree.nodes_conditions = ['some', 'full', 'none']
+	tree.attribute = 0
 	result = decisionTree.pruning_tree([0,1,2,3,4,5,6,7,8,9,10,11],tree)
-	assert result.atributo == tree.atributo
-	assert result.hijos == tree.hijos
-	assert result.condicion == tree.condicion
+	assert result.attribute == tree.attribute
+	assert result.leaf_nodes == tree.leaf_nodes
+	assert result.nodes_conditions == tree.nodes_conditions
 
 '''
 [TREE] Verify that the threshold_pruning_tree function does prune the tree if the 
@@ -226,9 +226,9 @@ def test_low_threshold_pruning_tree():
 			         ["yes", "yes" , "yes", "yes", "no" , "yes", "no" , "yes", "no" , "no" , "no" , "yes"]]
 	decisionTree = DecisionTree(samples_train, [], "", 0.02)
 	tree = DTree()
-	tree.hijos = ['yes', 'no', 'no']
-	tree.condicion = ['some', 'full', 'none']
-	tree.atributo = 0
+	tree.leaf_nodes = ['yes', 'no', 'no']
+	tree.nodes_conditions = ['some', 'full', 'none']
+	tree.attribute = 0
 	result = decisionTree.pruning_tree([0,1,2,3,4,5,6,7,8,9,10,11],tree)
 	assert result == "yes"
 
@@ -240,8 +240,8 @@ Requirements:
 	- Declare a data set (samples_train) and initialize it.
 	  It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
 	- Declare a DTree and initialize it. 
-	- votos: List with sublists of options that will make the conversion of String outputs to int outputs.
-	- prediccion: index of the "votos" sublist that will be used.
+	- votes: List with sublists of options that will make the conversion of String outputs to int outputs.
+	- prediction: index of the "votes" sublist that will be used.
 Outputs: List with int values. Classification of the data list.
 '''
 def test_validate_data():
@@ -249,11 +249,11 @@ def test_validate_data():
 			         ["yes", "no" , "no", "no"]]
 	decisionTree = DecisionTree([], [], "", 0)
 	tree = DTree()
-	tree.hijos = ['yes', 'no', 'no']
-	tree.condicion = ['some', 'full', 'none']
-	tree.atributo = 0
+	tree.leaf_nodes = ['yes', 'no', 'no']
+	tree.nodes_conditions = ['some', 'full', 'none']
+	tree.attribute = 0
 	decisionTree.main_tree = tree
-	decisionTree.votos = [["yes","no"]]
-	decisionTree.prediccion = 0
+	decisionTree.votes = [["yes","no"]]
+	decisionTree.prediction = 0
 	result = decisionTree.validate_data(samples_train)
 	assert result == [0,1,1,1]
