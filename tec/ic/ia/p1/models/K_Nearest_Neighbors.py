@@ -145,7 +145,7 @@ class KNearestNeighbors(Model):
                 n_results += 1
             pred_votes.append(pred_result)
         print("Training set")
-        print("Aciertos: ", p_results, " De: ", self.samples_train[0], " Accuracy: ",
+        print("Aciertos: ", p_results, " De: ", len(self.samples_train[0]), " Accuracy: ",
               p_results / len(self.samples_train[0]), "%")
         print("n= ", n_results)
         print("p= ", p_results)
@@ -167,7 +167,7 @@ class KNearestNeighbors(Model):
                 n_results += 1
             pred_votes.append(pred_result)
         print("Testing set")
-        print("Aciertos: ", p_results, " De: ", self.samples_test[0], " Accuracy: ",
+        print("Aciertos: ", p_results, " De: ", len(self.samples_test[0]), " Accuracy: ",
               p_results / len(self.samples_test[0]), "%")
         print("n= ", n_results)
         print("p= ", p_results)

@@ -703,6 +703,147 @@ It can be concluded that, including the restriction, there is no increase in the
 
 ### K-Nearest Neighbors
 
+For the Nearest Neighbors with k-d Tree model we had to compare how it performs with different k values, being k the number of nearest neighbors to be analized, and different amounts of attributes (r1, r2 and r2 with r1) (as well as with the other models). All the experiment combinations were tested 10 times and the value that appears in the table is the mean of all. The k-d tree model was implemented from scratch and you can follow the algorithm on [K_Nearest_Neighbors.py](../master/tec/ic/ia/p1/models/K_Nearest_Neighbors.py).
+
+First we compared the accuracy of the k-d tree without with different k values, with the country results. Including the classification r1, r2 and r2 with r1. We make this to see the behavior of the accuracy as the k value changes, comparing the training set with test set.
+
+The threshold is in the range of 0 to 1, where 1 is 100%. It is important to mention that as the node of a tree classifies the data, how closer to 1 is its deviation (value of the chi square), the classification will be worse.
+
+The results are:
+
+<table>
+    <thead>
+        <tr>
+            <th>Round 1</th>
+            <th align="center">k=3</th>
+            <th align="center">k=5</th>
+            <th align="center">k=7</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Training</td>
+            <td>0.85445</td>
+            <td>0.60084</td>
+            <td>0.54519</td>
+        </tr>
+        <tr>
+            <td>Test</td>
+            <td>0.19490</td>
+            <td>0.21905</td>
+            <td>0.22070</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>Round 2</th>
+            <th align="center">k=3</th>
+            <th align="center">k=5</th>
+            <th align="center">k=7</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Training</td>
+            <td>0.77504</td>
+            <td>0.72000</td>
+            <td>0.69761</td>
+        </tr>
+        <tr>
+            <td>Test</td>
+            <td>0.55555</td>
+            <td>0.56925</td>
+            <td>0.57645</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>R2 with R1</th>
+            <th align="center">k=3</th>
+            <th align="center">k=5</th>
+            <th align="center">k=7</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Training</td>
+            <td>0.77769</td>
+            <td>0.71920</td>
+            <td>0.69674</td>
+        </tr>
+        <tr>
+            <td>Test</td>
+            <td>0.54825</td>
+            <td>0.56960</td>
+            <td>0.58100</td>
+        </tr>
+    </tbody>
+</table>
+
+According to the results obtained with the k value change, we can conclude that:
+
+* The accuracy of the k-d tree increases as the k value does too, which indicates that the model performs better with higher k values and might even work even better with values higher than 7 (it was only possible to test it with 3 different k values due to processing time).
+
+* As the k value increased, the performance of the training set is reduced, while the performance of the test set increases gradually.
+
+* Due to the high amount of dimensions (54 in the case of round 1 or 2, and 56 in the case of round 2 with round 1), the model suffers from the dimensionality so the nearest neighbors are not really near and it affects its accuracy in comparison with the rest of the models.
+
+* Due to the fact that k-d trees are only appropriate when there are many more examples than dimensions, preferably 2^n examples, being n the number of dimensions, we would need to test the model with approximately 17 billion samples to make it perform optimally. If there aren't enough examples, literature states that k-d trees lookup is not faster than linear scan of the whole data set, so the average of processing time of our k-d tree for 10000 samples, calculating the three types of predictions (executing three times) and calculating the error of the whole training set and test set ended up being on average about 2 hours, 15 minutes on an average computer.
+
+* Even when the k-d tree is trained with a set of data, and then tested with the same data (training set), it still fails to predict them, that due to the curse of dimensionality. We can state that because the tree succeeds to find the nearest point almost always but it gets confused with the rest of near points, because they are quite far.
+
+* As well as in the case of the Decision Tree, we can observe that the r2 and r2_with_r1 modes have similar behavior, the accuracy values of the k-d tree between the two modes differ in a range of 0.00035-0.0073. Including the votes of the first round to estimate the votes of the second round has no direct effect, the classification of the second round that does not take into consideration the first round behaves practically the same.
+
+As we mentioned before in the Decision Tree section, we observed the behavior by provinces, and found out that the accuracy was notably better in the case of Cartago, not only in comparison to Puntarenas, but also in comparison to the accuracy measured with data from all the country. 
+
+Next, we will see the behavior of the accuracy when it is trained with only data from Cartago. As for k, it will only be configured with the values of 3 and 7, because it was checked above that accuracy increased as k did too, and these two values showed a bigger difference.
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Cartago</th>
+            <th colspan=3>k=3</th>
+            <th colspan=3>k=7</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">Round</td>
+            <td align="center">r1</td>
+            <td align="center">r2</td>
+            <td align="center">r2 with r1</td>
+            <td align="center">r1</td>
+            <td align="center">r2</td>
+            <td align="center">r2 with r1</td>
+        </tr>
+        <tr>
+            <td align="center">Training</td>
+            <td>0.86342</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td align="center">Test</td>
+            <td>0.18264</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0/td>
+            <td>0</td>
+        </tr>
+    </tbody>
+</table>
+
 ### Support Vector Machine
 
 
@@ -721,7 +862,7 @@ First, in Juntas.csv each of its rows represents a voting board, and its columns
     4.  Neighborhood
     5.  Board Number
     6.  Number of Electors
-    7.  Received Votes (Firts Round)
+    7.  Received Votes (First Round)
     8.  Received Votes (Second Round).
 
 In the case of VotosxPartidoxJunta.csv, each row represents the votes from each voting board for each party, and the columns represent the following data in the same order:
@@ -857,12 +998,12 @@ Lastly, in Indicadores_x_Canton.csv each row represents a canton in Costa Rica, 
 
 Now, the general operation of the generator is going to be explained by the steps it goes through to create the samples:
 
-    1. It contains two different functions in case the samples must belong to the country or a single province, so one of the must be called and be told how many samples must be created (and the name of the province if needed).
-    1.1. If the samples must belong to the whole country, the function opens the files mentioned above, and for each sample it chooses a random voting board. This is done by taking the number of electors of the voting boards, calculating their ranges, generating a random number and classifying it in a range.
-    1.2  If the samples must belong to a single province, the function opens the files mentioned above, calculates the indexes for the province data, and for each sample it chooses a random voting board. This is done by taking the number of electors of the voting boards, calculating their ranges, generating a random number and classifying it in a range.
-    2.  For each sample, the generator locates the data from the selected voting board, and that way it gets the demographic and geographic information for it. The general canton information that doesn't need to be calculated is just taken from the files and copied to the sample.
-    3.  For each sample, the attributes that must be calculated and randomized are calculated the same way the number of voting board is: taking the values for each attribute from the files, calculating their ranges, generating a random number and classifying it in a range.
-    4. All the samples are returned.
+* It contains two different functions in case the samples must belong to the country or a single province, so one of the must be called and be told how many samples must be created (and the name of the province if needed).
+    * If the samples must belong to the whole country, the function opens the files mentioned above, and for each sample it chooses a random voting board. This is done by taking the number of electors of the voting boards, calculating their ranges, generating a random number and classifying it in a range.
+    * If the samples must belong to a single province, the function opens the files mentioned above, calculates the indexes for the province data, and for each sample it chooses a random voting board. This is done by taking the number of electors of the voting boards, calculating their ranges, generating a random number and classifying it in a range.
+* For each sample, the generator locates the data from the selected voting board, and that way it gets the demographic and geographic information for it. The general canton information that doesn't need to be calculated is just taken from the files and copied to the sample.
+* For each sample, the attributes that must be calculated and randomized are calculated the same way the number of voting board is: taking the values for each attribute from the files, calculating their ranges, generating a random number and classifying it in a range.
+* All the samples are returned.
 
 The following list shows all the attributes generated for each sample:
 
@@ -872,7 +1013,7 @@ The following list shows all the attributes generated for each sample:
     4.  Neighborhood
     5.  Board Number
     6.  Number of Electors
-    7.  Received Votes (Firts Round)
+    7.  Received Votes (First Round)
     8.  Received Votes (Second Round).
     9. Total Population
     10. Canton Surface (Km2)
