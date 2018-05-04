@@ -37,9 +37,9 @@ class DecisionTree(Model):
     #Funcion responsable de sacar la ganancia a un atributo especifico
     def gain(self, atributo , datos):
         self.N = len(datos)
-        self.sacar_datos(atributo, datos)
-        self.sacar_entropia_general(datos)
-        final = (self.gain_total(atributo, datos))
+        self.take_out_information(atributo, datos)
+        self.general_entropy()
+        final = (self.total_gain())
         if(atributo not in self.atributos_oficiales):
             self.atributos_oficiales += [atributo]
             self.valores_atributos_oficiales += [self.lista_atributos]
@@ -53,7 +53,7 @@ class DecisionTree(Model):
         return (final)
         
     #Recorre la lista de datos para sacar la cantidad de valores por vk.
-    def sacar_datos(self, atributo, datos):
+    def take_out_information(self, atributo, datos):
         for i in datos:
             if (self.lista_atributos.count(self.samples_train[0][i][atributo]) == 0):
                 self.lista_atributos += [self.samples_train[0][i][atributo]]
@@ -74,13 +74,13 @@ class DecisionTree(Model):
             self.total[self.lista_atributos.index(self.samples_train[0][i][atributo])][self.lista_answers.index(self.samples_train[1][i])] += 1
 
     #Saca la entropia del atributo.
-    def sacar_entropia_general(self, datos):
+    def general_entropy(self):
         for i in self.valores_answers:
             self.entropia_general += (i/self.N)*log((i/self.N),2)
         self.entropia_general *= -1
 
     #Saca la entropia de los hijos del atributo y lo resta a la entropia del atributo.
-    def gain_total(self, atributo, datos):
+    def total_gain(self):
         resultado = 0
         for i in range(len(self.valores_atributos)):
             resultado_parcial = 0
@@ -92,7 +92,8 @@ class DecisionTree(Model):
 
 
     #Establece rangos a los valores numericos.
-    def generar_rangos(self):
+
+    def generate_ranges(self):
         numericos = []
         for i in range(len(self.samples_train[0][0])):
             if(type(self.samples_train[0][0][i])!=type("")):
@@ -108,16 +109,17 @@ class DecisionTree(Model):
                         i[j] = "[0.50 , 0.75["
                     elif(i[j] >= 0.75 and i[j]<=1):
                         i[j] = "[0.75 , 1]"
-            for i in self.samples_test[0]:
-                for j in numericos:
-                    if(i[j] >= 0 and i[j]<0.25):
-                        i[j] = "[0 , 0.25["
-                    elif(i[j] >= 0.25 and i[j]<0.50):
-                        i[j] = "[0.25 , 0.50["
-                    elif(i[j] >= 0.50 and i[j]<0.75):
-                        i[j] = "[0.50 , 0.75["
-                    elif(i[j] >= 0.75 and i[j]<=1):
-                        i[j] = "[0.75 , 1]"
+            if(len(self.samples_test)>0):
+                for i in self.samples_test[0]:
+                    for j in numericos:
+                        if(i[j] >= 0 and i[j]<0.25):
+                            i[j] = "[0 , 0.25["
+                        elif(i[j] >= 0.25 and i[j]<0.50):
+                            i[j] = "[0.25 , 0.50["
+                        elif(i[j] >= 0.50 and i[j]<0.75):
+                            i[j] = "[0.50 , 0.75["
+                        elif(i[j] >= 0.75 and i[j]<=1):
+                            i[j] = "[0.75 , 1]"
             
 
     #Funcion encargada de realizar el arbol de decision.
@@ -126,7 +128,7 @@ class DecisionTree(Model):
         if (examples == []):
             #print("Hoja: ",self.plurality_value(parent_examples))
             return self.plurality_value(parent_examples)
-        elif (self.clasificacion(examples) == True):
+        elif (self.classification(examples) == True):
             #print("Hoja: ", self.samples_train[1][examples[0]])
             return self.samples_train[1][examples[0]]
         elif (attributes == []):
@@ -155,8 +157,8 @@ class DecisionTree(Model):
                 #tree.hijos += [self.decision_tree_learning(ejemplos[k],attributes, examples)]
             return (tree)
 
-    #Saca la clasificacion de los datos.
-    def clasificacion(self, examples):
+    #Saca la classification de los datos.
+    def classification(self, examples):
         iguales = True
         valor = self.samples_train[1][examples[0]]
         for i in examples:
@@ -199,7 +201,7 @@ class DecisionTree(Model):
             else:
                 cant_hojas += 1
         if(cant_hojas > 0):
-            desviation = self.total_desviation(attributes, values)
+            desviation = self.total_deviation(attributes, values)
             if (desviation > self.pruning_threshold):
                 #print(" + Desviacion: ", desviation, " para nodo: ", tree.atributo)
                 return self.plurality_value(examples)
@@ -208,7 +210,7 @@ class DecisionTree(Model):
         else:
             return tree
 
-    def total_desviation(self, attributes, examples):
+    def total_deviation(self, attributes, examples):
         outputs = []
         total_outputs = []
         total_examples = 0
@@ -235,7 +237,7 @@ class DecisionTree(Model):
             result += partial_result
         return(1 - stats.chi2.cdf(x=result, df=((len(outputs)-1)*(len(attributes)-1))))
 
-    def validar_datos(self,data):
+    def validate_data(self,data):
         count = 0
         partidos = []
         a_x_p = []
@@ -283,7 +285,7 @@ class DecisionTree(Model):
         self.oficial_outputs = []
         att = [i for i in range(len(self.samples_train[0][0]))]
         datos = [i for i in range(len(self.samples_train[0]))]
-        self.generar_rangos()
+        self.generate_ranges()
         
         #Se crea el arbol
         self.main_tree = self.decision_tree_learning(datos, att, datos)
@@ -295,9 +297,9 @@ class DecisionTree(Model):
         print("\n-------Before pruning--------")
         #Se validan los datos con arbol sin podar
         print("-> Training Set")
-        self.validar_datos(self.samples_train)
+        self.validate_data(self.samples_train)
         print("-> Test Set")
-        self.validar_datos(self.samples_test)
+        self.validate_data(self.samples_test)
         
         #Se poda el arbol
         self.main_tree = self.pruning_tree(datos, self.main_tree)
@@ -312,9 +314,9 @@ class DecisionTree(Model):
         else:
             #Se validan los datos con arbol podado
             print("-> Training Set")
-            result += self.validar_datos(self.samples_train)
+            result += self.validate_data(self.samples_train)
             print("-> Test Set")
-            result += self.validar_datos(self.samples_test)
+            result += self.validate_data(self.samples_test)
             #print(result)
             print("\nEnding execution\n")
             return result

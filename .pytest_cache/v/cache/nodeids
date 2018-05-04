@@ -1,0 +1,16 @@
+[
+  "test_models.py::test_new_tree",
+  "test_models.py::test_gain",
+  "test_models.py::test_take_out_information",
+  "test_models.py::test_general_entropy",
+  "test_models.py::test_total_gain",
+  "test_models.py::test_generate_ranges",
+  "test_models.py::test_decision_tree_learning",
+  "test_models.py::test_false_classification",
+  "test_models.py::test_true_classification",
+  "test_models.py::test_plurality_value",
+  "test_models.py::test_total_deviation",
+  "test_models.py::test_high_threshold_pruning_tree",
+  "test_models.py::test_low_threshold_pruning_tree",
+  "test_models.py::test_validate_data"
+]
