@@ -43,6 +43,9 @@ parser.add_argument("--k", type=int, help="Number of Layers.")
 # SVM
 parser.add_argument("--svm", action="store_true",
                     help="Support Vector Machine Model.")
+parser.add_argument("--c", type=int, help="Penalty parameter C of the error term.")
+parser.add_argument("--kernel",
+                    choices=["linear", "rbf"], help="Specifies the kernel type to be used in the algorithm.")
 
 # Main Program
 parser.add_argument("--prefijo", required=True,
@@ -113,8 +116,12 @@ elif args.knn:
     model = KNearestNeighbors(samples_train=None, samples_test=None,prefix = args.prefijo, k=args.k)
     normalization = "total_sin_one_hot_encoding"
 elif args.svm:
-    model = SupportVectorMachine(samples_train=None, samples_test=None,prefix = args.prefijo)
-    normalization = "total_con_one_hot_encoding"
+    if args.c is None or args.kernel is None :
+        parser.error(
+            "The support vector machine model have to know the C value and the kernel.")
+        exit(-1)
+    model = SupportVectorMachine(samples_train=None, samples_test=None,prefix = args.prefijo, C=args.c, kernel=args.kernel)
+    normalization = "svm"
 else:
     parser.print_help()
     exit(0)

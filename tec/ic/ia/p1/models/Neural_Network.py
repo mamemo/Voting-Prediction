@@ -4,6 +4,7 @@ from keras.layers import Dense
 from keras import optimizers
 import ast
 import numpy as np
+from keras.callbacks import History
 
 
 class NeuralNetwork(Model):
@@ -42,12 +43,20 @@ class NeuralNetwork(Model):
                       optimizer=optimizer, metrics=['accuracy'])
 
         # Fit the model
-        model.fit(self.samples_train[0], self.samples_train[1], validation_data=(
-            self.samples_test[0], self.samples_test[1]), nb_epoch=self.training_epochs, batch_size=self.batch_size)
+        history = model.fit(self.samples_train[0], self.samples_train[1], validation_data=(
+            self.samples_test[0], self.samples_test[1]), epochs=self.training_epochs, batch_size=self.batch_size, verbose=0)
 
-        # Evaluate the model
-        scores = model.evaluate(self.samples_test[0], self.samples_test[1])
-        print("\nAccuracy: %.2f%%" % (scores[1]*100))
+        print("Optimization Finished!")
+
+        # Print the results of training
+        print("\nResults:")
+        print("Loss on Training set:", history.history['loss'][-1])
+        print("Loss on Test set:", history.history['loss'][-1])
+        print("Accuracy on Training set:", history.history['val_loss'][-1])
+        print("Accuracy on Test set:", history.history['val_acc'][-1])
+
+        # scores = model.evaluate(self.samples_test[0], self.samples_test[1])
+        # print("\nAccuracy: %.2f%%" % (scores[1]*100))
 
         # Returns the samples for store them in a csv
         pred_train = model.predict(self.samples_train[0])
