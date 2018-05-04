@@ -703,7 +703,7 @@ It can be concluded that, including the restriction, there is no increase in the
 
 ### K-Nearest Neighbors
 
-For the Nearest Neighbors with k-d Tree model we had to compare how it performs with different k values, being k the number of nearest neighbors to be analized, and different amounts of attributes (r1, r2 and r2 with r1) (as well as with the other models). All the experiment combinations were tested 10 times and the value that appears in the table is the mean of all. The k-d tree model was implemented from scratch and you can follow the algorithm on [K_Nearest_Neighbors.py](../master/tec/ic/ia/p1/models/K_Nearest_Neighbors.py).
+For the Nearest Neighbors with k-d Tree model we had to compare how it performs with different k values, being k the number of nearest neighbors to be analized, and different amounts of attributes (r1, r2 and r2 with r1) (as well as with the other models). All the experiment combinations were tested 10 times and the value that appears in the table is the mean of all. The k-d tree model was implemented from scratch and you can follow the algorithm with specific commented functions at [K_Nearest_Neighbors.py](../master/tec/ic/ia/p1/models/K_Nearest_Neighbors.py).
 
 First we compared the accuracy of the k-d tree without with different k values, with the country results. Including the classification r1, r2 and r2 with r1. We make this to see the behavior of the accuracy as the k value changes, comparing the training set with test set.
 
@@ -729,7 +729,7 @@ The results are:
             <td>Test</td>
             <td>0.19490</td>
             <td>0.21905</td>
-            <td>0.22070</td>
+            <th>0.22070</th>
         </tr>
     </tbody>
 </table>
@@ -753,7 +753,7 @@ The results are:
             <td>Test</td>
             <td>0.55555</td>
             <td>0.56925</td>
-            <td>0.57645</td>
+            <th>0.57645</th>
         </tr>
     </tbody>
 </table>
@@ -779,7 +779,7 @@ The results are:
             <td>Test</td>
             <td>0.54825</td>
             <td>0.56960</td>
-            <td>0.58100</td>
+            <th>0.58100</th>
         </tr>
     </tbody>
 </table>
@@ -798,7 +798,7 @@ According to the results obtained with the k value change, we can conclude that:
 
 * As well as in the case of the Decision Tree, we can observe that the r2 and r2_with_r1 modes have similar behavior, the accuracy values of the k-d tree between the two modes differ in a range of 0.00035-0.0073. Including the votes of the first round to estimate the votes of the second round has no direct effect, the classification of the second round that does not take into consideration the first round behaves practically the same.
 
-As we mentioned before in the Decision Tree section, we observed the behavior by provinces, and found out that the accuracy was notably better in the case of Cartago, not only in comparison to Puntarenas, but also in comparison to the accuracy measured with data from all the country. 
+As we mentioned before in the Decision Tree section, we observed the behavior by provinces, and found out that the accuracy was notably better in the case of Cartago, not only in comparison to Puntarenas, but also in comparison to the accuracy measured with data from all the country.
 
 Next, we will see the behavior of the accuracy when it is trained with only data from Cartago. As for k, it will only be configured with the values of 3 and 7, because it was checked above that accuracy increased as k did too, and these two values showed a bigger difference.
 
@@ -836,7 +836,7 @@ Next, we will see the behavior of the accuracy when it is trained with only data
             <td>0</td>
             <td>0</td>
             <td>0</td>
-            <td>0/td>
+            <td>0</td>
             <td>0</td>
         </tr>
     </tbody>
