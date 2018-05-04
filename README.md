@@ -357,10 +357,10 @@ The results were:
             <th></th>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>0.24879</td>
+            <td>0.24765</td>
+            <td>1.90916</td>
+            <td>1.91535</td>
         </tr>
         <tr>
             <td>r2</td>
@@ -368,10 +368,10 @@ The results were:
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <th></th>
-            <td></td>
-            <td></td>
+            <td>0.59294</td>
+            <th>0.5923</th>
+            <td>0.72854</td>
+            <td>0.73106</td>
         </tr>
         <tr>
             <td>r2 with r1</td>
@@ -379,10 +379,10 @@ The results were:
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <th></th>
-            <td></td>
-            <td></td>
+            <td>0.59294</td>
+            <th>0.5923</th>
+            <td>0.72854</td>
+            <td>0.73106</td>
         </tr>
     </tbody>
 </table>
@@ -462,7 +462,7 @@ First we compared the accuracy of the tree without pruning with different thresh
 
 The threshold is in the range of 0 to 1, where 1 is 100%. It is important to mention that as the node of a tree classifies the data, how closer to 1 is its deviation (value of the chi square), the classification will be worse.
 
-The results are:
+The results were:
 
 <table>
     <thead>
