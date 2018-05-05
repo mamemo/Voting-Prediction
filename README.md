@@ -456,7 +456,15 @@ The results were:
 
 >The loss is calculated by categorical crossentropy, sopported by Keras.
 
-HABLADA DE POQUE PASA LO QUE PASA.
+According to the results, we can conclude:
+
+* The samples' nature, explained before, affects different algorithms in a way that it only can achieve a certain amount of accuracy, making the model non-optimal.
+
+* With structures with two or more hidden layers, ReLU performs better than hard sigmoid at transforming the approximated function into non-linear. However, with structures with one hidden layer, hard sigmoid have the capability to approximate a better function at least when there are a little amount of outputs.
+
+* The best results were given on the first structure, one hidden layer with 20 units, proving that simple models are best than complicated. Nevertheless, maybe the more complicated structures could performed better if more time were applied on parameter tunning.
+
+* The first and second structures were overfitting a little bit in the training data. Only the last structure, three hidden layer with 30, 20 and 10 units, was performed better on every test set for each prediction round, independently of which activation function were chosen. However, this is the structure with worst accuracy.
 
 ### Decision Tree
 
