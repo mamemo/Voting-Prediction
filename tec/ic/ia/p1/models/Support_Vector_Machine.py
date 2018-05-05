@@ -4,6 +4,11 @@ from sklearn import svm
 from sklearn.metrics import accuracy_score, mean_squared_error
 from sklearn.model_selection import GridSearchCV
 
+"""
+This model creates a support vector machine to predict votes in 1st and 2nd round
+using Scikit.
+"""
+
 
 class SupportVectorMachine(Model):
     def __init__(self, samples_train, samples_test, prefix, C, kernel):

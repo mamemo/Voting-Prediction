@@ -6,6 +6,11 @@ import ast
 import numpy as np
 from keras.callbacks import History
 
+"""
+This model creates a neural network to predict votes in 1st and 2nd round
+using Keras on top of Tensorflow.
+"""
+
 
 class NeuralNetwork(Model):
     def __init__(self, samples_train, samples_test, prefix, layers, units_per_layer, activation_function):

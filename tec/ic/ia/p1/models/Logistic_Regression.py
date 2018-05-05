@@ -2,6 +2,10 @@ from tec.ic.ia.p1.models.Model import Model
 import tensorflow as tf
 import numpy as np
 
+"""
+This model creates a logistic regression to predict votes in 1st and 2nd round
+using Tensorflow.
+"""
 
 class LogisticRegression(Model):
     def __init__(self, samples_train, samples_test, prefix, regularization):

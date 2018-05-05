@@ -1,5 +1,7 @@
 from tec.ic.ia.p1.models.Decision_Tree import DecisionTree, DTree
 from tec.ic.ia.p1.models.K_Nearest_Neighbors import KNearestNeighbors
+from tec.ic.ia.p1.models.Neural_Network import NeuralNetwork
+from tec.ic.ia.p1.models.Support_Vector_Machine import SupportVectorMachine
 
 '''
 [TREE] An object of the DTree class is created and its attributes are checked.
@@ -17,7 +19,7 @@ def test_new_tree():
 
 
 '''
-[TREE] Check the output of the function that calculates the gain to an attribute according 
+[TREE] Check the output of the function that calculates the gain to an attribute according
 to a set of data.
 Parameters: None
 Requirements: Declare a data set (samples_train) and enter the attribute (0) that will
@@ -64,15 +66,15 @@ def test_gain():
 and a specific attribute, takes the values of the children of the attribute,
 the quantity for each one and the outputs.
 Parameters: None
-Requirements: Declare a data set (samples_train) and enter the attribute (0) that will 
+Requirements: Declare a data set (samples_train) and enter the attribute (0) that will
 be evaluated.
 It must have the form [ [[attributes values], ... ,[attributes values]] , [outputs]]
 Outputs: - attributes_list: list with string values. Contains the attribute values.
-         - attributes_values: list with int values. Contains the amount of attributes 
+         - attributes_values: list with int values. Contains the amount of attributes
          values.
          - outputs_list: list with string values. Contains the outputs values.
          - outputs_values:  list with int values. Contains the amount of outputs values.
-         - total: list with sublist int values. Contains the amount of outputs values 
+         - total: list with sublist int values. Contains the amount of outputs values
          per attribute value.
 '''
 
@@ -221,7 +223,7 @@ def test_decision_tree_learning():
 
 
 '''
-[TREE] Check that the classification function returns False when the outputs of the samples_train 
+[TREE] Check that the classification function returns False when the outputs of the samples_train
 are not the same.
 Parameters: None
 Requirements: Declare a data set (samples_train).
@@ -238,7 +240,7 @@ def test_false_classification():
 
 
 '''
-[TREE] Check that the classification function returns True when the outputs of the samples_train 
+[TREE] Check that the classification function returns True when the outputs of the samples_train
 are the same.
 Parameters: None
 Requirements: Declare a data set (samples_train).
@@ -255,7 +257,7 @@ def test_true_classification():
 
 
 '''
-[TREE] Check that the plurality value function returns the input value with the highest number 
+[TREE] Check that the plurality value function returns the input value with the highest number
 of occurrences in the list.
 Parameters: None
 Requirements: Declare a data set (samples_train).
@@ -720,3 +722,39 @@ def test_kdtree_closest_point_k3():
     result = k_d_tree.kdtree_closest_point(root, point, 0)
     assert result == [[5, 3, 0], [
         1.1112000000000057, 481.42999999999995, 825.009]]
+
+
+'''
+[Neural Network] Checks that the parameters assigned at model creation are arriving well.
+Parameters: None
+Requirements: None
+Outputs: The same parameters that was given at creation.
+'''
+
+
+def test_nn_parameters():
+    model = NeuralNetwork([1, 2, 3], [0, 1, 0], "NN", 3, [30, 20, 10], "relu")
+    assert model.samples_train == [1, 2, 3]
+    assert model.samples_test == [0, 1, 0]
+    assert model.prefix == "NN"
+    assert model.layers == 3
+    assert model.units_per_layer == [30, 20, 10]
+    assert model.activation_function == "relu"
+
+
+'''
+[Support Vector Machine] Checks that the parameters assigned at model creation are arriving well.
+Parameters: None
+Requirements: None
+Outputs: The same parameters that was given at creation.
+'''
+
+
+def test_svm_parameters():
+    model = SupportVectorMachine([1, 2, 3], [0, 1, 0], "SVM", 1, "linear")
+    assert model.samples_train == [1, 2, 3]
+    assert model.samples_test == [0, 1, 0]
+    assert model.prefix == "SVM"
+    assert model.C == 1
+    assert model.kernel != "rbf"
+    assert model.kernel == "linear"
