@@ -146,7 +146,7 @@ class KNearestNeighbors(Model):
             pred_votes.append(pred_result)
         print("Training set")
         print("Aciertos: ", p_results, " De: ", len(self.samples_train[0]), " Accuracy: ",
-              p_results / len(self.samples_train[0]), "%")
+              p_results / len(self.samples_train[0]))
         # Measures error with testing data
         p_results=0
         n_results=0
@@ -166,5 +166,5 @@ class KNearestNeighbors(Model):
             pred_votes.append(pred_result)
         print("Testing set")
         print("Aciertos: ", p_results, " De: ", len(self.samples_test[0]), " Accuracy: ",
-              p_results / len(self.samples_test[0]), "%")
+              p_results / len(self.samples_test[0]))
         return pred_votes

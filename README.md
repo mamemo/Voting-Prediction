@@ -703,9 +703,11 @@ It can be concluded that, including the restriction, there is no increase in the
 
 ### K-Nearest Neighbors
 
-For the Nearest Neighbors with k-d Tree model we had to compare how it performs with different k values, being k the number of nearest neighbors to be analized, and different amounts of attributes (r1, r2 and r2 with r1) (as well as with the other models). All the experiment combinations were tested 10 times and the value that appears in the table is the mean of all. The k-d tree model was implemented from scratch and you can follow the algorithm with specific commented functions at [K_Nearest_Neighbors.py](../master/tec/ic/ia/p1/models/K_Nearest_Neighbors.py).
+For the Nearest Neighbors with k-d Tree model we had to compare how it performs with different k values, being k the number of nearest neighbors to be analized, and different amounts of attributes (r1, r2 and r2 with r1) (as well as with the other models). All the experiment combinations were tested 10 times and the value that appears in the table is the mean of all. The k-d tree model was implemented from scratch and you can follow the algorithm and read the commented explanations on [K_Nearest_Neighbors.py](../master/tec/ic/ia/p1/models/K_Nearest_Neighbors.py).
 
 First we compared the accuracy of the k-d tree without with different k values, with the country results. Including the classification r1, r2 and r2 with r1. We make this to see the behavior of the accuracy as the k value changes, comparing the training set with test set.
+
+The threshold is in the range of 0 to 1, where 1 is 100%. It is important to mention that as the node of a tree classifies the data, how closer to 1 is its deviation (value of the chi square), the classification will be worse.
 
 The results are:
 
@@ -729,7 +731,7 @@ The results are:
             <td>Test</td>
             <td>0.19490</td>
             <td>0.21905</td>
-            <th>0.22070</th>
+            <td>0.22070</td>
         </tr>
     </tbody>
 </table>
@@ -753,7 +755,7 @@ The results are:
             <td>Test</td>
             <td>0.55555</td>
             <td>0.56925</td>
-            <th>0.57645</th>
+            <td>0.57645</td>
         </tr>
     </tbody>
 </table>
@@ -779,7 +781,7 @@ The results are:
             <td>Test</td>
             <td>0.54825</td>
             <td>0.56960</td>
-            <th>0.58100</th>
+            <td>0.58100</td>
         </tr>
     </tbody>
 </table>
@@ -794,11 +796,13 @@ According to the results obtained with the k value change, we can conclude that:
 
 * Due to the fact that k-d trees are only appropriate when there are many more examples than dimensions, preferably 2^n examples, being n the number of dimensions, we would need to test the model with approximately 17 billion samples to make it perform optimally. If there aren't enough examples, literature states that k-d trees lookup is not faster than linear scan of the whole data set, so the average of processing time of our k-d tree for 10000 samples, calculating the three types of predictions (executing three times) and calculating the error of the whole training set and test set ended up being on average about 2 hours, 15 minutes on an average computer.
 
+* Although the k-d tree tries to be faster by looking for the closest points only in only branch, sometimes it is neccessary to look for them in the other branch (some of the closest points might be in the ignored branch) according to the k-d tree algorithm, and it slows down the processing time a bit more, making the initial advantage disappear.
+
 * Even when the k-d tree is trained with a set of data, and then tested with the same data (training set), it still fails to predict them, that due to the curse of dimensionality. We can state that because the tree succeeds to find the nearest point almost always but it gets confused with the rest of near points, because they are quite far.
 
 * As well as in the case of the Decision Tree, we can observe that the r2 and r2_with_r1 modes have similar behavior, the accuracy values of the k-d tree between the two modes differ in a range of 0.00035-0.0073. Including the votes of the first round to estimate the votes of the second round has no direct effect, the classification of the second round that does not take into consideration the first round behaves practically the same.
 
-As we mentioned before in the Decision Tree section, we observed the behavior by provinces, and found out that the accuracy was notably better in the case of Cartago, not only in comparison to Puntarenas, but also in comparison to the accuracy measured with data from all the country.
+As we mentioned before in the Decision Tree section, we observed the behavior by provinces, and found out that the accuracy was notably better in the case of Cartago, not only in comparison to Puntarenas, but also in comparison to the accuracy measured with data from all the country. 
 
 Next, we will see the behavior of the accuracy when it is trained with only data from Cartago. As for k, it will only be configured with the values of 3 and 7, because it was checked above that accuracy increased as k did too, and these two values showed a bigger difference.
 
@@ -824,23 +828,31 @@ Next, we will see the behavior of the accuracy when it is trained with only data
         <tr>
             <td align="center">Training</td>
             <td>0.86342</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td>0.81441</td>
+            <td>0.81359</td>
+            <td>0.53148</td>
+            <td>0.76129</td>
+            <td>0.76274</td>
         </tr>
         <tr>
             <td align="center">Test</td>
             <td>0.18264</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td>0.67100</td>
+            <td>0.66510</td>
+            <td>0.20200</td>
+            <td>0.70445</td>
+            <td>0.70010</td>
         </tr>
     </tbody>
 </table>
+
+According to the results obtained, we can conclude that:
+
+* In the table of Cartago we can notice some behaviors different to the estimation behavior by country. The predictions of Cartago surpass significantly every accuracy value in r2 and r2_with_r1 in the previous experiment with k=3 and k-7. As we mentioned before, Cartago was the province that in its two rounds of voting had the lowest proportion of abstinence.
+
+* This is other example that shows that by taking only the people who voted, Cartago's predictions are more accurate because there is more data from the entire province, and because the indicators used for generating samples includes the whole population of the province, which makes the data connect pretty well.
+
+As an overall conclusion, it can be observed that round 1 predictions have almost always low accuracy. It might be due to some attributes that bring some noise to the data set, or because plenty of factors affected the vote choice for that round and some or them were not included in the sample generator. 
 
 ### Support Vector Machine
 
