@@ -408,8 +408,7 @@ class DecisionTree(Model):
               " of: ",
               len(data[0]),
               " Accuracy: ",
-              (count / len(data[0]) * 100),
-              "%")
+              (count / len(data[0])))
         # for i in range(len(a_x_p)):
         #    print(partidos[i])
         #    print(a_x_p[i])
@@ -461,14 +460,14 @@ class DecisionTree(Model):
                     self.main_tree), " of: ", len(
                     self.samples_train[0]), " Accuracy: ", (self.samples_train[1].count(
                         self.main_tree) / len(
-                        self.samples_train[0])) * 100, "%")
+                        self.samples_train[0])))
             print("-> Test Set")
             print(
                 "Success: ", self.samples_test[1].count(
                     self.main_tree), " of: ", len(
                     self.samples_test[0]), " Accuracy: ", (self.samples_test[1].count(
                         self.main_tree) / len(
-                        self.samples_test[0])) * 100, "%")
+                        self.samples_test[0])))
             return([self.votes[self.prediction].index(self.main_tree)] * ((len(self.samples_train[0]) + len(self.samples_test[0]))))
         else:
             # Validated data with pruned tree
