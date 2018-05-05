@@ -225,6 +225,8 @@ The results were:
     </tbody>
 </table>
 
+>The loss is calculated by the function softmax_cross_entropy_with_logits given at Tensorflow.
+
 According to the results for logistic regression using L1 and L2 regularization, we can conclude:
 
 * For Round 1, the L1 regularization gives the minimal error in the prediction at test set. L1 specializes on sparse feature spaces, given the nature of the samples on round 1 (15 classes to predict, and 4 classes with the majority of samples) we can infer L1 performs better because we have the features space on round 1 being more sparse than other rounds. Sparsity on the space means that the dataset have a lot of gaps between different samples and prediction will be harder to get a reasonable accuracy.
@@ -422,35 +424,37 @@ The results were:
             <th>0.2513</th>
             <td>1.90623</td>
             <td>1.90478</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>0.2468</td>
+            <td>0.25565</td>
+            <td>1.91678</td>
+            <td>1.91866</td>
         </tr>
         <tr>
             <td>r2</td>
             <td>0.59471</td>
-            <td>0.596</td>
+            <th>0.596</th>
             <td>0.73018</td>
             <td>0.73422</td>
-            <td></td>
-            <th></th>
-            <td></td>
-            <td></td>
+            <td>0.5958</td>
+            <td>0.5923</td>
+            <td>0.73265</td>
+            <td>0.72856</td>
         </tr>
         <tr>
             <td>r2 with r1</td>
             <td>0.59471</td>
-            <td>0.596</td>
+            <th>0.596</th>
             <td>0.73018</td>
             <td>0.7342</td>
-            <td></td>
-            <th></th>
-            <td></td>
-            <td></td>
+            <td>0.5958</td>
+            <td>0.5923</td>
+            <td>0.73265</td>
+            <td>0.72856</td>
         </tr>
     </tbody>
 </table>
+
+>The loss is calculated by categorical crossentropy, sopported by Keras.
 
 HABLADA DE POQUE PASA LO QUE PASA.
 
@@ -687,9 +691,9 @@ The following table also uses the 0.02 threshold because it is the one that retu
             <td>0.26705</td>
             <td>0.62085</td>
             <td>0.62160</td>
-            <td>0.26980</td>
-            <td>0.62315</td>
-            <td>0.62320</td>
+            <th>0.26980</th>
+            <th>0.62315</th>
+            <th>0.62320</th>
         </tr>
     </tbody>
 </table>
@@ -703,11 +707,9 @@ It can be concluded that, including the restriction, there is no increase in the
 
 ### K-Nearest Neighbors
 
-For the Nearest Neighbors with k-d Tree model we had to compare how it performs with different k values, being k the number of nearest neighbors to be analized, and different amounts of attributes (r1, r2 and r2 with r1) (as well as with the other models). All the experiment combinations were tested 10 times and the value that appears in the table is the mean of all. The k-d tree model was implemented from scratch and you can follow the algorithm and read the commented explanations on [K_Nearest_Neighbors.py](../master/tec/ic/ia/p1/models/K_Nearest_Neighbors.py).
+For the Nearest Neighbors with k-d Tree model we had to compare how it performs with different k values, being k the number of nearest neighbors to be analized, and different amounts of attributes (r1, r2 and r2 with r1) (as well as with the other models). All the experiment combinations were tested 10 times and the value that appears in the table is the mean of all. The k-d tree model was implemented from scratch and you can follow the algorithm with specific commented functions at [K_Nearest_Neighbors.py](../master/tec/ic/ia/p1/models/K_Nearest_Neighbors.py).
 
 First we compared the accuracy of the k-d tree without with different k values, with the country results. Including the classification r1, r2 and r2 with r1. We make this to see the behavior of the accuracy as the k value changes, comparing the training set with test set.
-
-The threshold is in the range of 0 to 1, where 1 is 100%. It is important to mention that as the node of a tree classifies the data, how closer to 1 is its deviation (value of the chi square), the classification will be worse.
 
 The results are:
 
@@ -731,7 +733,7 @@ The results are:
             <td>Test</td>
             <td>0.19490</td>
             <td>0.21905</td>
-            <td>0.22070</td>
+            <th>0.22070</th>
         </tr>
     </tbody>
 </table>
@@ -755,7 +757,7 @@ The results are:
             <td>Test</td>
             <td>0.55555</td>
             <td>0.56925</td>
-            <td>0.57645</td>
+            <th>0.57645</th>
         </tr>
     </tbody>
 </table>
@@ -781,7 +783,7 @@ The results are:
             <td>Test</td>
             <td>0.54825</td>
             <td>0.56960</td>
-            <td>0.58100</td>
+            <th>0.58100</th>
         </tr>
     </tbody>
 </table>
@@ -792,17 +794,15 @@ According to the results obtained with the k value change, we can conclude that:
 
 * As the k value increased, the performance of the training set is reduced, while the performance of the test set increases gradually.
 
-* Due to the high amount of dimensions (54 in the case of round 1 or 2, and 56 in the case of round 2 with round 1), the model suffers from the dimensionality so the nearest neighbors are not really near and it affects its accuracy in comparison with the rest of the models.
+* Due to the high amount of dimensions (54 in the case of round 1 or 2, and 56 in the case of round 2 with round 1), the model suffers from the curse of dimensionality so the nearest neighbors are not really near and it affects its accuracy in comparison with the rest of the models.
 
 * Due to the fact that k-d trees are only appropriate when there are many more examples than dimensions, preferably 2^n examples, being n the number of dimensions, we would need to test the model with approximately 17 billion samples to make it perform optimally. If there aren't enough examples, literature states that k-d trees lookup is not faster than linear scan of the whole data set, so the average of processing time of our k-d tree for 10000 samples, calculating the three types of predictions (executing three times) and calculating the error of the whole training set and test set ended up being on average about 2 hours, 15 minutes on an average computer.
-
-* Although the k-d tree tries to be faster by looking for the closest points only in only branch, sometimes it is neccessary to look for them in the other branch (some of the closest points might be in the ignored branch) according to the k-d tree algorithm, and it slows down the processing time a bit more, making the initial advantage disappear.
 
 * Even when the k-d tree is trained with a set of data, and then tested with the same data (training set), it still fails to predict them, that due to the curse of dimensionality. We can state that because the tree succeeds to find the nearest point almost always but it gets confused with the rest of near points, because they are quite far.
 
 * As well as in the case of the Decision Tree, we can observe that the r2 and r2_with_r1 modes have similar behavior, the accuracy values of the k-d tree between the two modes differ in a range of 0.00035-0.0073. Including the votes of the first round to estimate the votes of the second round has no direct effect, the classification of the second round that does not take into consideration the first round behaves practically the same.
 
-As we mentioned before in the Decision Tree section, we observed the behavior by provinces, and found out that the accuracy was notably better in the case of Cartago, not only in comparison to Puntarenas, but also in comparison to the accuracy measured with data from all the country. 
+As we mentioned before in the Decision Tree section, we observed the behavior by provinces, and found out that the accuracy was notably better in the case of Cartago, not only in comparison to Puntarenas, but also in comparison to the accuracy measured with data from all the country.
 
 Next, we will see the behavior of the accuracy when it is trained with only data from Cartago. As for k, it will only be configured with the values of 3 and 7, because it was checked above that accuracy increased as k did too, and these two values showed a bigger difference.
 
@@ -828,34 +828,98 @@ Next, we will see the behavior of the accuracy when it is trained with only data
         <tr>
             <td align="center">Training</td>
             <td>0.86342</td>
-            <td>0.81441</td>
-            <td>0.81359</td>
-            <td>0.53148</td>
-            <td>0.76129</td>
-            <td>0.76274</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr>
             <td align="center">Test</td>
             <td>0.18264</td>
-            <td>0.67100</td>
-            <td>0.66510</td>
-            <td>0.20200</td>
-            <td>0.70445</td>
-            <td>0.70010</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
     </tbody>
 </table>
 
-According to the results obtained, we can conclude that:
-
-* In the table of Cartago we can notice some behaviors different to the estimation behavior by country. The predictions of Cartago surpass significantly every accuracy value in r2 and r2_with_r1 in the previous experiment with k=3 and k-7. As we mentioned before, Cartago was the province that in its two rounds of voting had the lowest proportion of abstinence.
-
-* This is other example that shows that by taking only the people who voted, Cartago's predictions are more accurate because there is more data from the entire province, and because the indicators used for generating samples includes the whole population of the province, which makes the data connect pretty well.
-
-As an overall conclusion, it can be observed that round 1 predictions have almost always low accuracy. It might be due to some attributes that bring some noise to the data set, or because plenty of factors affected the vote choice for that round and some or them were not included in the sample generator. 
-
 ### Support Vector Machine
 
+For support vector machine we compared how it performs with linear and rbf kernels. All the experiment combinations were ran 10 times and the value in the table is the mean. Also, all the experiments were ran with normalized samples covering the whole country, the samples were normalized and even the labels were normalized. The algorithm was implemented using Scikit and you can follow the process with specific commented functions at [Support_Vector_Machine.py](../master/tec/ic/ia/p1/models/Support_Vector_Machine.py). In these tests we used the next hyper-parameters to get the best results:
+* C = 1 (but you can configured it as a parameter)
+* Decision function shapeTraining = ovr
+
+The results were:
+
+<table>
+    <thead>
+        <tr>
+            <th>Round</th>
+            <th colspan=4>Linear</th>
+            <th colspan=4>Rbf</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td colspan=2 align="center">Acurracy</td>
+            <td colspan=2 align="center">Loss</td>
+            <td colspan=2 align="center">Acurracy</td>
+            <td colspan=2 align="center">Loss</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+            <td align="center">Train</td>
+            <td align="center">Test</td>
+        </tr>
+        <tr>
+            <td>r1</td>
+            <td>0.29086</td>
+            <th>0.28845</th>
+            <td>37.19956</td>
+            <td>37.2352</td>
+            <td>0.38024</td>
+            <td>0.286</td>
+            <td>31.29876</td>
+            <td>37.01385</td>
+        </tr>
+        <tr>
+            <td>r2</td>
+            <td>0.62129</td>
+            <td>0.6238</td>
+            <td>0.41412</td>
+            <td>0.4149</td>
+            <td>0.67651</td>
+            <th>0.62945</th>
+            <td>0.35705</td>
+            <td>0.40515</td>
+        </tr>
+        <tr>
+            <td>r2 with r1</td>
+            <td>0.6215</td>
+            <td>0.62425</td>
+            <td>0.41387</td>
+            <td>0.4146</td>
+            <td>0.68087</td>
+            <th>0.6306</th>
+            <td>0.35286</td>
+            <td>0.40445</td>
+        </tr>
+    </tbody>
+</table>
+
+>The loss is calculated by the function mean_squared_error given at Scikit.
+
+According to the results for logistic regression using L1 and L2 regularization, we can conclude:
 
 ## Samples Generator
 The creation of samples was done by using a Python module developed by our work team called tec.ic.ia.pc1.g07, which contains all the logic necessary to recreate a population of N Costa Ricans and their the vote for the first and second round of the 2018 electoral process. The discribed module tec.ic.ia.pc1.g07 can be found on [pc1](../master/tec/ic/ia/pc1) or can be installed using pip:
