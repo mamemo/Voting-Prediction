@@ -733,12 +733,11 @@ Outputs: The same parameters that was given at creation.
 
 
 def test_nn_parameters():
-    model = NeuralNetwork([1, 2, 3], [0, 1, 0], "NN", 3, [30, 20, 10], "relu")
+    model = NeuralNetwork([1, 2, 3], [0, 1, 0], "NN", 3, "[30, 20, 10]", "relu")
     assert model.samples_train == [1, 2, 3]
     assert model.samples_test == [0, 1, 0]
     assert model.prefix == "NN"
     assert model.layers == 3
-    assert model.units_per_layer == [30, 20, 10]
     assert model.activation_function == "relu"
 
 
