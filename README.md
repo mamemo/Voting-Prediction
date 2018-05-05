@@ -9,6 +9,7 @@
 * [Usage](#usage)
 * [Models' Report](#models-report)
 * [Samples Generator](#samples-generator)
+* [Unit Testing](#unit-testing)
 
 ## Installation:
 
@@ -466,6 +467,8 @@ According to the results, we can conclude:
 
 * The first and second structures were overfitting a little bit in the training data. Only the last structure, three hidden layer with 30, 20 and 10 units, was performed better on every test set for each prediction round, independently of which activation function were chosen. However, this is the structure with worst accuracy.
 
+* The tested structures came to a point were they gave the same results for r2 and r2 with r1 predictions. That means, for those structures the extra attributes dont't affect at all the final prediction. Being specific, the loss and accuracy change but only a few decimals after e-06.
+
 ### Decision Tree
 
 For the decision tree we had to compare how it performs with different thresholds, different amounts of attributes (r1, r2 and r2 with r1) and other combinations. All the experiment combinations were tested 10 times and the value in the table is the mean of all. The decision tree model was implemented from scratch and you can follow the algorithm with specific commented functions at [Decision_Tree.py](../master/tec/ic/ia/p1/models/Decision_Tree.py).
@@ -719,8 +722,6 @@ For the Nearest Neighbors with k-d Tree model we had to compare how it performs 
 
 First we compared the accuracy of the k-d tree without with different k values, with the country results. Including the classification r1, r2 and r2 with r1. We make this to see the behavior of the accuracy as the k value changes, comparing the training set with test set.
 
-The threshold is in the range of 0 to 1, where 1 is 100%. It is important to mention that as the node of a tree classifies the data, how closer to 1 is its deviation (value of the chi square), the classification will be worse.
-
 The results are:
 
 <table>
@@ -939,7 +940,16 @@ The results were:
 
 >The loss is calculated by the function mean_squared_error given at Scikit.
 
-According to the results for logistic regression using L1 and L2 regularization, we can conclude:
+According to the results for support vector machine using linear and rbf kernels, we can conclude:
+
+* With more time of parameter tunning this algorithm would performed better, that is because we only adjust one parameter and this model gave the **best overall results** of all the algorithms tested on this project.
+
+* We consider rbf better than linear, because:
+	* It has the fewest loss of the kernels.
+	* Better accuracy was achieved.
+	* At r1 linear kernel won, but only on 0.02 percent.
+
+* However, you can see it performs better on training set than test set, but that allows to lower the mean squared error between ground truth and prediction.
 
 ## Samples Generator
 The creation of samples was done by using a Python module developed by our work team called tec.ic.ia.pc1.g07, which contains all the logic necessary to recreate a population of N Costa Ricans and their the vote for the first and second round of the 2018 electoral process. The discribed module tec.ic.ia.pc1.g07 can be found on [pc1](../master/tec/ic/ia/pc1) or can be installed using pip:
@@ -1170,3 +1180,7 @@ For the prediction models developed, the indexes 2, 3, 4, 5, 6, 10, 11, 16, 20, 
 >To generate the Assistance Percentage to Regular Education for Their Age, the 5-17 years range is taken as the 15-19 years range, and the 18-24 years range as the 20-24 years range, because of lack of data accuracy between the age ranges for the samples, and the age ranges from the Assistance Percentage to Regular Education Information used.
 >
 >It is only considered the possibility of a person being outside of the work force because of being retired if their age exceeds 60 years, that due to the Costa Rican legislation in the matter.
+
+## Unit Testing
+
+For this project we created unit testing for every function that were created by us and some functions that involves frameworks. We emphasize on Decision Tree and K-Nearest Neighbors models, because that ones were implemented from scratch. All the test can be located at [test_models.py](../master/test_models.py) were every test is documented with an objective, parameters, requirements and desired outputs.
