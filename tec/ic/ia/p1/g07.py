@@ -126,7 +126,7 @@ else:
             parser.error(
                 "The k nearest neighbors model have to know the k neighbors.")
             exit(-1)
-        elif (args.k > ((len(args.poblacion)*(100-args.porcentaje_pruebas))/100) or args.k < 0):
+        elif (args.k > ((args.poblacion*(100-args.porcentaje_pruebas))/100) or args.k < 0):
             parser.error(
                 "The k nearest neighbors must be  <= (poblacion*(100-porcentage-pruebas))/100.")
             exit(-1)
